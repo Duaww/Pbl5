@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>Ten</th>
+                <th>Tai Khoan</th>
+                <th>Dia chi</th>
+            </tr>
+            <tr th:each="user:${user}">
+                <td th:text="*{user.getTen()}"></td>
+                <td th:text="*{user.getTaiKhoan()}"></td>
+                <td th:text="*{user.getDiaChi()}"></td>
+
+            </tr>
+        </table>
+        <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}">doi mat khau</a>
+    </div>
+
+    <div>
+        <a th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}">list hoi dong</a>
+        <a th:href="@{'/listcanbo/' + *{user.getTaiKhoan()}}">list can bo</a>
+        <a th:href="@{'/listncsinh/' + *{user.getTaiKhoan()}}">list nghien cuu sinh</a>
+    </div>
+
+<!--     
+    <script th:inline="javascript">
+        var message = [[${user}]];
+        console.log(message);
+
+    </script> -->
+</body>
+</html>

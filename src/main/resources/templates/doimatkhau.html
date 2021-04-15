@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> 
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="changePass" th:action="@{/doimatkhau/{account}(account=${user.getTaiKhoan()})}" action="#" th:object="${user}" onsubmit="return validateForm()" method="POST">
+        <label for="">Mat Khau hien tai</label>
+        <label><input name="oldPass" type="text"></label>
+        <br>
+        <label for="">mat khau moi</label>
+        <label><input name="newPass" type="text"></label>
+        <br>
+        <label for="">xac nhan mat khau</label>
+<!--        <input name="MatKhau" value="" type="text" th:field="${user.MatKhau}" th:value="${user.Ten}">-->
+
+        <label th:field="${user.MatKhau}"><input name="MatKhau" value="" type="text" ></label>
+        <br>
+        <input type="submit" value="doi mat khau">
+    </form>
+
+    <script th:inline="javascript">
+        var user = [[${user}]];
+
+        let pass = user.matKhau;
+
+        function validateForm() {
+            let oldPass = document.forms["changePass"]["oldPass"].value;
+            let newPass = document.forms["changePass"]["newPass"].value;
+            let confirm = document.forms["changePass"]["MatKhau"].value;
+            // let confirm = "";
+            if (pass !== oldPass) {
+                alert("pass nhap vao hien tai khong dung!!");
+                return false;
+            }
+            if (newPass !==  confirm) {
+                alert("pass moi va pass xac nhan khong trung nhau!");
+                return false;
+            }
+
+            if (pass == "" || newPass == "" || confirm == "") {
+                alert("nhap thieu du lieu kia thang nay ?");
+                return false;
+            }
+            alert("change success");
+            return true;
+        }
+    </script>
+</body>
+</html>

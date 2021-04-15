@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>Ten</th>
+                <th>Tai Khoan</th>
+                <th>Dia chi</th>
+            </tr>
+            <tr th:each="user:${user}">
+                <td th:text="*{user.getTen()}"></td>
+                <td th:text="*{user.getTaiKhoan()}"></td>
+                <td th:text="*{user.getDiaChi()}"></td>
+                <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}">doi mat khau</a>
+            </tr>
+        </table>        
+    </div>
+
+</body>
+</html>
