@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form name="changeInfo" th:action="@{'/suathongtin/' + ${user.getTaiKhoan()} + '/' + ${changer.getTaiKhoan()}}" th:object="${user}" onsubmit="return validateForm()" method="POST">
+
+        <label for="">Ten</label>
+        <span th:field="*{Ten}">
+            <input name="Ten" type="text" th:value="*{Ten}">
+        </span>
+
+        <br>
+        <label for="">Ngay sinh</label>
+        <span th:field="*{NgaySinh}">
+            <input name="NgaySinh" type="text" th:value="*{NgaySinh}">
+        </span>
+
+
+        <br>
+        <label for="">Gioi tinh : </label>
+        <span  th:field="*{GioiTinh}" >
+            <input type="hidden" name="GioiTinh" th:value="*{GioiTinh}">
+            <span> Nam
+                <input type="radio" name="checkboxSex" value="nam" th:checked="*{GioiTinh} ? 'checked'" />
+            </span>
+            <span> Nu
+                <input type="radio" name="checkboxSex" value="nu"  th:checked="!*{GioiTinh} ? 'checked'" />
+            </span>        
+        </span>
+
+        <br>
+        <label for="">Dia chi</label>
+        <label th:field="*{DiaChi}">
+            <input name="DiaChi" type="text" th:value="*{DiaChi}">
+        </label>
+
+        <br>
+        <label for="">Sdt</label>
+        <span th:field="*{SDT}">
+            <input name="SDT" type="text" th:value="*{SDT}">
+        </span>
+
+        <br>
+        <label for="">Gmail</label>
+        <span th:field="*{Gmail}">
+            <input name="Gmail" type="text" th:value="*{Gmail}">
+        </span>
+
+        <br>
+        <input type="submit" value="doi">
+    </form>
+    <a th:href="${'/information/' + {user.getTaiKhoan()} + '/' + {changer.getTaiKhoan()}}">back</a>
+    <script>
+
+        function validateForm(){
+            let checkbox = document.getElementsByName("checkboxSex");
+            // console.log(document.forms["changeInfo"]["GioiTinh"].value);
+            for (var i = 0; i < checkbox.length; i++)  {
+                if(checkbox[i].checked === true) {
+                    // alert(checkbox[i].value);
+                    if(checkbox[i].value == "nam") {
+                        document.forms["changeInfo"]["GioiTinh"].value = "true";
+                    } else {
+                        document.forms["changeInfo"]["GioiTinh"].value = "false";
+                    }
+                }
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

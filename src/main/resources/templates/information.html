@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>information</title>
+</head>
+<body>
+    <h1>thong tin chi tiet ne :3 </h1>
+    <div>
+        <table>
+            <tr>
+                <th>Ten</th>
+                <th>Tai Khoan</th>
+                <th>Dia chi</th>
+                <th>Gioi Tinh</th>
+                <th>Trang Thai</th>
+            </tr>
+            <tr th:object="${user}">
+                <td th:text="*{getTen()}"></td>
+                <td th:text="*{getTaiKhoan()}"></td>
+                <td th:text="*{getDiaChi()}"></td>
+                <td th:text="*{getGioiTinh()} ? 'Nam' : 'Nu'"></td>
+                <td th:text="*{getTrangThai()}"></td>
+            </tr>
+        </table>
+        <a th:href="'/' + ${url} + '/' + ${whoFollow.getTaiKhoan()}">back</a>
+        <a th:href="${'/suathongtin/' + {user.getTaiKhoan()} + '/' + {whoFollow.getTaiKhoan()}}">sua thong tin</a>
+    </div>
+
+    <form name="changeStatus" th:action="@{'/information/' + ${user.getTaiKhoan()} + '/' + ${whoFollow.getTaiKhoan()}}" method="POST" onsubmit="return lock()">
+        <div th:field="*{TrangThai}">    
+            <input type="hidden" name="TrangThai" th:value="*{TrangThai}">
+            <div th:if="${#strings.equals(user.getTrangThai(), 'mo')}">
+                <input type="submit" value="Khoa Tai Khoan">
+            </div>
+            <div th:if="${#strings.equals(user.getTrangThai(), 'khoa')}">
+                <input type="submit" value="Mo Tai Khoan">
+            </div>
+        </div>
+    </form>
+    <script th:inline="javascript">
+        var user = [[${user}]];
+        function lock() {
+            let status = user.trangThai;
+            if(status == "mo") {
+                document.forms["changeStatus"]["TrangThai"].value = "khoa";
+            } else {
+                document.forms["changeStatus"]["TrangThai"].value = "mo";
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

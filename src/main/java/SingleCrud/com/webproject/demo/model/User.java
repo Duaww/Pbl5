@@ -1,5 +1,6 @@
 package SingleCrud.com.webproject.demo.model;
 import lombok.Data;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -8,7 +9,9 @@ import javax.persistence.*;
 @Table(name = "\"User\"", schema = "dbo")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Column(name = "\"ID\"")
     private String ID;
 
     @Column(name = "\"TaiKhoan\"")
@@ -37,6 +40,18 @@ public class User {
 
     @Column(name = "\"Role\"")
     private String Role;
+
+    @Column(name = "\"TrangThai\"")
+    private String TrangThai;
+
+
+    public String getTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(String trangThai) {
+        TrangThai = trangThai;
+    }
 
     public String getID() {
         return ID;
@@ -122,7 +137,7 @@ public class User {
 
     }
 
-    public User(String taiKhoan, String matKhau, String ten, String ngaySinh, boolean gioiTinh, String gmail, String SDT, String diaChi,String role ) {
+    public User(String taiKhoan, String matKhau, String ten, String ngaySinh, boolean gioiTinh, String gmail, String SDT, String diaChi, String role) {
         this.TaiKhoan = taiKhoan;
         this.MatKhau = matKhau;
         this.Ten =  ten;
@@ -132,6 +147,7 @@ public class User {
         this.SDT = SDT;
         this.DiaChi = diaChi;
         this.Role = role;
+        this.TrangThai = "mo";
     }
 
 

@@ -14,13 +14,19 @@
                 <th>Ten</th>
                 <th>Tai Khoan</th>
                 <th>Dia chi</th>
+                <th>thong tin chi tiet</th>
             </tr>
-            <tr th:each="hoidong:${listhoidong}">
+            <tr th:each="hoidong : ${listhoidong}">
                 <td th:text="*{hoidong.getTen()}"></td>
                 <td th:text="*{hoidong.getTaiKhoan()}"></td>
                 <td th:text="*{hoidong.getDiaChi()}"></td>
+                <td>
+                    <a th:href="${'/information/' + {hoidong.getTaiKhoan()} + '/' + {user.getTaiKhoan()}}">chi tiet</a>
+                </td>
+
             </tr>
         </table>
     </div>
+    <a th:href="${'/admin/' + {user.getTaiKhoan()}}">back</a>
 </body>
 </html>

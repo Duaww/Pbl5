@@ -8,16 +8,14 @@
 </head>
 <body>
     <form name="changePass" th:action="@{/doimatkhau/{account}(account=${user.getTaiKhoan()})}" action="#" th:object="${user}" onsubmit="return validateForm()" method="POST">
-        <label for="">Mat Khau hien tai</label>
+        <label >Mat Khau hien tai</label>
         <label><input name="oldPass" type="text"></label>
         <br>
-        <label for="">mat khau moi</label>
+        <label >mat khau moi</label>
         <label><input name="newPass" type="text"></label>
         <br>
-        <label for="">xac nhan mat khau</label>
-<!--        <input name="MatKhau" value="" type="text" th:field="${user.MatKhau}" th:value="${user.Ten}">-->
-
-        <label th:field="${user.MatKhau}"><input name="MatKhau" value="" type="text" ></label>
+        <label>xac nhan mat khau</label>
+        <label th:field="${user.getMatKhau()}"><input name="MatKhau" value="" type="text" ></label>
         <br>
         <input type="submit" value="doi mat khau">
     </form>

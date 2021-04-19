@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,5 +8,24 @@
 </head>
 <body>
     <h1>list nghien cuu sinh ne</h1>
+    <div>
+        <table>
+            <tr>
+                <th>Ten</th>
+                <th>Tai Khoan</th>
+                <th>Dia chi</th>
+                <th>thong tin chi tiet</th>
+            </tr>
+            <tr th:each="ncsinh : ${listncsinh}">
+                <td th:text="*{ncsinh.getTen()}"></td>
+                <td th:text="*{ncsinh.getTaiKhoan()}"></td>
+                <td th:text="*{ncsinh.getDiaChi()}"></td>
+                <td>
+                    <a th:href="${'/information/' + {ncsinh.getTaiKhoan()} + '/' + {user.getTaiKhoan()}}">chi tiet</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <a th:href="${'/admin/' + {user.getTaiKhoan()}}">back</a>
 </body>
 </html>
