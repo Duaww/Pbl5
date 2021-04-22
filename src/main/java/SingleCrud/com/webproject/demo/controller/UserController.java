@@ -94,6 +94,7 @@ public class UserController {
         return "redirect:/index";
     }
 
+//    ------------------ Admin function -----------------------
     @GetMapping("/lockAccount")
     public String getLockAccount() {
         return "lockAccount";
@@ -233,4 +234,36 @@ public class UserController {
         return "redirect:/admin/{accountChanger}";
     }
 
+//   ------------------ Hoi dong fucntion ------------------
+
+    @GetMapping("/changePersonInfo/{accountUser}")
+    public String getChangePersonInfo(@PathVariable("accountUser") String accountUser, Model model) {
+        User user = userService.find(accountUser);
+        model.addAttribute("user", user);
+        String option = user.getRole();
+        if (option.equals("2")) {
+            model.addAttribute("role", "hoidong");
+        } else if (option.equals("3")) {
+            model.addAttribute("role", "canbo");
+        } else if (option.equals("4")) {
+            model.addAttribute("role", "nghiencuusinh");
+        }
+        return "changePersonInfo";
+    }
+
+    @PostMapping("/changePersonInfo/{accountUser}")
+    public String postChangePersonInfo(@PathVariable("accountUser") String accountUser,  @ModelAttribute User newUser,  RedirectAttributes redirectAttrs) {
+        User user = userService.find(accountUser);
+        userService.update(user, newUser);
+        redirectAttrs.addAttribute("accountUser", accountUser);
+        String option = user.getRole();
+        if (option.equals("2")) {
+            return "redirect:/changePersonInfo/{accountUser}";
+        } else if (option.equals("3")) {
+            return "redirect:/changePersonInfo/{accountUser}";
+        } else if (option.equals("4")) {
+            return "redirect:/changePersonInfo/{accountUser}";
+        }
+        return "redirect:error";
+    }
 }

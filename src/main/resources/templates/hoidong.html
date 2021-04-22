@@ -16,9 +16,10 @@
                 <td th:text="*{getTen()}"></td>
                 <td th:text="*{getTaiKhoan()}"></td>
                 <td th:text="*{getDiaChi()}"></td>
-                <a th:href="@{'/doimatkhau/' + *{getTaiKhoan()}}">doi mat khau</a>
             </tr>
-        </table>        
+        </table>
+        <a th:href="@{'/doimatkhau/' + ${user.getTaiKhoan()}}">doi mat khau</a>
+        <a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}">doi thong tin ca nhan</a>
     </div>
 
 </body>
