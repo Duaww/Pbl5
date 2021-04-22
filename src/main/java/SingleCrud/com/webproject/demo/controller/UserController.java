@@ -77,6 +77,9 @@ public class UserController {
         if (userLogin == null) {
             return "redirect:error";
         }
+        if(userLogin.getTrangThai().equals("khoa")) {
+            return "redirect:lockAccount";
+        }
         String option = userLogin.getRole();
         redirectAttrs.addAttribute("account", user.getTaiKhoan());
         if (option.equals("1")) {
@@ -89,6 +92,11 @@ public class UserController {
             return "redirect:/nghiencuusinh/{account}";
         }
         return "redirect:/index";
+    }
+
+    @GetMapping("/lockAccount")
+    public String getLockAccount() {
+        return "lockAccount";
     }
 
     @GetMapping("/doimatkhau/{account}")

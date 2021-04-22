@@ -14,19 +14,6 @@
         <br>
         <input type="submit" value="login">
     </form>
-    <script  th:inline="javascript">
-        var user = [[${user}]];
-
-        function validateForm() {
-            let status = user.trangThai;
-            alert(status);
-            if (status == "khoa") {
-                alert("tai khoan bi khoa roi ku!!!");
-                return false;
-            }
-            return true;
-        }
-    </script>
 </body>
 
 </html>
