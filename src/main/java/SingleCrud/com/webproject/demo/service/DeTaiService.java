@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface DeTaiService {
     List<Detai> findAll();
+
+    List<Detai> findByStatus(String status);
 }

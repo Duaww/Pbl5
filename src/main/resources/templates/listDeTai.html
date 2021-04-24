@@ -6,21 +6,43 @@
 </head>
 <body>
     <h1>list de tai ne</h1>
-    <div>
+    <form name="formFilter"  th:action="@{/listDeTai/{account}(account=${viewer.getTaiKhoan()})}" method="post"  onsubmit="return validateForm()">
+        <label for="">chon trang thai muon loc</label>
+        <select name="field" id="fields">
+            <option value="all">All</option>
+            <option value="ok">OK</option>
+            <option value="dangxet">Dang Xet</option>
+            <option value="chuaxet">Chua Xet</option>
+        </select>
+        <span th:field="${status}" >
+            <input type="hidden" name="status" th:value="${status}">
+        </span>
+        <input type="submit" name="form_filter"  value="filter">
+    </form>
+
+    <div th:if="${list}">
         <table>
             <tr>
                 <th>Ten de tai</th>
-                <th>Mo ta</th>
-                <th>Id nguoi huong dan</th>
+                <th>Ten can bo huong dan</th>
                 <th>Trang thai</th>
             </tr>
-            <tr th:each="deTai : ${deTaiList}">
-                <td th:text="*{deTai.getTenDeTai()}"></td>
-                <td th:text="*{deTai.getMoTa()}"></td>
-                <td th:text="*{deTai.getIDNguoihuongdan()}"></td>
-                <td th:text="*{deTai.getTrangThai()}"></td>
+            <tr th:each="element : ${list}">
+                <td th:text="${element.value.getTenDeTai()}"></td>
+                <td th:text="${element.key.getTen()}"></td>
+                <td th:text="${element.value.getTrangThai()}"></td>
             </tr>
         </table>
     </div>
+
+    <script th:inline="javascript">
+        function validateForm() {
+            var choice = document.getElementById("fields");
+            console.log(choice);
+            document.forms["formFilter"]["status"].value = choice.options[choice.selectedIndex].value;
+            return true;
+        }
+    </script>
+
 </body>
 </html>
