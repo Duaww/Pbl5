@@ -20,12 +20,12 @@
         </table>
         <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}">doi mat khau</a>
     </div>
-
     <div>
         <a th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}">list hoi dong</a>
         <a th:href="@{'/listcanbo/' + *{user.getTaiKhoan()}}">list can bo</a>
         <a th:href="@{'/listncsinh/' + *{user.getTaiKhoan()}}">list nghien cuu sinh</a>
         <a th:href="@{'/addTaiKhoan/' + *{user.getTaiKhoan()}}">add tai khoan</a>
+        <a th:href="@{'/searchTaiKhoan/' + *{user.getTaiKhoan()}}">tim kiem tai khoan</a>
     </div>
 
 <!--     

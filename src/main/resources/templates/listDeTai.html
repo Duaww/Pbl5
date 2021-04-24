@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>De Tai</title>
+</head>
+<body>
+    <h1>list de tai ne</h1>
+    <div>
+        <table>
+            <tr>
+                <th>Ten de tai</th>
+                <th>Mo ta</th>
+                <th>Id nguoi huong dan</th>
+                <th>Trang thai</th>
+            </tr>
+            <tr th:each="deTai : ${deTaiList}">
+                <td th:text="*{deTai.getTenDeTai()}"></td>
+                <td th:text="*{deTai.getMoTa()}"></td>
+                <td th:text="*{deTai.getIDNguoihuongdan()}"></td>
+                <td th:text="*{deTai.getTrangThai()}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

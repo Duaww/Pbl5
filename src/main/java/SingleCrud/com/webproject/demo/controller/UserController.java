@@ -33,25 +33,25 @@ public class UserController {
 
     @GetMapping("/admin/{account}")
     public String adminPage(Model mode, @PathVariable String account) {
-        mode.addAttribute("user", userService.find(account));
+        mode.addAttribute("user", userService.findByName(account));
         return "admin";
     }
 
     @GetMapping("/hoidong/{account}")
     public String hoidongPage(Model mode, @PathVariable String account) {
-        mode.addAttribute("user", userService.find(account));
+        mode.addAttribute("user", userService.findByName(account));
         return "hoidong";
     }
 
     @GetMapping("/canbo/{account}")
     public String canboPage(Model mode, @PathVariable String account) {
-        mode.addAttribute("user", userService.find(account));
+        mode.addAttribute("user", userService.findByName(account));
         return "canbo";
     }
 
     @GetMapping("/nghiencuusinh/{account}")
     public String ncsinhPage(Model mode, @PathVariable String account) {
-        mode.addAttribute("user", userService.find(account));
+        mode.addAttribute("user", userService.findByName(account));
         return "nghiencuusinh";
     }
 
@@ -102,7 +102,7 @@ public class UserController {
 
     @GetMapping("/doimatkhau/{account}")
     public String formdoiPass(Model model, @PathVariable("account") String account) {
-        model.addAttribute("user", userService.find(account));
+        model.addAttribute("user", userService.findByName(account));
         return "doimatkhau";
     }
 
@@ -110,7 +110,7 @@ public class UserController {
     public String doiPassPost(@PathVariable("account") String account, @ModelAttribute User newUser, RedirectAttributes redirectAttrs) {
 //        System.out.println(newUser);
 //        System.out.println(account);
-        User user = userService.find(account);
+        User user = userService.findByName(account);
         userService.updatePass(user, newUser.getMatKhau());
         String option = user.getRole();
         redirectAttrs.addAttribute("account", account);
@@ -135,7 +135,7 @@ public class UserController {
                 listHoiDong.add(userList.get(i));
             }
         }
-        User user = userService.find(account);
+        User user = userService.findByName(account);
         model.addAttribute("user", user);
         model.addAttribute("listhoidong", listHoiDong);
         return "listhoidong";
@@ -150,7 +150,7 @@ public class UserController {
                 listCanbo.add(userList.get(i));
             }
         }
-        User user = userService.find(account);
+        User user = userService.findByName(account);
         model.addAttribute("user", user);
         model.addAttribute("listcanbo", listCanbo);
         return "listcanbo";
@@ -165,7 +165,7 @@ public class UserController {
                 listNcsinh.add(userList.get(i));
             }
         }
-        User user = userService.find(account);
+        User user = userService.findByName(account);
         model.addAttribute("user", user);
         model.addAttribute("listncsinh", listNcsinh);
         return "listncSinh";
@@ -173,8 +173,8 @@ public class UserController {
 
     @GetMapping("/information/{account}/{status}")
     public String information(@PathVariable("account") String account,@PathVariable("status") String status, Model model) {
-        User user = userService.find(account);
-        User whoFollow = userService.find(status);
+        User user = userService.findByName(account);
+        User whoFollow = userService.findByName(status);
         String option = user.getRole();
         String url = "";
         if (option.equals("2")) {
@@ -192,7 +192,7 @@ public class UserController {
 
     @PostMapping("/information/{account}/{status}")
     public String lockAccount(@PathVariable("account") String account, @PathVariable("status") String status , @ModelAttribute User newUser, RedirectAttributes redirectAttrs) {
-        User user = userService.find(account);
+        User user = userService.findByName(account);
         userService.updateStatus(user, newUser.getTrangThai());
         redirectAttrs.addAttribute("account", account);
         redirectAttrs.addAttribute("status", status);
@@ -201,8 +201,8 @@ public class UserController {
 
     @GetMapping("/suathongtin/{accountUser}/{accountChanger}")
     public String changeInformation(@PathVariable("accountUser") String accountUser, @PathVariable("accountChanger") String accountChanger, Model model ) {
-        User user = userService.find(accountUser);
-        User changer = userService.find(accountChanger);
+        User user = userService.findByName(accountUser);
+        User changer = userService.findByName(accountChanger);
         model.addAttribute("user",user);
         model.addAttribute("changer", changer);
         return "suathongtin";
@@ -210,7 +210,7 @@ public class UserController {
 
     @PostMapping("/suathongtin/{accountUser}/{accountChanger}")
     public String handlerChangeInfo(@PathVariable("accountUser") String accountUser, @PathVariable("accountChanger") String accountChanger, @ModelAttribute User newUser,  RedirectAttributes redirectAttrs) {
-        User user = userService.find(accountUser);
+        User user = userService.findByName(accountUser);
 //        System.out.println(user);
 //        System.out.println(newUser);
         userService.update(user, newUser);
@@ -221,24 +221,43 @@ public class UserController {
 
     @GetMapping("/addTaiKhoan/{accountChanger}")
     public String getAddTaiKhoan(Model model,  @PathVariable("accountChanger") String accountChanger) {
-        User changer = userService.find(accountChanger);
+        User changer = userService.findByName(accountChanger);
         model.addAttribute("user", new User());
         model.addAttribute("changer", changer);
         return "addTaiKhoan";
     }
 
     @PostMapping("/addTaiKhoan/{accountChanger}")
-    public String postAddTaiKhoan( @PathVariable("accountChanger") String accountChanger,  RedirectAttributes redirectAttrs, @ModelAttribute User newUser) {
+    public String postAddTaiKhoan(@PathVariable("accountChanger") String accountChanger,  RedirectAttributes redirectAttrs, @ModelAttribute User newUser) {
         userService.addUser(newUser);
         redirectAttrs.addAttribute("accountChanger", accountChanger);
         return "redirect:/admin/{accountChanger}";
     }
 
+    @GetMapping("/searchTaiKhoan/{accountSearch}")
+    public String getSearchTaiKhoan(@PathVariable("accountSearch") String accountSearch, Model model) {
+        User changer =  userService.findByName(accountSearch);
+        String truong = "";
+        String giatri = "";
+        model.addAttribute("changer", changer);
+        model.addAttribute("truong", truong);
+        model.addAttribute("giatri", giatri);
+        return "searchTaiKhoan";
+    }
+
+    @PostMapping("/searchTaiKhoan/{accountSearch}")
+    public String postSearchTaiKhoan(Model model, @PathVariable("accountSearch") String accountSearch, @ModelAttribute("giatri") String giatri, @ModelAttribute("truong") String truong ) {
+        User changer =  userService.findByName(accountSearch);
+        List<User> searchList = userService.search(truong, giatri);
+        model.addAttribute("changer", changer);
+        model.addAttribute("searchList", searchList);
+        return "searchTaiKhoan";
+    }
 //   ------------------ Hoi dong fucntion ------------------
 
     @GetMapping("/changePersonInfo/{accountUser}")
     public String getChangePersonInfo(@PathVariable("accountUser") String accountUser, Model model) {
-        User user = userService.find(accountUser);
+        User user = userService.findByName(accountUser);
         model.addAttribute("user", user);
         String option = user.getRole();
         if (option.equals("2")) {
@@ -253,7 +272,7 @@ public class UserController {
 
     @PostMapping("/changePersonInfo/{accountUser}")
     public String postChangePersonInfo(@PathVariable("accountUser") String accountUser,  @ModelAttribute User newUser,  RedirectAttributes redirectAttrs) {
-        User user = userService.find(accountUser);
+        User user = userService.findByName(accountUser);
         userService.update(user, newUser);
         redirectAttrs.addAttribute("accountUser", accountUser);
         String option = user.getRole();

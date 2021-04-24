@@ -7,7 +7,9 @@ import java.util.List;
 public interface UserService {
     List<User> findAll();
 
-    User find(String account);
+    User findByName(String account);
+
+    User findById(String id);
 
     User login(User user);
 
@@ -18,4 +20,6 @@ public interface UserService {
     User addUser(User newUser);
 
     User updateStatus(User user, String status);
+
+    List<User> search(String truong, String giatri);
 }

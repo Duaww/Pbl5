@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form name="formSearch" th:action="@{/searchTaiKhoan/{account}(account=${changer.getTaiKhoan()})}" method="post" onsubmit="return validateForm()">
+        <label for="">chon truong muon tim kiem</label>
+        <select name="field" id="fields">
+            <option value="Ten">Ten</option>
+            <option value="DiaChi">DiaChi</option>
+            <option value="TrangThai">TrangThai</option>
+        </select>
+        <input type="text"  name="search">
+        <span th:field="${truong}" >
+            <input type="hidden" name="truong" th:value="${truong}">
+        </span>
+        <span th:field="${giatri}">
+             <input type="hidden" th:value="${giatri}" name="giatri">
+        </span>
+
+        <input type="submit" name="form_search"  value="Search">
+        <div th:if="${searchList}">
+            <table>
+                <tr>
+                    <th>Ten</th>
+                    <th>Tai Khoan</th>
+                    <th>Dia chi</th>
+                </tr>
+                <tr th:each="user :${searchList}">
+                    <td th:text="${user.getTen()}"></td>
+                    <td th:text="${user.getTaiKhoan()}"></td>
+                    <td th:text="${user.getDiaChi()}"></td>
+                </tr>
+            </table>
+        </div>
+    </form>
+
+    <a th:href="${'/admin/' + {changer.getTaiKhoan()}}">back</a>
+
+    <script th:inline="javascript">
+        function validateForm() {
+            var choice = document.getElementById("fields");
+            document.forms["formSearch"]["truong"].value = choice.options[choice.selectedIndex].value;
+            document.forms["formSearch"]["giatri"].value = document.getElementsByName("search")[0].value;
+            return true;
+        }
+    </script>
+</body>
+</html>

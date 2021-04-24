@@ -26,10 +26,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User find(String account) {
+    public User findByName(String account) {
         List<User> users = this.findAll();
         for (int i = 0 ; i < users.size(); i++) {
             if(users.get(i).getTaiKhoan().equals(account)) {
+                return users.get(i);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public User findById(String id) {
+        List<User> users = this.findAll();
+        for (int i = 0 ; i < users.size(); i++) {
+            if(users.get(i).getID().equals(id)) {
                 return users.get(i);
             }
         }
@@ -89,6 +100,38 @@ public class UserServiceImpl implements UserService {
         user.setTrangThai(status);
         userRepository.save(user);
         return user;
+    }
+
+    @Override
+    public List<User> search(String truong, String giatri) {
+        List<User> userList = this.findAll();
+        List<User> searchList = new ArrayList<User>();
+        if (giatri.equals("")) {
+            return null;
+        }
+        if (truong.equals("Ten")) {
+            for (int i = 0 ; i < userList.size(); i++) {
+                if (userList.get(i).getTen().toLowerCase().contains(giatri.toLowerCase())) {
+                    searchList.add(userList.get(i));
+                }
+            }
+            return searchList;
+        } else if (truong.equals("DiaChi")) {
+            for (int i = 0 ; i < userList.size(); i++) {
+                if (userList.get(i).getDiaChi().toLowerCase().contains(giatri.toLowerCase())) {
+                    searchList.add(userList.get(i));
+                }
+            }
+            return searchList;
+        } else  if (truong.equals("TrangThai")) {
+            for (int i = 0 ; i < userList.size(); i++) {
+                if (userList.get(i).getTrangThai().toLowerCase().contains(giatri.toLowerCase())) {
+                    searchList.add(userList.get(i));
+                }
+            }
+            return searchList;
+        }
+        return null;
     }
 
 
