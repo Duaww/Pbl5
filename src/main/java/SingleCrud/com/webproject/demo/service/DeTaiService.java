@@ -8,4 +8,8 @@ public interface DeTaiService {
     List<Detai> findAll();
 
     List<Detai> findByStatus(String status);
+
+    Detai findById(String idDeTai);
+
+    void changeStatus(String idDeTai, String status);
 }

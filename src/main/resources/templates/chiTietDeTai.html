@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>chi tiet de tai</title>
+</head>
+<body>
+    <h1>Chi tiet ne !!!</h1>
+    <div>
+       <p th:text="'ten : ' + ${detai.getTenDeTai()}"></p>
+       mo ta : <textarea th:text=" ${detai.getMoTa()}"></textarea>
+<!--       <p th:text="'mo ta : ' + ${detai.getMoTa()}"></p>-->
+       <p th:text="'nguoi huong dan : ' + ${nguoiHuongDan.getTen()}"></p>
+       <p th:text="'trang thai : ' + ${detai.getTrangThai()}"></p>
+       linh vuc :
+        <select>
+            <option th:each="linhvuc : ${linhVucCuaDeTai}" th:text="${linhvuc.getTenLinhVuc()}"></option>
+        </select>
+    </div>
+    <div th:if="${detai.getTrangThai().equals('dangxet')}">
+        <form name="formPheDuyet" th:action="@{'/chiTietDeTai/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" method="post">
+             <span th:field="${status}" >
+                <input type="hidden" name="status" th:value="${status}">
+             </span>
+            <input type="submit" name="Pheduyet" value="Pheduyet" onclick="isClicked(this.name)">
+            <input type="submit" name="Huybo" value="Huybo" onclick="isClicked(this.name)">
+        </form>
+    </div>
+    <a th:href="'/listDeTai/' + ${viewer.getTaiKhoan()}">back</a>
+    <script th:inline="javascript">
+        function isClicked(name) {
+            document.forms["formPheDuyet"]["status"].value = name;
+        }
+    </script>
+</body>
+</html>

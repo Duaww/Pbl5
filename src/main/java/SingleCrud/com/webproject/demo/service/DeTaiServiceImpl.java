@@ -39,5 +39,27 @@ public class DeTaiServiceImpl implements DeTaiService {
         return statusList;
     }
 
+    @Override
+    public Detai findById(String idDeTai) {
+        List<Detai> detaiList = deTaiRepository.findAll();
+        for(int i = 0 ; i < detaiList.size(); i++ ) {
+            if (detaiList.get(i).getIDDeTai().equals(idDeTai)) {
+                return detaiList.get(i);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void changeStatus(String idDeTai, String status) {
+        Detai detai = this.findById(idDeTai);
+        if(status.equals("Pheduyet")) {
+            detai.setTrangThai("ok");
+        } else if (status.equals("Huybo")) {
+            detai.setTrangThai("chuaxet");
+        }
+        deTaiRepository.save(detai);
+    }
+
 
 }

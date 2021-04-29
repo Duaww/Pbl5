@@ -26,14 +26,17 @@
                 <th>Ten de tai</th>
                 <th>Ten can bo huong dan</th>
                 <th>Trang thai</th>
+                <th>Chi tiet de tai</th>
             </tr>
             <tr th:each="element : ${list}">
                 <td th:text="${element.value.getTenDeTai()}"></td>
                 <td th:text="${element.key.getTen()}"></td>
                 <td th:text="${element.value.getTrangThai()}"></td>
+                <td><a th:href="@{'/chiTietDeTai/' + ${element.value.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">xem chi tiet</a></td>
             </tr>
         </table>
     </div>
+    <a th:href="@{'/hoidong/' + ${viewer.getTaiKhoan()}}">back</a>
 
     <script th:inline="javascript">
         function validateForm() {
