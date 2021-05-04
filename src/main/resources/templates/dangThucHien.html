@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>list dang thuc hien</title>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>Ten de tai</th>
+                <th>Trang thai</th>
+                <th>Tien Do</th>
+                <th>Chi tiet de tai</th>
+                <th>Phan cong cham</th>
+            </tr>
+            <tr th:each="element : ${listDangThucHien}">
+                <td th:text="${element.value.getTenDeTai()}"></td>
+                <td th:text="${element.value.getTrangThai()}"></td>
+                <td th:text="${element.key.getTienDo()}"></td>
+                <td><a th:href="@{'/chiTietDeTai/' + ${element.value.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">xem chi tiet</a></td>
+                <td><a th:href="@{'/phanCongCham/' + ${element.value.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">phan cong cham</a></td>
+            </tr>
+        </table>
+        <a th:href="@{'/hoidong/' + ${viewer.getTaiKhoan()}}">back</a>
+    </div>
+</body>
+</html>

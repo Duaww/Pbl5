@@ -1,15 +1,15 @@
 package SingleCrud.com.webproject.demo.service;
 
-import SingleCrud.com.webproject.demo.model.Detai;
+import SingleCrud.com.webproject.demo.model.DeTai;
 
 import java.util.List;
 
 public interface DeTaiService {
-    List<Detai> findAll();
+    List<DeTai> findAll();
 
-    List<Detai> findByStatus(String status);
+    List<DeTai> findByStatus(String status);
 
-    Detai findById(String idDeTai);
+    DeTai findById(String idDeTai);
 
     void changeStatus(String idDeTai, String status);
 }

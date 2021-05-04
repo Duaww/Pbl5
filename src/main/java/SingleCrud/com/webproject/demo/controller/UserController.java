@@ -1,7 +1,7 @@
 package SingleCrud.com.webproject.demo.controller;
 
-import SingleCrud.com.webproject.demo.model.User;
-import SingleCrud.com.webproject.demo.service.UserService;
+import SingleCrud.com.webproject.demo.model.*;
+import SingleCrud.com.webproject.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,15 +9,25 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
     private final UserService userService;
+    private final HoiDongChamService hoiDongChamService;
+    private final DeTaiService deTaiService;
+    private final NghiepVuService nghiepVuService;
+    private final LinhVucService linhVucService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, HoiDongChamService hoiDongChamService, DeTaiService deTaiService, NghiepVuService nghiepVuService, LinhVucService linhVucService) {
         this.userService = userService;
+        this.hoiDongChamService = hoiDongChamService;
+        this.deTaiService = deTaiService;
+        this.nghiepVuService = nghiepVuService;
+        this.linhVucService = linhVucService;
     }
 
     @GetMapping("/")
@@ -284,5 +294,89 @@ public class UserController {
             return "redirect:/changePersonInfo/{accountUser}";
         }
         return "redirect:error";
+    }
+
+    @GetMapping("/hoidongchamthi/{accountUser}")
+    public String getHoiDongChamThi(@PathVariable("accountUser") String accountUser, Model model) {
+        List<HoiDongCham> hoiDongChamList = hoiDongChamService.findAll();
+        Map<User, DeTai> listPhanCong = new HashMap<User, DeTai>();
+        for(int i = 0; i < hoiDongChamList.size(); i++) {
+            listPhanCong.put(userService.findById(hoiDongChamList.get(i).getIDCanBo()), deTaiService.findById(hoiDongChamList.get(i).getIDDeTai()));
+        }
+        model.addAttribute("listPhanCong", listPhanCong);
+        return "hoidongchamthi";
+    }
+
+    @GetMapping("/phanCongCham/{idDeTai}/{accountView}")
+    public String getPhanCong(@PathVariable("idDeTai") String idDeTai, @PathVariable("accountView") String accViewer, Model model)  {
+        List<User> userList = userService.findAll();
+        List<User> listCanbo = new ArrayList<User>();
+        for(int i = 0 ; i < userList.size(); i++) {
+            if(userList.get(i).getRole().equals("3")) {
+                listCanbo.add(userList.get(i));
+            }
+        }
+        List<NghiepVu> nghiepVuList = nghiepVuService.findAll();
+        List<LinhVuc> linhVucList =  linhVucService.findAll();
+        Map<User,List<LinhVuc>>  linhVucCuaCanBo = new HashMap<User, List<LinhVuc>>();
+        for (int  i = 0; i < listCanbo.size(); i++) {
+            List<LinhVuc> list = new ArrayList<LinhVuc>();
+            for (int j = 0; j < nghiepVuList.size(); j++) {
+                if (listCanbo.get(i).getID().equals(nghiepVuList.get(j).getIDCanBo())) {
+                    for (int k = 0; k < linhVucList.size(); k++) {
+                        if (nghiepVuList.get(j).getIDLinhVuc().equals(linhVucList.get(k).getIDLinhVuc())) {
+                            list.add(linhVucList.get(k));
+                        }
+                    }
+                }
+            }
+           if(list.size()!=0) {
+               linhVucCuaCanBo.put(listCanbo.get(i), list);
+           }
+        }
+//        List<String> checked = new ArrayList<String>();
+        String checked = "";
+        String notChecked = "";
+        List<HoiDongCham> hoiDongChamList = hoiDongChamService.findAll();
+        List<String> idHoiDongChamCuaDeTai = new ArrayList<String>();
+        for(int i = 0; i < hoiDongChamList.size(); i++) {
+            if (hoiDongChamList.get(i).getIDDeTai().equals(idDeTai)) {
+                idHoiDongChamCuaDeTai.add(hoiDongChamList.get(i).getIDCanBo());
+            }
+        }
+        model.addAttribute("detai", deTaiService.findById(idDeTai));
+        model.addAttribute("viewer", userService.findByName(accViewer));
+        model.addAttribute("hoidongcham",  idHoiDongChamCuaDeTai);
+        model.addAttribute("linhVucCuaCanBo", linhVucCuaCanBo);
+        model.addAttribute("checked", checked);
+        model.addAttribute("notChecked", notChecked);
+        return "phanCongCham";
+    }
+
+    @PostMapping("/phanCongCham/{idDeTai}/{accountView}")
+    public String postPhanCong(@PathVariable("idDeTai") String idDeTai, @PathVariable("accountView") String accViewer,  @ModelAttribute("notChecked") String notChecked, @ModelAttribute("checked") String checked ,Model model) {
+//        System.out.println(checked);
+        String[] idNguoiCham = checked.split("/");
+        String[] idNguoiKhongCham = notChecked.split("/");
+        List<HoiDongCham> hoiDongChamList = hoiDongChamService.findAll();
+        List<String> idHoiDongChamCuaDeTai =  new ArrayList<String>();
+        for (int i = 0; i < hoiDongChamList.size(); i++) {
+            if (hoiDongChamList.get(i).getIDDeTai().equals(idDeTai)) {
+                idHoiDongChamCuaDeTai.add(hoiDongChamList.get(i).getIDCanBo());
+            }
+        }
+        for (int i = 0 ; i < idNguoiCham.length; i++) {
+            if (!idHoiDongChamCuaDeTai.contains(idNguoiCham[i])) {
+                idHoiDongChamCuaDeTai.add(idNguoiCham[i]);
+            }
+        }
+        for (int i = 0; i < idNguoiKhongCham.length; i++) {
+            if (idHoiDongChamCuaDeTai.contains(idNguoiKhongCham[i])) {
+                idHoiDongChamCuaDeTai.remove(idNguoiKhongCham[i]);
+            }
+        }
+//        System.out.println(idHoiDongChamCuaDeTai);
+        hoiDongChamService.updateListByUser(idDeTai, idHoiDongChamCuaDeTai);
+        return getPhanCong(idDeTai, accViewer, model);
     }
 }

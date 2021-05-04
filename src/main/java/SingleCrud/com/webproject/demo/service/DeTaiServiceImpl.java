@@ -1,6 +1,6 @@
 package SingleCrud.com.webproject.demo.service;
 
-import SingleCrud.com.webproject.demo.model.Detai;
+import SingleCrud.com.webproject.demo.model.DeTai;
 import SingleCrud.com.webproject.demo.repository.DeTaiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,14 +20,14 @@ public class DeTaiServiceImpl implements DeTaiService {
 
 
     @Override
-    public List<Detai> findAll() {
+    public List<DeTai> findAll() {
         return deTaiRepository.findAll();
     }
 
     @Override
-    public List<Detai> findByStatus(String status) {
-        List<Detai> statusList = new ArrayList<Detai>();
-        List<Detai> detaiList = deTaiRepository.findAll();
+    public List<DeTai> findByStatus(String status) {
+        List<DeTai> statusList = new ArrayList<DeTai>();
+        List<DeTai> detaiList = deTaiRepository.findAll();
         for (int i = 0; i < detaiList.size(); i++) {
             if (detaiList.get(i).getTrangThai().equals(status)) {
                 statusList.add(detaiList.get(i));
@@ -40,8 +40,8 @@ public class DeTaiServiceImpl implements DeTaiService {
     }
 
     @Override
-    public Detai findById(String idDeTai) {
-        List<Detai> detaiList = deTaiRepository.findAll();
+    public DeTai findById(String idDeTai) {
+        List<DeTai> detaiList = deTaiRepository.findAll();
         for(int i = 0 ; i < detaiList.size(); i++ ) {
             if (detaiList.get(i).getIDDeTai().equals(idDeTai)) {
                 return detaiList.get(i);
@@ -52,7 +52,7 @@ public class DeTaiServiceImpl implements DeTaiService {
 
     @Override
     public void changeStatus(String idDeTai, String status) {
-        Detai detai = this.findById(idDeTai);
+        DeTai detai = this.findById(idDeTai);
         if(status.equals("Pheduyet")) {
             detai.setTrangThai("ok");
         } else if (status.equals("Huybo")) {

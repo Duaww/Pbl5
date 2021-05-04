@@ -21,7 +21,9 @@
         <a th:href="@{'/doimatkhau/' + ${user.getTaiKhoan()}}">doi mat khau</a>
         <a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}">doi thong tin ca nhan</a>
         <a th:href="@{'/listDeTai/' +   ${user.getTaiKhoan()}}">danh sach de tai</a>
+        <a th:href="@{'/hoidongchamthi/' + ${user.getTaiKhoan()}}">danh sach hoi dong cham thi</a>
+        <br>
+        <a th:href="@{'/dangThucHien/' + ${user.getTaiKhoan()}}">danh sang de tai dang duoc thuc hien</a>
     </div>
-
 </body>
 </html>

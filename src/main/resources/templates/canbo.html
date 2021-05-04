@@ -19,6 +19,8 @@
             </tr>
         </table>
         <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}">doi mat khau</a>
+        <a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}">doi thong tin ca nhan</a>
+        <a th:href="@{'/listHuongDan/' + ${user.getTaiKhoan()}}">list huong dan</a>
     </div>
 
 </body>

@@ -1,9 +1,6 @@
 package SingleCrud.com.webproject.demo.controller;
 
-import SingleCrud.com.webproject.demo.model.Chuyenmon;
-import SingleCrud.com.webproject.demo.model.Detai;
-import SingleCrud.com.webproject.demo.model.Linhvuc;
-import SingleCrud.com.webproject.demo.model.User;
+import SingleCrud.com.webproject.demo.model.*;
 import SingleCrud.com.webproject.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,25 +16,31 @@ import java.util.Map;
 public class DeTaiController {
     private final DeTaiService deTaiService;
     private final UserService userService;
-    private final ChuyenmonService chuyenmonService;
-    private final LinhvucService  linhvucService;
+    private final ChuyenMonService chuyenmonService;
+    private final LinhVucService linhvucService;
+    private final NguoiThucHienService nguoiThucHienService;
+    private final DeTaiDangThucHienService deTaiDangThucHienService;
 
     @Autowired
-    public DeTaiController(DeTaiService deTaiService, UserService userService, ChuyenmonService chuyenmonService, LinhvucService linhvucService) {
+    public DeTaiController(DeTaiService deTaiService, UserService userService, ChuyenMonService chuyenmonService, LinhVucService linhvucService, NguoiThucHienService nguoiThucHienService, DeTaiDangThucHienService deTaiDangThucHienService) {
         this.deTaiService = deTaiService;
         this.userService = userService;
         this.chuyenmonService = chuyenmonService;
         this.linhvucService = linhvucService;
+        this.nguoiThucHienService = nguoiThucHienService;
+        this.deTaiDangThucHienService = deTaiDangThucHienService;
     }
 
     @GetMapping("/listDeTai/{accountView}")
     public String getListDeTai(Model model,  @PathVariable("accountView") String accountView) {
         User viewer = userService.findByName(accountView);
         String status = "";
-        List<Detai> detaiList = deTaiService.findAll();
-        Map<User, Detai> list = new HashMap<User, Detai>();
+        List<DeTai> detaiList = deTaiService.findAll();
+        Map<User, DeTai> list = new HashMap<User, DeTai>();
         for (int i = 0; i < detaiList.size(); i++) {
-            list.put(userService.findById(detaiList.get(i).getIDNguoihuongdan()),  detaiList.get(i));
+            if (!detaiList.get(i).getTrangThai().equals("dangyeucau")){
+                list.put(userService.findById(detaiList.get(i).getIDNguoihuongdan()),  detaiList.get(i));
+            }
         }
         model.addAttribute("viewer", viewer);
         model.addAttribute("list",  list);
@@ -49,8 +52,8 @@ public class DeTaiController {
     public String postListDeTai(Model model, @PathVariable("accountView") String accountView, @ModelAttribute("status") String status) {
         User viewer = userService.findByName(accountView);
         model.addAttribute("viewer", viewer);
-        List<Detai> statusList = deTaiService.findByStatus(status);
-        Map<User, Detai> list = new HashMap<User, Detai>();
+        List<DeTai> statusList = deTaiService.findByStatus(status);
+        Map<User, DeTai> list = new HashMap<User, DeTai>();
         for (int i = 0; i < statusList.size(); i++) {
             list.put(userService.findById(statusList.get(i).getIDNguoihuongdan()),  statusList.get(i));
         }
@@ -60,16 +63,16 @@ public class DeTaiController {
 
     @GetMapping("/chiTietDeTai/{idDeTai}/{accountView}")
     public String getChiTiet(@PathVariable("idDeTai") String idDeTai, @PathVariable("accountView") String accViewer, Model model) {
-        Detai detai = deTaiService.findById(idDeTai);
-        List<Chuyenmon> chuyenmonList = chuyenmonService.findAll();
-        List<Linhvuc> linhvucList = linhvucService.findAll();
-        List<Linhvuc> linhvucCuaDeTai = new ArrayList<Linhvuc>();
+        DeTai detai = deTaiService.findById(idDeTai);
+        List<ChuyenMon> chuyenMonList = chuyenmonService.findAll();
+        List<LinhVuc> linhvucList = linhvucService.findAll();
+        List<LinhVuc> linhvucCuaDeTai = new ArrayList<LinhVuc>();
         String status = "";
         User viewer = userService.findByName(accViewer);
-        for(int i = 0 ; i < chuyenmonList.size(); i++) {
+        for(int i = 0; i < chuyenMonList.size(); i++) {
             String idLinhvuc = "";
-            if(chuyenmonList.get(i).getIDDeTai().equals(idDeTai)) {
-                idLinhvuc = chuyenmonList.get(i).getIDLinhVuc();
+            if(chuyenMonList.get(i).getIDDeTai().equals(idDeTai)) {
+                idLinhvuc = chuyenMonList.get(i).getIDLinhVuc();
             }
             for(int j = 0; j < linhvucList.size(); j++) {
                 if (linhvucList.get(j).getIDLinhVuc().equals(idLinhvuc)) {
@@ -78,7 +81,7 @@ public class DeTaiController {
             }
         }
         if (linhvucCuaDeTai.size()==0) {
-            linhvucCuaDeTai.add(new Linhvuc("chua co linh vuc"));
+            linhvucCuaDeTai.add(new LinhVuc("chua co linh vuc"));
         }
         User nguoiHuongDan = userService.findById(detai.getIDNguoihuongdan());
         model.addAttribute("nguoiHuongDan", nguoiHuongDan);
@@ -97,4 +100,41 @@ public class DeTaiController {
         deTaiService.changeStatus(idDeTai, status);
         return getChiTiet(idDeTai, accViewer, model);
     }
+
+    @GetMapping("/listHuongDan/{accountView}")
+    public String getListHuongDan(@PathVariable("accountView") String accountView, Model model) {
+        User nguoihuongdan = userService.findByName(accountView);
+        List<DeTai> deTaiList = deTaiService.findAll();
+        List<NguoiThucHien> nguoiThucHienList = nguoiThucHienService.findAll();
+        Map<DeTai, User> listHuongDan = new HashMap<DeTai, User>();
+
+        for (int i = 0; i < deTaiList.size(); i++) {
+            if (deTaiList.get(i).getIDNguoihuongdan().equals(nguoihuongdan.getID()) && !deTaiList.get(i).getTrangThai().equals("dangyeucau")) {
+                for (int  j = 0; j < nguoiThucHienList.size(); j++) {
+                    if (deTaiList.get(i).getIDDeTai().equals(nguoiThucHienList.get(j).getIDDeTai())) {
+                        listHuongDan.put(deTaiList.get(i), userService.findById(nguoiThucHienList.get(j).getIDNguoiThucHien()));
+                    }
+                }
+            }
+        }
+        model.addAttribute("nguoihuongdan", nguoihuongdan);
+        model.addAttribute("listHuongDan", listHuongDan);
+        return "listHuongDan";
+    }
+
+    @GetMapping("/dangThucHien/{accountView}")
+    public String getListDangThucHien(@PathVariable("accountView") String accountView, Model model) {
+        User viewer = userService.findByName(accountView);
+        List<DeTaiDangThucHien> list = deTaiDangThucHienService.findAll();
+        List<DeTai> deTaiList = new ArrayList<DeTai>();
+        Map<DeTaiDangThucHien ,DeTai> dangThucHienList = new HashMap<DeTaiDangThucHien, DeTai>();
+        for (int i = 0 ;i < list.size(); i++) {
+            dangThucHienList.put(list.get(i), deTaiService.findById(list.get(i).getIDDeTai()));
+        }
+        model.addAttribute("viewer", viewer);
+        model.addAttribute("listDangThucHien", dangThucHienList);
+        return "dangThucHien";
+    }
+
+
 }

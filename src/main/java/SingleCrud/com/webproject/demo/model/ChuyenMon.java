@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table(name = "\"ChuyenMon\"", schema = "dbo")
-public class Chuyenmon {
+public class ChuyenMon {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
@@ -45,11 +45,11 @@ public class Chuyenmon {
         this.IDDeTai = IDDeTai;
     }
 
-    public Chuyenmon() {
+    public ChuyenMon() {
 
     }
 
-    public Chuyenmon(String IDLinhVuc, String IDDeTai) {
+    public ChuyenMon(String IDLinhVuc, String IDDeTai) {
         this.IDLinhVuc = IDLinhVuc;
         this.IDDeTai = IDDeTai;
     }

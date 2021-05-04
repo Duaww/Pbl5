@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>hoi dong cham thi ne</h1>
+    <div>
+        <table>
+            <tr>
+                <th>Ten giao vien cham</th>
+                <th>Ten de tai khoa hoc</th>
+            </tr>
+            <tr th:each="phancong : ${listPhanCong}">
+                <td th:text="${phancong.key.getTen()}"></td>
+                <td th:text="${phancong.value.getTenDeTai()}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

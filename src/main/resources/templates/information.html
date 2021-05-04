@@ -16,6 +16,7 @@
                 <th>Dia chi</th>
                 <th>Gioi Tinh</th>
                 <th>Trang Thai</th>
+                <th th:if="${user.getRole().equals('3')}">Nghiep vu</th>
             </tr>
             <tr th:object="${user}">
                 <td th:text="*{getTen()}"></td>
@@ -23,6 +24,7 @@
                 <td th:text="*{getDiaChi()}"></td>
                 <td th:text="*{getGioiTinh()} ? 'Nam' : 'Nu'"></td>
                 <td th:text="*{getTrangThai()}"></td>
+                <td th:if="${user.getRole().equals('3')}">hello</td>
             </tr>
         </table>
         <a th:href="'/' + ${url} + '/' + ${whoFollow.getTaiKhoan()}">back</a>

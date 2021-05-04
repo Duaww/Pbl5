@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>List Huong dan</h1>
+    <div>
+        <table>
+            <tr>
+                <th>Ten de tai</th>
+                <th>Trang thai</th>
+                <th>Nguoi thuc hien</th>
+            </tr>
+            <tr th:each="list : ${listHuongDan}">
+                <td th:text="${list.key.getTenDeTai()}"></td>
+                <td th:text="${list.key.getTrangThai()}"></td>
+                <td th:text="${list.value.getTen()}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
