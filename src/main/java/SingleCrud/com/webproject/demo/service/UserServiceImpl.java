@@ -107,7 +107,7 @@ public class UserServiceImpl implements UserService {
         List<User> userList = this.findAll();
         List<User> searchList = new ArrayList<User>();
         if (giatri.equals("")) {
-            return null;
+            return userList;
         }
         if (truong.equals("Ten")) {
             for (int i = 0 ; i < userList.size(); i++) {

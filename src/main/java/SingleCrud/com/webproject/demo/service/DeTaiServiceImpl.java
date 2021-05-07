@@ -1,6 +1,7 @@
 package SingleCrud.com.webproject.demo.service;
 
 import SingleCrud.com.webproject.demo.model.DeTai;
+import SingleCrud.com.webproject.demo.model.User;
 import SingleCrud.com.webproject.demo.repository.DeTaiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,6 +60,33 @@ public class DeTaiServiceImpl implements DeTaiService {
             detai.setTrangThai("chuaxet");
         }
         deTaiRepository.save(detai);
+    }
+
+    @Override
+    public void update(DeTai deTai, DeTai newDeTai) {
+        deTai.setTenDeTai(newDeTai.getTenDeTai());
+        deTai.setMoTa(newDeTai.getMoTa());
+        deTaiRepository.save(deTai);
+    }
+
+    @Override
+    public String addDeTai(DeTai newDeTai) {
+        User user = new User();
+        DeTai deTai = new DeTai(newDeTai.getTenDeTai(), newDeTai.getMoTa(), user.getID());
+        deTaiRepository.save(deTai);
+        return deTai.getIDDeTai();
+    }
+
+    @Override
+    public void updateNguoiHuongDan(DeTai deTai, String idnguoihuongdan) {
+        deTai.setIDNguoihuongdan(idnguoihuongdan);
+        deTaiRepository.save(deTai);
+    }
+
+    @Override
+    public void updateStatus(DeTai deTai, String status) {
+        deTai.setTrangThai(status);
+        deTaiRepository.save(deTai);
     }
 
 

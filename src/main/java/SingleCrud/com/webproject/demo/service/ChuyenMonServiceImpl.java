@@ -22,4 +22,10 @@ public class ChuyenMonServiceImpl implements ChuyenMonService {
     public List<ChuyenMon> findAll() {
         return chuyenmonRepository.findAll();
     }
+
+    @Override
+    public void addChuyenMon(String idLinhVuc, String idDeTai) {
+        ChuyenMon chuyenMon = new ChuyenMon(idLinhVuc, idDeTai);
+        chuyenmonRepository.save(chuyenMon);
+    }
 }

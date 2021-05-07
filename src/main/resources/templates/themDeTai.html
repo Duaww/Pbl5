@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Them De Tai</title>
+</head>
+<body>
+    <form name="suadetai"  th:action="@{'/themDeTai/' + ${viewer.getTaiKhoan()}}" th:object="${detai}" method="post">
+        <label for="">Ten : </label>
+        <span th:field="*{TenDeTai}">
+                <input name="TenDeTai" type="text" th:value="*{TenDeTai}">
+            </span>
+        <br>
+        <br>
+
+        <label for="">Mo Ta :  </label>
+        <span th:field="*{MoTa}">
+                <textarea name="MoTa" th:text="*{MoTa}"></textarea>
+            </span>
+        <br>
+
+        <p><input type="submit" value="add"></p>
+    </form>
+    <a th:href="@{'/canbo/' + *{viewer.getTaiKhoan()}}">back</a>
+</body>
+</html>

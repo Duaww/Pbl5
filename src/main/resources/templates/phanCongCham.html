@@ -14,7 +14,6 @@
                 <th>Dia chi</th>
                 <th>linh vuc</th>
                 <th>cham thi</th>
-                <th><input type="hidden"></th>
             </tr>
             <tr th:each="canbo : ${linhVucCuaCanBo}">
                 <td th:text="${canbo.key.getTen()}"></td>
@@ -38,6 +37,7 @@
         </span>
         <input type="submit" value="change">
     </form>
+    <a th:href="@{'/dangThucHien/' + ${viewer.getTaiKhoan()}}">back</a>
     <script th:inline="javascript">
         function validateForm() {
             let Checked = "";

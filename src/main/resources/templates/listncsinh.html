@@ -7,25 +7,51 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>list nghien cuu sinh ne</h1>
-    <div>
-        <table>
-            <tr>
-                <th>Ten</th>
-                <th>Tai Khoan</th>
-                <th>Dia chi</th>
-                <th>thong tin chi tiet</th>
-            </tr>
-            <tr th:each="ncsinh : ${listncsinh}">
-                <td th:text="*{ncsinh.getTen()}"></td>
-                <td th:text="*{ncsinh.getTaiKhoan()}"></td>
-                <td th:text="*{ncsinh.getDiaChi()}"></td>
-                <td>
-                    <a th:href="${'/information/' + {ncsinh.getTaiKhoan()} + '/' + {user.getTaiKhoan()}}">chi tiet</a>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <a th:href="${'/admin/' + {user.getTaiKhoan()}}">back</a>
+    <h1>list hoi dong ne</h1>
+    <form name="formSearch" th:action="@{/listncsinh/{account}(account=${changer.getTaiKhoan()})}" method="post" onsubmit="return validateForm()">
+        <label for="">chon truong muon tim kiem</label>
+        <select name="field" id="fields">
+            <option value="Ten">Ten</option>
+            <option value="DiaChi">DiaChi</option>
+            <option value="TrangThai">TrangThai</option>
+        </select>
+        <input type="text"  name="search">
+        <span th:field="${truong}" >
+                    <input type="hidden" name="truong" th:value="${truong}">
+                </span>
+        <span th:field="${giatri}">
+                     <input type="hidden" th:value="${giatri}" name="giatri">
+                </span>
+
+        <input type="submit" name="form_search"  value="Search">
+        <div th:if="${listncsinh}">
+            <table>
+                <tr>
+                    <th>Ten</th>
+                    <th>Tai Khoan</th>
+                    <th>Dia chi</th>
+                    <th>thong tin chi tiet</th>
+                </tr>
+                <tr th:each="user :${listncsinh}">
+                    <td th:text="${user.getTen()}"></td>
+                    <td th:text="${user.getTaiKhoan()}"></td>
+                    <td th:text="${user.getDiaChi()}"></td>
+                    <td>
+                        <a th:href="${'/information/' + {pageold}  + '/' + {user.getTaiKhoan()} + '/' + {changer.getTaiKhoan()}}">chi tiet</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+
+    <a th:href="${'/admin/' + {changer.getTaiKhoan()}}">back</a>
+    <script th:inline="javascript">
+        function validateForm() {
+            var choice = document.getElementById("fields");
+            document.forms["formSearch"]["truong"].value = choice.options[choice.selectedIndex].value;
+            document.forms["formSearch"]["giatri"].value = document.getElementsByName("search")[0].value;
+            return true;
+        }
+    </script>
 </body>
 </html>

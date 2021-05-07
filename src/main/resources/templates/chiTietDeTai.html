@@ -10,15 +10,22 @@
        <p th:text="'ten : ' + ${detai.getTenDeTai()}"></p>
        mo ta : <textarea th:text=" ${detai.getMoTa()}"></textarea>
 <!--       <p th:text="'mo ta : ' + ${detai.getMoTa()}"></p>-->
-       <p th:text="'nguoi huong dan : ' + ${nguoiHuongDan.getTen()}"></p>
+       <div>
+           <span th:if="${nguoiHuongDan.getTen()}" th:text="'nguoi huong dan : ' + ${nguoiHuongDan.getTen()}"></span>
+           <span th:if="!${nguoiHuongDan.getTen()}" th:text="'nguoi huong dan : chua co nguoi huong dan'"></span>
+       </div>
        <p th:text="'trang thai : ' + ${detai.getTrangThai()}"></p>
+       <div>
+           <p th:if="${nguoithuchien.getTen()}" th:text="'nguoi thuc hien de tai : ' + ${nguoithuchien.getTen()}"></p>
+           <p th:if="!${nguoithuchien.getTen()}" th:text="'nguoi thuc hien de tai : chua co nguoi thuc hien'"></p>
+       </div>
        linh vuc :
         <select>
             <option th:each="linhvuc : ${linhVucCuaDeTai}" th:text="${linhvuc.getTenLinhVuc()}"></option>
         </select>
     </div>
-    <div th:if="${detai.getTrangThai().equals('dangxet')}">
-        <form name="formPheDuyet" th:action="@{'/chiTietDeTai/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" method="post">
+    <div th:if="${detai.getTrangThai().equals('dangxet') && viewer.getRole().equals('2')} ">
+        <form name="formPheDuyet" th:action="@{'/chiTietDeTai/' + ${pageold} + '/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" method="post">
              <span th:field="${status}" >
                 <input type="hidden" name="status" th:value="${status}">
              </span>
@@ -26,7 +33,17 @@
             <input type="submit" name="Huybo" value="Huybo" onclick="isClicked(this.name)">
         </form>
     </div>
-    <a th:href="'/listDeTai/' + ${viewer.getTaiKhoan()}">back</a>
+    <div th:if="${viewer.getRole().equals('3') && pageold.equals('listHuongDan')}">
+        tien do :
+            <textarea th:if="${plane}" th:text="${plane}"></textarea>
+            <textarea th:if="!${plane}" th:text="''"></textarea>
+    </div>
+    <p th:if="${pageold.equals('chiTietBaiBao')}">
+        <a th:href="@{'/' + ${pageold} + '/'+ ${detai.getIDDeTai()} +'/'+ ${viewer.getTaiKhoan()}}">back</a>
+    </p>
+    <p th:if="!${pageold.equals('chiTietBaiBao')}">
+        <a th:href="@{'/' + ${pageold} + '/' + ${viewer.getTaiKhoan()}}">back</a>
+    </p>
     <script th:inline="javascript">
         function isClicked(name) {
             document.forms["formPheDuyet"]["status"].value = name;

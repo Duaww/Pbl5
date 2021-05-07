@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form name="changeInfo" th:action="@{'/suathongtin/' + ${user.getTaiKhoan()} + '/' + ${changer.getTaiKhoan()}}" th:object="${user}" onsubmit="return validateForm()" method="POST">
+    <form name="changeInfo" th:action="@{'/suathongtin/' + ${pageold} + '/' + ${user.getTaiKhoan()} + '/' + ${changer.getTaiKhoan()}}" th:object="${user}" onsubmit="return validateForm()" method="POST">
 
         <label for="">Ten</label>
         <span th:field="*{Ten}">
@@ -54,7 +54,7 @@
         <br>
         <input type="submit" value="doi">
     </form>
-    <a th:href="${'/information/' + {user.getTaiKhoan()} + '/' + {changer.getTaiKhoan()}}">back</a>
+    <a th:href="${'/information/'+ {pageold} + '/' + {user.getTaiKhoan()} + '/' + {changer.getTaiKhoan()}}">back</a>
     <script>
 
         function validateForm(){

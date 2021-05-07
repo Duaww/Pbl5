@@ -12,4 +12,12 @@ public interface DeTaiService {
     DeTai findById(String idDeTai);
 
     void changeStatus(String idDeTai, String status);
+
+    void update(DeTai deTai, DeTai newDeTai);
+
+    String addDeTai(DeTai newDeTai);
+
+    void updateNguoiHuongDan(DeTai deTai, String idnguoihuongdan);
+
+    void updateStatus(DeTai deTai, String status);
 }

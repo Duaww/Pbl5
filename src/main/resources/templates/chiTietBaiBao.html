@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>chi tiet bai bao</title>
+</head>
+<body>
+    <div th:if="${baibao}">
+        Ten Bai Bao : <span th:text="${detai.getTenDeTai()}"></span>
+        Noi Dung : <span th:text="${baibao.getNoiDung()}"></span>
+        Ngay Dang : <span th:text="${baibao.getNgayDang()}"></span>
+        De Tai Thuc Hien <span><a th:href="@{'/chiTietDeTai/'+ ${pageold} + '/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">chi tiet ve de tai</a></span>
+    </div>
+    <a th:href="@{'/danhSachBaiBao/' + ${viewer.getTaiKhoan()}}">back</a>
+</body>
+</html>

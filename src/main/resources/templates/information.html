@@ -16,7 +16,7 @@
                 <th>Dia chi</th>
                 <th>Gioi Tinh</th>
                 <th>Trang Thai</th>
-                <th th:if="${user.getRole().equals('3')}">Nghiep vu</th>
+                <th th:if="${user.getRole().equals('3')}">LinhVuc</th>
             </tr>
             <tr th:object="${user}">
                 <td th:text="*{getTen()}"></td>
@@ -27,11 +27,11 @@
                 <td th:if="${user.getRole().equals('3')}">hello</td>
             </tr>
         </table>
-        <a th:href="'/' + ${url} + '/' + ${whoFollow.getTaiKhoan()}">back</a>
-        <a th:href="${'/suathongtin/' + {user.getTaiKhoan()} + '/' + {whoFollow.getTaiKhoan()}}">sua thong tin</a>
+        <a th:href="'/' + ${pageold} + '/' + ${whoFollow.getTaiKhoan()}">back</a>
+        <a th:href="${'/suathongtin/' + {pageold} + '/' + {user.getTaiKhoan()} + '/' + {whoFollow.getTaiKhoan()}}">sua thong tin</a>
     </div>
 
-    <form name="changeStatus" th:action="@{'/information/' + ${user.getTaiKhoan()} + '/' + ${whoFollow.getTaiKhoan()}}" method="POST" onsubmit="return lock()">
+    <form name="changeStatus" th:action="@{'/information/' + ${pageold} + '/' + ${user.getTaiKhoan()} + '/' + ${whoFollow.getTaiKhoan()}}" method="POST" onsubmit="return lock()">
         <div th:field="*{TrangThai}">    
             <input type="hidden" name="TrangThai" th:value="*{TrangThai}">
             <div th:if="${#strings.equals(user.getTrangThai(), 'mo')}">

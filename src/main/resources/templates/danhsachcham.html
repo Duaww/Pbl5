@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>danh sach nguoi cham</h1>
+    <div th:if="${nguoicham}">
+        <table>
+            <tr>
+                <th>Ten</th>
+                <th>SDT</th>
+                <th>Gmail</th>
+            </tr>
+            <tr th:each="user :${nguoicham}">
+                <td th:text="${user.getTen()}"></td>
+                <td th:text="${user.getSDT()}"></td>
+                <td th:text="${user.getGmail()}"></td>
+            </tr>
+        </table>
+    </div>
+    <div th:if="!${nguoicham}">
+        <h1>chua co giao vien cham</h1>
+    </div>
+    <a th:href="@{'/hoidongchamthi/' + ${accViewer.getTaiKhoan()}}">back</a>
+</body>
+</html>

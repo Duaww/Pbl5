@@ -75,6 +75,6 @@ public class DeTai {
         this.TenDeTai = tenDeTai;
         this.MoTa = moTa;
         this.IDNguoihuongdan = IDNguoihuongdan;
-        this.TrangThai = "chua phe duyet";
+        this.TrangThai = "dangxet";
     }
 }

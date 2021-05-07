@@ -22,4 +22,20 @@ public class NguoiThucHienServiceImpl implements NguoiThucHienService {
     public List<NguoiThucHien> findAll() {
         return nguoiThucHienRepository.findAll();
     }
+
+    @Override
+    public String findIDNguoiThucHien(String idDeTai) {
+        List<NguoiThucHien> nguoiThucHienList = this.findAll();
+        for (int i = 0 ; i < nguoiThucHienList.size(); i++) {
+            if (nguoiThucHienList.get(i).getIDDeTai().equals(idDeTai)){
+                return nguoiThucHienList.get(i).getIDNguoiThucHien();
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void add(NguoiThucHien nguoiThucHien) {
+        nguoiThucHienRepository.save(nguoiThucHien);
+    }
 }

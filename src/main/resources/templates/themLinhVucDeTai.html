@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>them linh vuc cho de tai </h1>
+    <form name="formThemLinhVuc" th:action="@{'/themLinhVucDeTai/' + ${idDeTai} + '/' + ${accViewer}}" method="post" onsubmit="return validateForm()">
+        <div th:each="list : ${linhvuc}">
+            <input type="checkbox" class="checkList" th:value="${list.getIDLinhVuc()}">
+            <label th:text="${list.getTenLinhVuc()}"></label>
+        </div>
+        <span th:field="${checked}" >
+            <input type="hidden" name="checked" th:value="${checked}">
+        </span>
+        <input type="submit" value="them">
+    </form>
+    <script th:inline="javascript">
+        function validateForm() {
+            let Checked = "";
+            var inputElements =  document.getElementsByClassName('checkList');
+            for(var i = 0; i < inputElements.length ; i++){
+                if(inputElements[i].checked){
+
+                    Checked = Checked + "/" + inputElements[i].value;
+                }
+            }
+            document.forms["formThemLinhVuc"]["checked"].value = Checked;
+            return true;
+        }
+    </script>
+</body>
+</html>

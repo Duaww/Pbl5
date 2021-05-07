@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" >
+    <title>Title</title>
+</head>
+<body>
+    <h1>danh sach de tai co the dang ky</h1>
+    <form name="dangKyLamDeTai" th:action="@{'/dangKyLamNghienCuu/' + ${user.getTaiKhoan()}}" onsubmit="return validateForm()" method="post">
+        <table>
+            <tr>
+                <th>Ten de tai</th>
+                <th>Trang thai</th>
+                <th>Chi tiet de tai</th>
+                <th>dang ky</th>
+            </tr>
+            <tr th:each="detai : ${deTaiCoThe}">
+                <td th:text="${detai.getTenDeTai()}"></td>
+                <td th:text="${detai.getTrangThai()}"></td>
+                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${detai.getIDDeTai()} + '/' + ${user.getTaiKhoan()}}">xem chi tiet</a></td>
+                <td><input type="checkbox" class="checkList" th:value="${detai.getIDDeTai()}"></td>
+            </tr>
+        </table>
+        <span th:field="${checked}" >
+                <input type="hidden" name="checked" th:value="${checked}">
+        </span>
+        <input type="submit" value="dangky">
+    </form>
+    <a th:href="@{'/canbo/' + ${user.getTaiKhoan()}}">back</a>
+    <script th:inline="javascript">
+        function validateForm() {
+            let Checked = "";
+            var inputElements =  document.getElementsByClassName('checkList');
+            for(var i = 0; i < inputElements.length ; i++){
+                if(inputElements[i].checked){
+                    // checkedValue = inputElements[i].value;
+                    Checked = Checked + "/" + inputElements[i].value;
+                }
+            }
+            document.forms["dangKyLamDeTai"]["checked"].value = Checked;
+            return true;
+        }
+    </script>
+</body>
+</html>

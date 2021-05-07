@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>danh sach can yeu cau phe duyet</h1>
+    <form name="formYeucauPheDuyet" th:action="@{'/listYeuCauPheDuyet/' + ${accViewer.getTaiKhoan()}}" method="post" onsubmit="return validateForm()">
+        <table>
+            <tr>
+                <th>Ten de tai</th>
+                <th>Nguoi thuc hien</th>
+                <th>Chi tiet de tai</th>
+                <th>gui yeu cau</th>
+            </tr>
+            <tr th:each="list : ${nguoithuchien}">
+                <td th:text="${list.first.getTenDeTai()}"></td>
+                <td>
+                    <span th:if="${list.second.getTen()}" >
+                        <a th:href="@{'/thongtinNCS/' + ${pageold} + '/' + ${list.second.getID()} + '/' + ${accViewer.getID()}}" th:text="${list.second.getTen()}"></a>
+                    </span>
+                    <span th:if="!${list.second.getTen()}" th:text="'chua co ai thuc hien'"></span>
+                </td>
+                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${list.first.getIDDeTai()} + '/' + ${accViewer.getTaiKhoan()}}">xem chi tiet</a></td>
+                <td><input type="checkbox" class="checkList" th:value="${list.first.getIDDeTai()}"></td>
+            </tr>
+        </table>
+        <span th:field="${checked}" >
+                <input type="hidden" name="checked" th:value="${checked}">
+        </span>
+        <input type="submit" value="gui yeu cau">
+    </form>
+    <a th:href="@{'/canbo/' + ${accViewer.getTaiKhoan()}}">back</a>
+    <script th:inline="javascript">
+        function validateForm() {
+            let Checked = "";
+            var inputElements =  document.getElementsByClassName('checkList');
+            for(var i = 0; i < inputElements.length ; i++){
+                if(inputElements[i].checked){
+                    // checkedValue = inputElements[i].value;
+                    Checked = Checked + "/" + inputElements[i].value;
+                }
+            }
+            document.forms["formYeucauPheDuyet"]["checked"].value = Checked;
+            return true;
+        }
+    </script>
+</body>
+</html>

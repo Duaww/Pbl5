@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>danh sach bai bao</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Ten Bai Bao</th>
+            <th>chi tiet</th>
+        </tr>
+        <tr th:each="element : ${list}">
+            <td th:text="${element.first.getTenDeTai()}"></td>
+            <td>
+                <a th:href="@{'/chiTietBaiBao/' + ${element.first.getIDDeTai()}  + '/' + ${viewer.getTaiKhoan()}}">Chi Tiet Bai Bao</a>
+            </td>
+        </tr>
+    </table>
+    <a th:href="@{'/canbo/' + ${viewer.getTaiKhoan()}}">back</a>
+</body>
+</html>

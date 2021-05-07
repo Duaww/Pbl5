@@ -44,7 +44,6 @@ public class User {
     @Column(name = "\"TrangThai\"")
     private String TrangThai;
 
-
     public String getTrangThai() {
         return TrangThai;
     }

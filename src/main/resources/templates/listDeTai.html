@@ -29,10 +29,13 @@
                 <th>Chi tiet de tai</th>
             </tr>
             <tr th:each="element : ${list}">
-                <td th:text="${element.value.getTenDeTai()}"></td>
-                <td th:text="${element.key.getTen()}"></td>
-                <td th:text="${element.value.getTrangThai()}"></td>
-                <td><a th:href="@{'/chiTietDeTai/' + ${element.value.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">xem chi tiet</a></td>
+                <td th:text="${element.key.getTenDeTai()}"></td>
+                <td >
+                    <span th:if="${element.value.getTen()}"  th:text="${element.value.getTen()}"></span>
+                    <span th:if="!${element.value.getTen()}" th:text="'chua co nguoi huong dan'"></span>
+                </td>
+                <td th:text="${element.key.getTrangThai()}"></td>
+                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${element.key.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">xem chi tiet</a></td>
             </tr>
         </table>
     </div>

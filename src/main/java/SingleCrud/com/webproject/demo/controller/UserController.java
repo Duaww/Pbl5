@@ -8,10 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 public class UserController {
@@ -145,8 +142,29 @@ public class UserController {
                 listHoiDong.add(userList.get(i));
             }
         }
-        User user = userService.findByName(account);
-        model.addAttribute("user", user);
+        User changer = userService.findByName(account);
+        String truong = "";
+        String giatri = "";
+        String pageold = "listhoidong";
+        model.addAttribute("pageold", pageold);
+        model.addAttribute("truong", truong);
+        model.addAttribute("giatri", giatri);
+        model.addAttribute("changer", changer);
+        model.addAttribute("listhoidong", listHoiDong);
+        return "listhoidong";
+    }
+
+    @PostMapping("/listhoidong/{account}")
+    public String searchHoiDong(@PathVariable("account") String account, Model model, @ModelAttribute("giatri") String giatri, @ModelAttribute("truong") String truong ) {
+        List<User> searchList = userService.search(truong, giatri);
+        User changer = userService.findByName(account);
+        List<User> listHoiDong = new ArrayList<User>();
+        for(int i = 0 ; i < searchList.size(); i++) {
+            if(searchList.get(i).getRole().equals("2")) {
+                listHoiDong.add(searchList.get(i));
+            }
+        }
+        model.addAttribute("changer", changer);
         model.addAttribute("listhoidong", listHoiDong);
         return "listhoidong";
     }
@@ -160,11 +178,34 @@ public class UserController {
                 listCanbo.add(userList.get(i));
             }
         }
-        User user = userService.findByName(account);
-        model.addAttribute("user", user);
+        User changer = userService.findByName(account);
+        String truong = "";
+        String giatri = "";
+        String pageold = "listcanbo";
+        model.addAttribute("pageold", pageold);
+        model.addAttribute("truong", truong);
+        model.addAttribute("giatri", giatri);
+        model.addAttribute("changer", changer);
+        model.addAttribute("listcanbo", listCanbo);
+
+        return "listcanbo";
+    }
+
+    @PostMapping("/listcanbo/{account}")
+    public String searchCanBo(@PathVariable("account") String account, Model model, @ModelAttribute("giatri") String giatri, @ModelAttribute("truong") String truong ) {
+        List<User> searchList = userService.search(truong, giatri);
+        User changer = userService.findByName(account);
+        List<User> listCanbo = new ArrayList<User>();
+        for(int i = 0 ; i < searchList.size(); i++) {
+            if(searchList.get(i).getRole().equals("3")) {
+                listCanbo.add(searchList.get(i));
+            }
+        }
+        model.addAttribute("changer", changer);
         model.addAttribute("listcanbo", listCanbo);
         return "listcanbo";
     }
+
 
     @GetMapping("/listncsinh/{account}")
     public String listncSinh(@PathVariable("account") String account, Model model) {
@@ -175,58 +216,69 @@ public class UserController {
                 listNcsinh.add(userList.get(i));
             }
         }
-        User user = userService.findByName(account);
-        model.addAttribute("user", user);
+        User changer = userService.findByName(account);
+        String truong = "";
+        String giatri = "";
+        String pageold = "listncsinh";
+        model.addAttribute("pageold", pageold);
+        model.addAttribute("truong", truong);
+        model.addAttribute("giatri", giatri);
+        model.addAttribute("changer", changer);
         model.addAttribute("listncsinh", listNcsinh);
         return "listncSinh";
     }
 
-    @GetMapping("/information/{account}/{status}")
-    public String information(@PathVariable("account") String account,@PathVariable("status") String status, Model model) {
+    @PostMapping("/listncsinh/{account}")
+    public String searchNcsinh(@PathVariable("account") String account, Model model, @ModelAttribute("giatri") String giatri, @ModelAttribute("truong") String truong ) {
+        List<User> searchList = userService.search(truong, giatri);
+        User changer = userService.findByName(account);
+        List<User> listNcsinh = new ArrayList<User>();
+        for(int i = 0 ; i < searchList.size(); i++) {
+            if(searchList.get(i).getRole().equals("4")) {
+                listNcsinh.add(searchList.get(i));
+            }
+        }
+        model.addAttribute("changer", changer);
+        model.addAttribute("listncsinh", listNcsinh);
+        return "listncsinh";
+    }
+
+
+    @GetMapping("/information/{pageold}/{account}/{status}")
+    public String information(@PathVariable("pageold") String pageold ,@PathVariable("account") String account,@PathVariable("status") String status, Model model) {
         User user = userService.findByName(account);
         User whoFollow = userService.findByName(status);
-        String option = user.getRole();
-        String url = "";
-        if (option.equals("2")) {
-            url = "listhoidong";
-        } else if (option.equals("3")) {
-            url = "listcanbo";
-        } else if (option.equals("4")) {
-            url = "listncsinh";
-        }
         model.addAttribute("user", user);
         model.addAttribute("whoFollow",whoFollow);
-        model.addAttribute("url", url);
+        model.addAttribute("pageold", pageold);
         return "information";
     }
 
-    @PostMapping("/information/{account}/{status}")
-    public String lockAccount(@PathVariable("account") String account, @PathVariable("status") String status , @ModelAttribute User newUser, RedirectAttributes redirectAttrs) {
+    @PostMapping("/information/{pageold}/{account}/{status}")
+    public String lockAccount(@PathVariable("pageold") String pageold, @PathVariable("account") String account, @PathVariable("status") String status , @ModelAttribute User newUser, Model model) {
         User user = userService.findByName(account);
         userService.updateStatus(user, newUser.getTrangThai());
-        redirectAttrs.addAttribute("account", account);
-        redirectAttrs.addAttribute("status", status);
-        return "redirect:/information/{account}/{status}";
+
+        return information(pageold, account, status, model);
     }
 
-    @GetMapping("/suathongtin/{accountUser}/{accountChanger}")
-    public String changeInformation(@PathVariable("accountUser") String accountUser, @PathVariable("accountChanger") String accountChanger, Model model ) {
+    @GetMapping("/suathongtin/{pageold}/{accountUser}/{accountChanger}")
+    public String changeInformation(@PathVariable("pageold") String pageold, @PathVariable("accountUser") String accountUser, @PathVariable("accountChanger") String accountChanger, Model model ) {
         User user = userService.findByName(accountUser);
         User changer = userService.findByName(accountChanger);
         model.addAttribute("user",user);
         model.addAttribute("changer", changer);
+        model.addAttribute("pageold", pageold);
         return "suathongtin";
     }
 
-    @PostMapping("/suathongtin/{accountUser}/{accountChanger}")
-    public String handlerChangeInfo(@PathVariable("accountUser") String accountUser, @PathVariable("accountChanger") String accountChanger, @ModelAttribute User newUser,  RedirectAttributes redirectAttrs) {
+    @PostMapping("/suathongtin/{pageold}/{accountUser}/{accountChanger}")
+    public String handlerChangeInfo(@PathVariable("pageold") String pageold, @PathVariable("accountUser") String accountUser, @PathVariable("accountChanger") String accountChanger, @ModelAttribute User newUser, Model model) {
         User user = userService.findByName(accountUser);
 //        System.out.println(user);
 //        System.out.println(newUser);
         userService.update(user, newUser);
-        redirectAttrs.addAttribute("accountUser", accountUser);
-        redirectAttrs.addAttribute("accountChanger", accountChanger);
-        return "redirect:/suathongtin/{accountUser}/{accountChanger}";
+        return changeInformation(pageold, accountUser, accountChanger, model);
     }
 
     @GetMapping("/addTaiKhoan/{accountChanger}")
@@ -244,25 +296,6 @@ public class UserController {
         return "redirect:/admin/{accountChanger}";
     }
 
-    @GetMapping("/searchTaiKhoan/{accountSearch}")
-    public String getSearchTaiKhoan(@PathVariable("accountSearch") String accountSearch, Model model) {
-        User changer =  userService.findByName(accountSearch);
-        String truong = "";
-        String giatri = "";
-        model.addAttribute("changer", changer);
-        model.addAttribute("truong", truong);
-        model.addAttribute("giatri", giatri);
-        return "searchTaiKhoan";
-    }
-
-    @PostMapping("/searchTaiKhoan/{accountSearch}")
-    public String postSearchTaiKhoan(Model model, @PathVariable("accountSearch") String accountSearch, @ModelAttribute("giatri") String giatri, @ModelAttribute("truong") String truong ) {
-        User changer =  userService.findByName(accountSearch);
-        List<User> searchList = userService.search(truong, giatri);
-        model.addAttribute("changer", changer);
-        model.addAttribute("searchList", searchList);
-        return "searchTaiKhoan";
-    }
 //   ------------------ Hoi dong fucntion ------------------
 
     @GetMapping("/changePersonInfo/{accountUser}")
@@ -299,12 +332,36 @@ public class UserController {
     @GetMapping("/hoidongchamthi/{accountUser}")
     public String getHoiDongChamThi(@PathVariable("accountUser") String accountUser, Model model) {
         List<HoiDongCham> hoiDongChamList = hoiDongChamService.findAll();
-        Map<User, DeTai> listPhanCong = new HashMap<User, DeTai>();
-        for(int i = 0; i < hoiDongChamList.size(); i++) {
-            listPhanCong.put(userService.findById(hoiDongChamList.get(i).getIDCanBo()), deTaiService.findById(hoiDongChamList.get(i).getIDDeTai()));
+        List<DeTai> deTaiCham = new ArrayList<DeTai>();
+        List<DeTai> deTaiFilter = new ArrayList<DeTai>();
+        for (int i = 0; i < hoiDongChamList.size(); i++) {
+            deTaiCham.add(deTaiService.findById(hoiDongChamList.get(i).getIDDeTai()));
         }
-        model.addAttribute("listPhanCong", listPhanCong);
+        for (int i = 0; i < deTaiCham.size(); i++) {
+            if (!deTaiFilter.contains(deTaiCham.get(i))) {
+                deTaiFilter.add(deTaiCham.get(i));
+            }
+        }
+        model.addAttribute("deTaiCham", deTaiFilter);
+        model.addAttribute("viewer", userService.findByName(accountUser));
         return "hoidongchamthi";
+    }
+
+    @GetMapping("/danhsachcham/{idDeTai}/{accViewer}")
+    public String getDanhSach(@PathVariable("idDeTai") String idDeTai, @PathVariable("accViewer") String accViewer, Model model) {
+        List<HoiDongCham> hoiDongChamList = hoiDongChamService.findAll();
+        List<User> nguoiCham = new ArrayList<User>();
+        for (int i = 0; i < hoiDongChamList.size(); i++) {
+            if (hoiDongChamList.get(i).getIDDeTai().equals(idDeTai)){
+                nguoiCham.add(userService.findById(hoiDongChamList.get(i).getIDCanBo()));
+            }
+        }
+        String pageold = "danhsachcham";
+        model.addAttribute("pageold", pageold);
+        model.addAttribute("nguoicham", nguoiCham);
+        model.addAttribute("accViewer", userService.findByName(accViewer));
+
+        return "danhsachcham";
     }
 
     @GetMapping("/phanCongCham/{idDeTai}/{accountView}")
@@ -378,5 +435,15 @@ public class UserController {
 //        System.out.println(idHoiDongChamCuaDeTai);
         hoiDongChamService.updateListByUser(idDeTai, idHoiDongChamCuaDeTai);
         return getPhanCong(idDeTai, accViewer, model);
+    }
+
+    @GetMapping("/thongtinNCS/{pageold}/{idNCS}/{idNguoiHuongDan}")
+    public String getThongTinNCS(@PathVariable("pageold") String pageold, @PathVariable("idNCS") String idNCS, @PathVariable("idNguoiHuongDan") String idNguoiHuongDan, Model model) {
+        User user = userService.findById(idNCS);
+        User nguoiHuongDan = userService.findById(idNguoiHuongDan);
+        model.addAttribute("pageold",pageold);
+        model.addAttribute("user", user);
+        model.addAttribute("nguoihuongdan", nguoiHuongDan);
+        return "thongtinNCS";
     }
 }

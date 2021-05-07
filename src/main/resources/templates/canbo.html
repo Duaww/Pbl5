@@ -18,9 +18,17 @@
                 <td th:text="*{user.getDiaChi()}"></td>
             </tr>
         </table>
-        <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}">doi mat khau</a>
-        <a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}">doi thong tin ca nhan</a>
-        <a th:href="@{'/listHuongDan/' + ${user.getTaiKhoan()}}">list huong dan</a>
+        <p><a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}">doi mat khau</a></p>
+        <p><a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}">doi thong tin ca nhan</a></p>
+        <p><a th:href="@{'/listHuongDan/' + ${user.getTaiKhoan()}}">list huong dan</a></p>
+        <p><a th:href="@{'/themDeTai/' + ${user.getTaiKhoan()}}">them de tai moi</a></p>
+        <p><a th:href="@{'/listChoHuongDan/' + ${user.getTaiKhoan()}}">danh sach chua co huong dan</a></p>
+        <p><a th:href="@{'/listYeuCauPheDuyet/' + ${user.getTaiKhoan()}} ">danh sach can yeu can phe duyet</a></p>
+        <p><a th:href="@{'/listDeTaiCham/'+ ${user.getTaiKhoan()}}">danh sach de tai can cham</a></p>
+        <p><a th:href="@{'/deTaiDangThucHien/' + ${user.getTaiKhoan()}}">de tai dang thuc hien</a></p>
+        <p><a th:href="@{'/dangKyLamNghienCuu/' + ${user.getTaiKhoan()}}">dang ky lam nghien cuu khoa hoc</a></p>
+        <p><a th:href="@{'/danhSachBaiBao/' + ${user.getTaiKhoan()}}">danh sach bai bao</a></p>
+
     </div>
 
 </body>

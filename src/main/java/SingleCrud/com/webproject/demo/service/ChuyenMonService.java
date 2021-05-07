@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ChuyenMonService {
     List<ChuyenMon> findAll();
+
+    void addChuyenMon(String idLinhVuc, String idDeTai);
 }
