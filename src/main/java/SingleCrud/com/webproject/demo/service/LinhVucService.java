@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface LinhVucService {
     List<LinhVuc> findAll();
+
+    LinhVuc findByID(String idLinhVuc);
 }

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface NghiepVuService {
     List<NghiepVu> findAll();
+
+    List<NghiepVu> findByIdUser(String idUser);
 }

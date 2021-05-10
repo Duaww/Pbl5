@@ -15,11 +15,11 @@
                 <th>Phan cong cham</th>
             </tr>
             <tr th:each="element : ${listDangThucHien}">
-                <td th:text="${element.value.getTenDeTai()}"></td>
-                <td th:text="${element.value.getTrangThai()}"></td>
-                <td th:text="${element.key.getTienDo()}"></td>
-                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' +  ${element.value.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">xem chi tiet</a></td>
-                <td><a th:href="@{'/phanCongCham/' + ${element.value.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">phan cong cham</a></td>
+                <td th:text="${element.second.getTenDeTai()}"></td>
+                <td th:text="${element.second.getTrangThai()}"></td>
+                <td th:text="${element.first.getTienDo()}"></td>
+                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' +  ${element.second.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">xem chi tiet</a></td>
+                <td><a th:href="@{'/phanCongCham/' + ${element.second.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">phan cong cham</a></td>
             </tr>
         </table>
         <a th:href="@{'/hoidong/' + ${viewer.getTaiKhoan()}}">back</a>

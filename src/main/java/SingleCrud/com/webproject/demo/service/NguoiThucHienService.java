@@ -10,4 +10,6 @@ public interface NguoiThucHienService {
     String findIDNguoiThucHien(String idDeTai);
 
     void add(NguoiThucHien nguoiThucHien);
+
+    List<NguoiThucHien> findDeTaiByIDUser(String idUser);
 }

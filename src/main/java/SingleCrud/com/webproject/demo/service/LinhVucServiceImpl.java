@@ -22,4 +22,15 @@ public class LinhVucServiceImpl implements LinhVucService {
     public List<LinhVuc> findAll() {
         return linhvucRepository.findAll();
     }
+
+    @Override
+    public LinhVuc findByID(String idLinhVuc) {
+        List<LinhVuc> linhVucList = this.findAll();
+        for (int i = 0; i < linhVucList.size(); i++) {
+            if (linhVucList.get(i).getIDLinhVuc().equals(idLinhVuc)) {
+                return linhVucList.get(i);
+            }
+        }
+        return null;
+    }
 }

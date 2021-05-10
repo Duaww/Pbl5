@@ -15,15 +15,15 @@
                 <th>Chi tiet de tai</th>
             </tr>
             <tr th:each="list : ${listHuongDan}">
-                <td th:text="${list.key.getTenDeTai()}"></td>
-                <td th:text="${list.key.getTrangThai()}"></td>
+                <td th:text="${list.first.getTenDeTai()}"></td>
+                <td th:text="${list.first.getTrangThai()}"></td>
                 <td>
-                    <span th:if="${list.value.getTen()}" >
-                        <a th:href="@{'/thongtinNCS/' + ${pageold} + '/' + ${list.value.getID()} + '/' + ${nguoihuongdan.getID()}}" th:text="${list.value.getTen()}"></a>
+                    <span th:if="${list.second.getTen()}" >
+                        <a th:href="@{'/thongtinNCS/' + ${pageold} + '/' + ${list.second.getID()} + '/' + ${nguoihuongdan.getID()}}" th:text="${list.second.getTen()}"></a>
                     </span>
-                    <span th:if="!${list.value.getTen()}" th:text="'chua co ai thuc hien'"></span>
+                    <span th:if="!${list.second.getTen()}" th:text="'chua co ai thuc hien'"></span>
                 </td>
-                <td><a th:href="@{'/chiTietDeTai/'+ ${pageold} + '/' + ${list.key.getIDDeTai()} + '/' + ${nguoihuongdan.getTaiKhoan()}}">xem chi tiet</a></td>
+                <td><a th:href="@{'/chiTietDeTai/'+ ${pageold} + '/' + ${list.first.getIDDeTai()} + '/' + ${nguoihuongdan.getTaiKhoan()}}">xem chi tiet</a></td>
             </tr>
         </table>
         <a th:href="@{'/canbo/' + *{nguoihuongdan.getTaiKhoan()}}">back</a>

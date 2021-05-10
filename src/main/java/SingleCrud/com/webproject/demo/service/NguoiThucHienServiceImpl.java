@@ -5,6 +5,7 @@ import SingleCrud.com.webproject.demo.repository.NguoiThucHienRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -37,5 +38,17 @@ public class NguoiThucHienServiceImpl implements NguoiThucHienService {
     @Override
     public void add(NguoiThucHien nguoiThucHien) {
         nguoiThucHienRepository.save(nguoiThucHien);
+    }
+
+    @Override
+    public List<NguoiThucHien> findDeTaiByIDUser(String idUser) {
+        List<NguoiThucHien> nguoiThucHienList = this.findAll();
+        List<NguoiThucHien> deTaiCuaUser = new ArrayList<NguoiThucHien>();
+        for (int i = 0; i < nguoiThucHienList.size(); i++) {
+            if (nguoiThucHienList.get(i).getIDNguoiThucHien().equals(idUser)) {
+                deTaiCuaUser.add(nguoiThucHienList.get(i));
+            }
+        }
+        return deTaiCuaUser;
     }
 }

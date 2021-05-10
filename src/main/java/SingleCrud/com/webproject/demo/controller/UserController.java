@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserController {
@@ -82,10 +83,10 @@ public class UserController {
     public String loginacc(@ModelAttribute User user, RedirectAttributes redirectAttrs) {
         User userLogin = userService.login(user);
         if (userLogin == null) {
-            return "redirect:error";
+            return "redirect:/saiTaiKhoan";
         }
         if(userLogin.getTrangThai().equals("khoa")) {
-            return "redirect:lockAccount";
+            return "redirect:/lockAccount";
         }
         String option = userLogin.getRole();
         redirectAttrs.addAttribute("account", user.getTaiKhoan());
@@ -105,6 +106,11 @@ public class UserController {
     @GetMapping("/lockAccount")
     public String getLockAccount() {
         return "lockAccount";
+    }
+
+    @GetMapping("/saiTaiKhoan")
+    public String getSaiTaiKhoan() {
+        return "saiTaiKhoan";
     }
 
     @GetMapping("/doimatkhau/{account}")
@@ -164,6 +170,8 @@ public class UserController {
                 listHoiDong.add(searchList.get(i));
             }
         }
+        String pageold = "listhoidong";
+        model.addAttribute("pageold", pageold);
         model.addAttribute("changer", changer);
         model.addAttribute("listhoidong", listHoiDong);
         return "listhoidong";
@@ -201,6 +209,8 @@ public class UserController {
                 listCanbo.add(searchList.get(i));
             }
         }
+        String pageold = "listcanbo";
+        model.addAttribute("pageold", pageold);
         model.addAttribute("changer", changer);
         model.addAttribute("listcanbo", listCanbo);
         return "listcanbo";
@@ -238,9 +248,11 @@ public class UserController {
                 listNcsinh.add(searchList.get(i));
             }
         }
+        String pageold = "listncsinh";
+        model.addAttribute("pageold", pageold);
         model.addAttribute("changer", changer);
         model.addAttribute("listncsinh", listNcsinh);
-        return "listncsinh";
+        return "listncSinh";
     }
 
 
@@ -248,6 +260,16 @@ public class UserController {
     public String information(@PathVariable("pageold") String pageold ,@PathVariable("account") String account,@PathVariable("status") String status, Model model) {
         User user = userService.findByName(account);
         User whoFollow = userService.findByName(status);
+        List<NghiepVu> nghiepVuList = nghiepVuService.findByIdUser(user.getID());
+        List<LinhVuc> linhVucList = linhVucService.findAll();
+        List<LinhVuc> linhVucCuaUser = new ArrayList<LinhVuc>();
+        List<String> idLinhVuc = linhVucList.stream().map(linhVuc -> linhVuc.getIDLinhVuc()).collect(Collectors.toList());
+        for (int i = 0; i < nghiepVuList.size(); i++) {
+            if (idLinhVuc.contains(nghiepVuList.get(i).getIDLinhVuc())) {
+                linhVucCuaUser.add(linhVucService.findByID(nghiepVuList.get(i).getIDLinhVuc()));
+            }
+        }
+        model.addAttribute("linhvuc", linhVucCuaUser);
         model.addAttribute("user", user);
         model.addAttribute("whoFollow",whoFollow);
         model.addAttribute("pageold", pageold);
@@ -375,6 +397,7 @@ public class UserController {
         }
         List<NghiepVu> nghiepVuList = nghiepVuService.findAll();
         List<LinhVuc> linhVucList =  linhVucService.findAll();
+
         Map<User,List<LinhVuc>>  linhVucCuaCanBo = new HashMap<User, List<LinhVuc>>();
         for (int  i = 0; i < listCanbo.size(); i++) {
             List<LinhVuc> list = new ArrayList<LinhVuc>();
@@ -445,5 +468,18 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("nguoihuongdan", nguoiHuongDan);
         return "thongtinNCS";
+    }
+
+    @GetMapping("/dangky")
+    public String getDangKy(Model model) {
+        model.addAttribute("user", new User());
+        return "dangky";
+    }
+
+    @PostMapping("/dangky")
+    public String postDangKy(@ModelAttribute("user") User newUser) {
+        newUser.setRole("4");
+        userService.addUser(newUser);
+        return "redirect:/login";
     }
 }

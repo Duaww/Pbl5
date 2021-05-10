@@ -6,7 +6,7 @@
 </head>
 <body>
     <div>
-        <form name="formchonhuongdan" th:action="@{'/listChoHuongDan/' + ${accViewer.getTaiKhoan()}}" method="post" onsubmit="return validateForm()">
+        <form name="formchonhuongdan" th:action="@{'/listChoHuongDan/' + ${viewer.getTaiKhoan()}}" method="post" onsubmit="return validateForm()">
             <table>
                 <tr>
                     <th>Ten de tai</th>
@@ -16,16 +16,16 @@
                     <th>Huong dan</th>
                 </tr>
                 <tr th:each="list : ${nguoidexuat}">
-                    <td th:text="${list.key.getTenDeTai()}"></td>
-                    <td th:text="${list.key.getTrangThai()}"></td>
+                    <td th:text="${list.first.getTenDeTai()}"></td>
+                    <td th:text="${list.first.getTrangThai()}"></td>
                     <td>
-                        <span th:if="${list.value.getTen()}" >
-                            <a th:href="@{'/thongtinNCS/' + ${pageold} + '/' + ${list.value.getID()} + '/' + ${accViewer.getID()}}" th:text="${list.value.getTen()}"></a>
+                        <span th:if="${list.second.getTen()}" >
+                            <a th:href="@{'/thongtinNCS/' + ${pageold} + '/' + ${list.second.getID()} + '/' + ${viewer.getID()}}" th:text="${list.second.getTen()}"></a>
                         </span>
-                        <span th:if="!${list.value.getTen()}" th:text="'chua co ai thuc hien'"></span>
+                        <span th:if="!${list.second.getTen()}" th:text="'chua co ai thuc hien'"></span>
                     </td>
-                    <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${list.key.getIDDeTai()} + '/' + ${accViewer.getTaiKhoan()}}">xem chi tiet</a></td>
-                    <td><input type="checkbox" class="checkList" th:value="${list.key.getIDDeTai()}"></td>
+                    <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${list.first.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">xem chi tiet</a></td>
+                    <td><input type="checkbox" class="checkList" th:value="${list.first.getIDDeTai()}"></td>
                 </tr>
             </table>
             <span th:field="${checked}" >
@@ -33,7 +33,7 @@
             </span>
             <input type="submit" value="nhan huong dan">
         </form>
-    <a th:href="@{'/canbo/' + ${accViewer.getTaiKhoan()}}">back</a>
+    <a th:href="@{'/canbo/' + ${viewer.getTaiKhoan()}}">back</a>
     </div>
     <script th:inline="javascript">
         function validateForm() {

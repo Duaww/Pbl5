@@ -24,9 +24,10 @@ public class DeTaiController {
     private final DeTaiDangThucHienService deTaiDangThucHienService;
     private final HoiDongChamService hoiDongChamService;
     private final BaiBaoService baiBaoService;
+    private final DeTaiHoanThanhService deTaiHoanThanhService;
 
     @Autowired
-    public DeTaiController(DeTaiService deTaiService, UserService userService, ChuyenMonService chuyenmonService, LinhVucService linhvucService, NguoiThucHienService nguoiThucHienService, DeTaiDangThucHienService deTaiDangThucHienService, HoiDongChamService hoiDongChamService, BaiBaoService baiBaoService) {
+    public DeTaiController(DeTaiService deTaiService, UserService userService, ChuyenMonService chuyenmonService, LinhVucService linhvucService, NguoiThucHienService nguoiThucHienService, DeTaiDangThucHienService deTaiDangThucHienService, HoiDongChamService hoiDongChamService, BaiBaoService baiBaoService, DeTaiHoanThanhService deTaiHoanThanhService) {
         this.deTaiService = deTaiService;
         this.userService = userService;
         this.chuyenmonService = chuyenmonService;
@@ -35,6 +36,7 @@ public class DeTaiController {
         this.deTaiDangThucHienService = deTaiDangThucHienService;
         this.hoiDongChamService = hoiDongChamService;
         this.baiBaoService = baiBaoService;
+        this.deTaiHoanThanhService = deTaiHoanThanhService;
     }
 
     @GetMapping("/listDeTai/{accountView}")
@@ -42,12 +44,14 @@ public class DeTaiController {
         User viewer = userService.findByName(accountView);
         String status = "";
         List<DeTai> detaiList = deTaiService.findAll();
-        Map<DeTai, User> list = new HashMap<DeTai, User>();
+        List<Pair<DeTai, User>> list = new ArrayList<Pair<DeTai, User>>();
         for (int i = 0; i < detaiList.size(); i++) {
             if (detaiList.get(i).getIDNguoihuongdan()!=null) {
-                list.put(detaiList.get(i), userService.findById(detaiList.get(i).getIDNguoihuongdan()));
+                Pair pair = Pair.of(detaiList.get(i), userService.findById(detaiList.get(i).getIDNguoihuongdan()));
+                list.add(pair);
             } else {
-                list.put(detaiList.get(i), new User());
+                Pair pair = Pair.of(detaiList.get(i), new User());
+                list.add(pair);
             }
         }
         String pageOld = "listDeTai";
@@ -55,7 +59,7 @@ public class DeTaiController {
         model.addAttribute("viewer", viewer);
         model.addAttribute("list",  list);
         model.addAttribute("status", status);
-        return "listDetai";
+        return "listDeTai";
     }
 
     @PostMapping("/listDeTai/{accountView}")
@@ -63,12 +67,14 @@ public class DeTaiController {
         User viewer = userService.findByName(accountView);
         model.addAttribute("viewer", viewer);
         List<DeTai> statusList = deTaiService.findByStatus(status);
-        Map<DeTai, User> list = new HashMap<DeTai, User>();
+        List<Pair<DeTai, User>> list = new ArrayList<Pair<DeTai, User>>();
         for (int i = 0; i < statusList.size(); i++) {
             if (statusList.get(i).getIDNguoihuongdan()!=null) {
-                list.put(statusList.get(i), userService.findById(statusList.get(i).getIDNguoihuongdan()));
+                Pair pair = Pair.of(statusList.get(i), userService.findById(statusList.get(i).getIDNguoihuongdan()));
+                list.add(pair);
             } else {
-                list.put(statusList.get(i), new User());
+                Pair pair = Pair.of(statusList.get(i), new User());
+                list.add(pair);
             }
         }
         String pageOld = "listDeTai";
@@ -147,7 +153,7 @@ public class DeTaiController {
         for (int i = 0; i < nguoiThucHienList.size(); i++) {
             idDeTaiThucHienList.add(nguoiThucHienList.get(i).getIDDeTai());
         }
-        Map<DeTai, User> listHuongDan = new HashMap<DeTai, User>();
+        List< Pair<DeTai, User> > listHuongDan =  new ArrayList< Pair<DeTai, User> >();
         for (int  i = 0; i <deTaiList.size(); i++) {
             if (deTaiList.get(i).getIDNguoihuongdan() != null && deTaiList.get(i).getIDNguoihuongdan().equals(nguoihuongdan.getID())) {
                 deTaiHuongDan.add(deTaiList.get(i));
@@ -155,9 +161,10 @@ public class DeTaiController {
         }
         for (int i = 0; i < deTaiHuongDan.size(); i++) {
             if (idDeTaiThucHienList.contains(deTaiHuongDan.get(i).getIDDeTai())) {
-                listHuongDan.put(deTaiHuongDan.get(i), userService.findById(nguoiThucHienService.findIDNguoiThucHien(deTaiHuongDan.get(i).getIDDeTai())));
+                Pair pair = Pair.of(deTaiHuongDan.get(i), userService.findById(nguoiThucHienService.findIDNguoiThucHien(deTaiHuongDan.get(i).getIDDeTai())));
+                listHuongDan.add(pair);
             } else {
-                listHuongDan.put(deTaiHuongDan.get(i), new User());
+                listHuongDan.add(Pair.of(deTaiHuongDan.get(i), new User()));
             }
 
         }
@@ -173,9 +180,9 @@ public class DeTaiController {
         User viewer = userService.findByName(accountView);
         List<DeTaiDangThucHien> list = deTaiDangThucHienService.findAll();
         List<DeTai> deTaiList = new ArrayList<DeTai>();
-        Map<DeTaiDangThucHien ,DeTai> dangThucHienList = new HashMap<DeTaiDangThucHien, DeTai>();
+        List<Pair<DeTaiDangThucHien ,DeTai>> dangThucHienList = new ArrayList<Pair<DeTaiDangThucHien ,DeTai>>();
         for (int i = 0 ;i < list.size(); i++) {
-            dangThucHienList.put(list.get(i), deTaiService.findById(list.get(i).getIDDeTai()));
+            dangThucHienList.add(Pair.of(list.get(i), deTaiService.findById(list.get(i).getIDDeTai())));
         }
         String pageOld = "dangThucHien";
         model.addAttribute("pageold", pageOld);
@@ -272,12 +279,12 @@ public class DeTaiController {
     public String getChoHuongDan(Model model, @PathVariable("accViewer") String accViewer) {
         List<DeTai> deTaiList = deTaiService.findAll();
         List<NguoiThucHien> nguoiThucHienList = nguoiThucHienService.findAll();
-        Map<DeTai, User> nguoidexuat = new HashMap<DeTai, User>();
+        List<Pair<DeTai, User>> nguoidexuat = new ArrayList<Pair<DeTai, User>>();
         for (int i = 0; i < deTaiList.size(); i++) {
             if(deTaiList.get(i).getIDNguoihuongdan() == null) {
                 for (int j = 0; j < nguoiThucHienList.size(); j++) {
                     if (deTaiList.get(i).getIDDeTai().equals(nguoiThucHienList.get(j).getIDDeTai())) {
-                        nguoidexuat.put(deTaiList.get(i), userService.findById(nguoiThucHienList.get(j).getIDNguoiThucHien()));
+                        nguoidexuat.add(Pair.of(deTaiList.get(i), userService.findById(nguoiThucHienList.get(j).getIDNguoiThucHien())));
                     }
                 }
             }
@@ -285,7 +292,7 @@ public class DeTaiController {
         String checked = "";
         String pageOld = "listChoHuongDan";
         model.addAttribute("pageold", pageOld);
-        model.addAttribute("accViewer", userService.findByName(accViewer));
+        model.addAttribute("viewer", userService.findByName(accViewer));
         model.addAttribute("nguoidexuat", nguoidexuat);
         model.addAttribute("checked", checked);
         return "listChoHuongDan";
@@ -459,5 +466,28 @@ public class DeTaiController {
         model.addAttribute("pageold", pageold);
         model.addAttribute("viewer", userService.findByName(accViewer));
         return "chiTietBaiBao";
+    }
+
+    @GetMapping("/deTaiDaLamDuoc/{accViewer}")
+    public String getDeTaiLamDuoc(Model model, @PathVariable("accViewer") String accViewer) {
+        User user =  userService.findByName(accViewer);
+        List<DeTaiHoanThanh> hoanThanhList = deTaiHoanThanhService.findAll();
+        List<NguoiThucHien> thucHienList = nguoiThucHienService.findDeTaiByIDUser(user.getID());
+        List<String> idDeTaiThucHien = new ArrayList<String>();
+        List< Pair<DeTai, DeTaiHoanThanh> >  deTaiThucHien = new ArrayList< Pair<DeTai, DeTaiHoanThanh> >();
+        for (int i = 0; i < thucHienList.size(); i++) {
+            idDeTaiThucHien.add(thucHienList.get(i).getIDDeTai());
+        }
+        for (int i = 0; i < hoanThanhList.size(); i++) {
+            if (idDeTaiThucHien.contains(hoanThanhList.get(i).getIDDeTai())) {
+                Pair pair = Pair.of(deTaiService.findById(hoanThanhList.get(i).getIDDeTai()), hoanThanhList.get(i));
+                deTaiThucHien.add(pair);
+            }
+        }
+        String pageold = "deTaiDaLamDuoc";
+        model.addAttribute("pageold", pageold);
+        model.addAttribute("detai", deTaiThucHien);
+        model.addAttribute("accViewer", user);
+        return "deTaiDaLamDuoc";
     }
 }

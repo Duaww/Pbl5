@@ -24,7 +24,14 @@
                 <td th:text="*{getDiaChi()}"></td>
                 <td th:text="*{getGioiTinh()} ? 'Nam' : 'Nu'"></td>
                 <td th:text="*{getTrangThai()}"></td>
-                <td th:if="${user.getRole().equals('3')}">hello</td>
+                <td th:if="${user.getRole().equals('3')}">
+                    <select th:if="${linhvuc}">
+                        <option th:each="element : ${linhvuc}" th:text="${element.getTenLinhVuc()}"></option>
+                    </select>
+                    <select th:if="!${linhvuc}">
+                        <option th:text="'chua co linh vuc'"></option>
+                    </select>
+                </td>
             </tr>
         </table>
         <a th:href="'/' + ${pageold} + '/' + ${whoFollow.getTaiKhoan()}">back</a>

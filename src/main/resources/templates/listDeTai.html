@@ -7,7 +7,7 @@
 <body>
     <h1>list de tai ne</h1>
     <form name="formFilter"  th:action="@{/listDeTai/{account}(account=${viewer.getTaiKhoan()})}" method="post"  onsubmit="return validateForm()">
-        <label for="">chon trang thai muon loc</label>
+        <label>chon trang thai muon loc</label>
         <select name="field" id="fields">
             <option value="all">All</option>
             <option value="ok">OK</option>
@@ -29,13 +29,13 @@
                 <th>Chi tiet de tai</th>
             </tr>
             <tr th:each="element : ${list}">
-                <td th:text="${element.key.getTenDeTai()}"></td>
+                <td th:text="${element.first.getTenDeTai()}"></td>
                 <td >
-                    <span th:if="${element.value.getTen()}"  th:text="${element.value.getTen()}"></span>
-                    <span th:if="!${element.value.getTen()}" th:text="'chua co nguoi huong dan'"></span>
+                    <span th:if="${element.second.getTen()}"  th:text="${element.second.getTen()}"></span>
+                    <span th:if="!${element.second.getTen()}" th:text="'chua co nguoi huong dan'"></span>
                 </td>
-                <td th:text="${element.key.getTrangThai()}"></td>
-                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${element.key.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">xem chi tiet</a></td>
+                <td th:text="${element.first.getTrangThai()}"></td>
+                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${element.first.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">xem chi tiet</a></td>
             </tr>
         </table>
     </div>
