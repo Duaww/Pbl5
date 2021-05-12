@@ -17,9 +17,14 @@
                 <td th:text="*{user.getTaiKhoan()}"></td>
                 <td th:text="*{user.getDiaChi()}"></td>
             </tr>
-            <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}">doi mat khau</a>
         </table>        
     </div>
+    <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}">doi mat khau</a>
+    <p><a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}">doi thong tin ca nhan</a></p>
+    <p><a th:href="@{'/danhSachBaiBao/' + ${user.getTaiKhoan()}}">danh sach bai bao</a></p>
+    <p><a th:href="@{'/dangKyLamNghienCuu/' + ${user.getTaiKhoan()}}">dang ky lam nghien cuu khoa hoc</a></p>
+    <p><a th:href="@{'/themDeTai/' + ${user.getTaiKhoan()}}">them de tai moi</a></p>
+    <p><a th:href="@{'/deTaiDangThucHien/nghiencuusinh/' + ${user.getTaiKhoan()}}">de tai dang thuc hien</a></p>
     <a th:href="@{'/login'}">dang xuat</a>
 </body>
 </html>

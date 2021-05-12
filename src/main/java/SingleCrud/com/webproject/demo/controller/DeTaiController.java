@@ -93,6 +93,7 @@ public class DeTaiController {
         List<NguoiThucHien> nguoiThucHienList = nguoiThucHienService.findAll();
         String plane = "";
         String status = "";
+        String newTienDo = "";
         User nguoithuchien = new User();
         User viewer = userService.findByName(accViewer);
         for (int i = 0; i < nguoiThucHienList.size(); i++) {
@@ -132,14 +133,21 @@ public class DeTaiController {
         model.addAttribute("linhVucCuaDeTai", linhvucCuaDeTai);
         model.addAttribute("viewer", viewer);
         model.addAttribute("status", status);
+        model.addAttribute("newTienDo", newTienDo);
         model.addAttribute("plane",  plane);
         return "chiTietDeTai";
     }
 
     @PostMapping("/chiTietDeTai/{pageold}/{idDeTai}/{accountView}")
-    public String postPheDuyet(Model model, @PathVariable("idDeTai") String idDeTai, @PathVariable("accountView") String accViewer, @PathVariable("pageold") String pageold, @ModelAttribute("status") String status) {
-//        System.out.println(status);
-        deTaiService.changeStatus(idDeTai, status);
+    public String postUpdate(Model model, @PathVariable("idDeTai") String idDeTai, @PathVariable("accountView") String accViewer, @PathVariable("pageold") String pageold, @ModelAttribute("status") String status, @ModelAttribute("newTienDo") String newTiendo) {
+        if (!status.equals("")) {
+            System.out.println(status);
+            deTaiService.changeStatus(idDeTai, status);
+        } else if (!newTiendo.equals("")) {
+            DeTaiDangThucHien deTaiDangThucHien =  deTaiDangThucHienService.findByIdDeTai(idDeTai);
+            deTaiDangThucHienService.updateTienDo(deTaiDangThucHien, idDeTai , newTiendo);
+            System.out.println(newTiendo);
+        }
         return getChiTiet(idDeTai, accViewer, pageold, model);
     }
 
@@ -235,8 +243,16 @@ public class DeTaiController {
     @GetMapping("/themDeTai/{accountView}")
     public String getThemDeTai(Model model, @PathVariable("accountView") String accViewer) {
         DeTai deTai = new DeTai();
+        User user = userService.findByName(accViewer);
+        String pageold = "";
+        if (user.getRole().equals("3")) {
+            pageold = "canbo";
+        } else  if (user.getRole().equals("4")) {
+            pageold = "nghiencuusinh";
+        }
+        model.addAttribute("pageold", pageold);
         model.addAttribute("detai", deTai);
-        model.addAttribute("viewer", userService.findByName(accViewer));
+        model.addAttribute("viewer", user);
         return "themDeTai";
     }
 
@@ -263,16 +279,13 @@ public class DeTaiController {
     @PostMapping("/themLinhVucDeTai/{idDeTai}/{accViewer}")
     public String postThemLinhVuc(Model model, @ModelAttribute("checked") String checked, @PathVariable("accViewer") String accViewer, @PathVariable("idDeTai") String idDeTai, RedirectAttributes redirectAttrs) {
         String[] idlinhVucCanThem = checked.split("/");
-
         for (int i = 0; i < idlinhVucCanThem.length; i++) {
             if (!idlinhVucCanThem[i].equals("")) {
                 chuyenmonService.addChuyenMon(idlinhVucCanThem[i], idDeTai);
-
             }
-//            System.out.println(idlinhVucCanThem[i].equals(""));
         }
         redirectAttrs.addAttribute("accViewer",accViewer);
-        return "redirect:/listHuongDan/{accViewer}";
+        return "redirect:/dangKyLamNghienCuu/{accViewer}";
     }
 
     @GetMapping("/listChoHuongDan/{accViewer}")
@@ -376,8 +389,8 @@ public class DeTaiController {
         return "listDeTaiCham";
     }
 
-    @GetMapping("/deTaiDangThucHien/{accViewer}")
-    public String getThucHien(Model model,  @PathVariable("accViewer") String accViewer) {
+    @GetMapping("/deTaiDangThucHien/{pageold}/{accViewer}")
+    public String getThucHien(Model model,  @PathVariable("accViewer") String accViewer, @PathVariable("pageold") String pageold) {
         User nguoithuchien = userService.findByName(accViewer);
         List<NguoiThucHien> nguoiThucHienList = nguoiThucHienService.findAll();
         List<DeTai> deTaiDangThucHien = new ArrayList<DeTai>();
@@ -386,7 +399,6 @@ public class DeTaiController {
                 deTaiDangThucHien.add(deTaiService.findById(nguoiThucHienList.get(i).getIDDeTai()));
             }
         }
-        String pageold = "deTaiDangThucHien";
         model.addAttribute("pageold", pageold);
         model.addAttribute("deTaiDangThucHien", deTaiDangThucHien);
         model.addAttribute("nguoithuchien", nguoithuchien);
@@ -415,7 +427,12 @@ public class DeTaiController {
                 }
             }
         }
-        String pageold = "dangKyLamNghienCuu";
+        String pageold = "";
+        if (user.getRole().equals("3")) {
+            pageold = "canbo";
+        } else  if (user.getRole().equals("4")) {
+            pageold = "nghiencuusinh";
+        }
         model.addAttribute("checked", checked);
         model.addAttribute("pageold", pageold);
         model.addAttribute("deTaiCoThe", deTaiCoThe);
@@ -439,13 +456,19 @@ public class DeTaiController {
 
     @GetMapping("/danhSachBaiBao/{accViewer}")
     public String getBaiBao(Model model, @PathVariable("accViewer") String accViewer) {
+        User viewer = userService.findByName(accViewer);
         List<BaiBao> baiBaoList = baiBaoService.findAll();
         List< Pair<DeTai, BaiBao> > list = new ArrayList< Pair<DeTai, BaiBao> >() ;
         for (int i = 0; i < baiBaoList.size(); i++) {
             list.add(Pair.of(deTaiService.findById(baiBaoList.get(i).getIDDeTai()), baiBaoList.get(i)));
         }
+        String pageold = "canbo";
+        if (viewer.getRole().equals("4")) {
+            pageold = "nghiencuusinh";
+        }
+        model.addAttribute("pageold", pageold);
         model.addAttribute("list",  list);
-        model.addAttribute("viewer",userService.findByName(accViewer));
+        model.addAttribute("viewer", viewer);
         return "danhSachBaiBao";
     }
 

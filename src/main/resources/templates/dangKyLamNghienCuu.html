@@ -17,7 +17,7 @@
             <tr th:each="detai : ${deTaiCoThe}">
                 <td th:text="${detai.getTenDeTai()}"></td>
                 <td th:text="${detai.getTrangThai()}"></td>
-                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${detai.getIDDeTai()} + '/' + ${user.getTaiKhoan()}}">xem chi tiet</a></td>
+                <td><a th:href="@{'/chiTietDeTai/dangKyLamNghienCuu/' + ${detai.getIDDeTai()} + '/' + ${user.getTaiKhoan()}}">xem chi tiet</a></td>
                 <td><input type="checkbox" class="checkList" th:value="${detai.getIDDeTai()}"></td>
             </tr>
         </table>
@@ -26,7 +26,7 @@
         </span>
         <input type="submit" value="dangky">
     </form>
-    <a th:href="@{'/canbo/' + ${user.getTaiKhoan()}}">back</a>
+    <a th:href="@{'/' + ${pageold} +'/' + ${user.getTaiKhoan()}}">back</a>
     <script th:inline="javascript">
         function validateForm() {
             let Checked = "";
