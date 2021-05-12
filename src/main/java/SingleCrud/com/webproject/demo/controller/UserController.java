@@ -28,17 +28,6 @@ public class UserController {
         this.linhVucService = linhVucService;
     }
 
-    @GetMapping("/")
-    public String index() {
-        return "index";
-    }
-
-    @GetMapping("/hello")
-    public String listUser(Model model) {
-        model.addAttribute("userList", userService.findAll());
-        return "hello";
-    }
-
     @GetMapping("/admin/{account}")
     public String adminPage(Model mode, @PathVariable String account) {
         mode.addAttribute("user", userService.findByName(account));
@@ -102,7 +91,6 @@ public class UserController {
         return "redirect:/index";
     }
 
-//    ------------------ Admin function -----------------------
     @GetMapping("/lockAccount")
     public String getLockAccount() {
         return "lockAccount";
@@ -317,8 +305,6 @@ public class UserController {
         redirectAttrs.addAttribute("accountChanger", accountChanger);
         return "redirect:/admin/{accountChanger}";
     }
-
-//   ------------------ Hoi dong fucntion ------------------
 
     @GetMapping("/changePersonInfo/{accountUser}")
     public String getChangePersonInfo(@PathVariable("accountUser") String accountUser, Model model) {

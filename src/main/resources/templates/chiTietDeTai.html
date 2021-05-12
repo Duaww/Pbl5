@@ -38,7 +38,7 @@
             <textarea th:if="${plane}" th:text="${plane}"></textarea>
             <textarea th:if="!${plane}" th:text="''"></textarea>
     </div>
-    <div th:if="${viewer.getRole().equals('4')}">
+    <div th:if="${viewer.getRole().equals('4') && pageold.equals('deTaiDangThucHien')}">
         tien do :
         <form name="updateTienDo" th:action="@{'/chiTietDeTai/' + ${pageold} + '/'+ ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" onsubmit="return validateForm()" method="post" >
             <span th:field="${newTienDo}" >
@@ -57,7 +57,7 @@
             <a th:if="${viewer.getRole().equals('3')}" th:href="@{'/' + ${pageold} + '/canbo/' + ${viewer.getTaiKhoan()}}">back</a>
             <a th:if="${viewer.getRole().equals('4')}" th:href="@{'/' + ${pageold} + '/nghiencuusinh/' + ${viewer.getTaiKhoan()}}">back</a>
         </p>
-        <p th:if="${pageold.equals('listHuongDan') || pageold.equals('listDeTai')}">
+        <p th:if="${!pageold.equals('chiTietBaiBao') && !pageold.equals('deTaiDangThucHien')}">
             <a th:href="@{'/' + ${pageold}  +'/'+ ${viewer.getTaiKhoan()}}">back</a>
         </p>
     </div>

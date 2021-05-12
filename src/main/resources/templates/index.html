@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -7,5 +7,10 @@
 <body>
     <h1>hello ne</h1>
     <a href="/login">dang ky de tai thuc hien</a>
+    <div>
+        <div th:each="element : ${list}">
+            <p><a th:text="${element.first.getTenDeTai()}" th:href="@{'/xemBaiBao/' + ${element.first.getIDDeTai()}}"></a></p>
+        </div>
+    </div>
 </body>
 </html>
