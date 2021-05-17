@@ -1,46 +1,104 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>De Tai</title>
+    <title>Đề tài</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 </head>
+
 <body>
-    <h1>list de tai ne</h1>
-    <form name="formFilter"  th:action="@{/listDeTai/{account}(account=${viewer.getTaiKhoan()})}" method="post"  onsubmit="return validateForm()">
-        <label>chon trang thai muon loc</label>
-        <select name="field" id="fields">
-            <option value="all">All</option>
-            <option value="ok">OK</option>
-            <option value="dangxet">Dang Xet</option>
-            <option value="chuaxet">Chua Xet</option>
-        </select>
-        <span th:field="${status}" >
-            <input type="hidden" name="status" th:value="${status}">
-        </span>
-        <input type="submit" name="form_filter"  value="filter">
-    </form>
+    <div class="container">
+        <h5>Danh sách đề tài </h5>
+        <form name="formFilter" th:action="@{/listDeTai/{account}(account=${viewer.getTaiKhoan()})}" method="post" onsubmit="return validateForm()">
+            <label>Chọn trạng thái muốn lọc</label>
+            <select name="field" id="fields">
+                <option value="all">Tất cả</option>
+                <option value="ok">OK</option>
+                <option value="dangxet">Đang xét</option>
+                <option value="chuaxet">Chưa xét</option>
+            </select>
+            <span th:field="${status}">
+                <input type="hidden" name="status" th:value="${status}">
+            </span>
+            <input type="submit" name="form_filter" value="Lọc">
 
-    <div th:if="${list}">
-        <table>
-            <tr>
-                <th>Ten de tai</th>
-                <th>Ten can bo huong dan</th>
-                <th>Trang thai</th>
-                <th>Chi tiet de tai</th>
-            </tr>
-            <tr th:each="element : ${list}">
-                <td th:text="${element.first.getTenDeTai()}"></td>
-                <td >
-                    <span th:if="${element.second.getTen()}"  th:text="${element.second.getTen()}"></span>
-                    <span th:if="!${element.second.getTen()}" th:text="'chua co nguoi huong dan'"></span>
-                </td>
-                <td th:text="${element.first.getTrangThai()}"></td>
-                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${element.first.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">xem chi tiet</a></td>
-            </tr>
-        </table>
+        </form>
     </div>
-    <a th:href="@{'/hoidong/' + ${viewer.getTaiKhoan()}}">back</a>
+    <div class="container">
+        <div th:if="${list}">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr style="background-color: #BE81F7;">
+                            <th scope="col">Tên đề tài</th>
+                            <th scope="col">Tên cán bộ hướng dẫn</th>
+                            <th scope="col">Trạng thái</th>
+                            <th scope="col">Chi tiết đề tài</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <tr th:each="element : ${list}">
+                                <td th:text="${element.first.getTenDeTai()}"></td>
+                                <td>
+                                    <span th:if="${element.second.getTen()}" th:text="${element.second.getTen()}"></span>
+                                    <span th:if="!${element.second.getTen()}" th:text="'chua co nguoi huong dan'"></span>
+                                </td>
+                                <td th:text="${element.first.getTrangThai()}"></td>
+                                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${element.first.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 35%; text-align: center;">Chi tiết</a></td>
+                            </tr>
+                        </tr>
+                    </tbody>
+                    <span th:field="${checked}">
+                    <input type="hidden" name="checked" th:value="${checked}">
+                </span>
+                </table>
 
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <a th:href="@{'/hoidong/' + ${viewer.getTaiKhoan()}}" class="btn btn-primary" tyle="border-radius: 10px; margin-top: 10px; width: 13%;">Trở về</a>
+            </div>
+            <div class="col-md-6">
+<!--                <div class="input-group">-->
+<!--                    <div class="form-outline">-->
+<!--                        <input id="search-focus" type="search" id="form1" class="form-control" />-->
+<!--                        <label class="form-label" for="form1">Tìm kiếm</label>-->
+<!--                    </div>-->
+<!--                    <button type="button" class="btn btn-primary" style="margin-left: 14px; margin-bottom: 31px; border-radius: 10px;">-->
+<!--                            <i class="fas fa-search"></i>-->
+<!--                        </button>-->
+<!--                </div>-->
+            </div>
+        </div>
+        <hr>
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12">
+                    <h5>Liên lạc với nhóm</h5>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
     <script th:inline="javascript">
         function validateForm() {
             var choice = document.getElementById("fields");
@@ -49,6 +107,8 @@
             return true;
         }
     </script>
-
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

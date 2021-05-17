@@ -1,30 +1,66 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Hội đồng</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
 </head>
+
 <body>
-    <div>
-        <table>
-            <tr>
-                <th>Ten</th>
-                <th>Tai Khoan</th>
-                <th>Dia chi</th>
-            </tr>
-            <tr th:object="${user}">
-                <td th:text="*{getTen()}"></td>
-                <td th:text="*{getTaiKhoan()}"></td>
-                <td th:text="*{getDiaChi()}"></td>
-            </tr>
-        </table>
-        <a th:href="@{'/doimatkhau/' + ${user.getTaiKhoan()}}">doi mat khau</a>
-        <a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}">doi thong tin ca nhan</a>
-        <a th:href="@{'/listDeTai/' +   ${user.getTaiKhoan()}}">danh sach de tai</a>
-        <a th:href="@{'/hoidongchamthi/' + ${user.getTaiKhoan()}}">danh sach hoi dong cham thi</a>
-        <br>
-        <a th:href="@{'/dangThucHien/' + ${user.getTaiKhoan()}}">danh sang de tai dang duoc thuc hien</a>
-        <a th:href="@{'/login'}">dang xuat</a>
+    <div class="container">
+        <h5>Danh sách hội đồng </h5>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr style="background-color: #BE81F7;">
+                        <th scope="col">Tên</th>
+                        <th scope="col">Tài khoản</th>
+                        <th scope="col">Địa chỉ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <tr th:object="${user}">
+                            <td th:text="*{getTen()}"></td>
+                            <td th:text="*{getTaiKhoan()}"></td>
+                            <td th:text="*{getDiaChi()}"></td>
+                        </tr>
+                </tbody>
+            </table>
+            <a th:href="@{'/doimatkhau/' + ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 18%; text-align: center;">Đổi mật khẩu</a>
+            <a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 18%; text-align: center;">Đổi thông tin cá nhân</a>
+            <a th:href="@{'/listDeTai/' +   ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 18%; text-align: center;">Danh sách đề tài</a>
+            <a th:href="@{'/hoidongchamthi/' + ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 21%; text-align: center;">Danh sách hội đồng chấm thi</a>
+            <a th:href="@{'/dangThucHien/' + ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 19%; text-align: center;">Danh sách đề tài thực hiện</a>
+            <a th:href="@{'/login'}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 19%; text-align: center;">Đăng xuất</a>
+        </div>
+        <hr>
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12">
+                    <h5>Liên lạc với nhóm</h5>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
     </div>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

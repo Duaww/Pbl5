@@ -1,59 +1,98 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>information</title>
-</head>
-<body>
-    <h1>thong tin chi tiet ne :3 </h1>
-    <div>
-        <table>
-            <tr>
-                <th>Ten</th>
-                <th>Tai Khoan</th>
-                <th>Dia chi</th>
-                <th>Gioi Tinh</th>
-                <th>Trang Thai</th>
-                <th th:if="${user.getRole().equals('3')}">LinhVuc</th>
-            </tr>
-            <tr th:object="${user}">
-                <td th:text="*{getTen()}"></td>
-                <td th:text="*{getTaiKhoan()}"></td>
-                <td th:text="*{getDiaChi()}"></td>
-                <td th:text="*{getGioiTinh()} ? 'Nam' : 'Nu'"></td>
-                <td th:text="*{getTrangThai()}"></td>
-                <td th:if="${user.getRole().equals('3')}">
-                    <select th:if="${linhvuc}">
-                        <option th:each="element : ${linhvuc}" th:text="${element.getTenLinhVuc()}"></option>
-                    </select>
-                    <select th:if="!${linhvuc}">
-                        <option th:text="'chua co linh vuc'"></option>
-                    </select>
-                </td>
-            </tr>
-        </table>
-        <a th:href="'/' + ${pageold} + '/' + ${whoFollow.getTaiKhoan()}">back</a>
-        <a th:href="${'/suathongtin/' + {pageold} + '/' + {user.getTaiKhoan()} + '/' + {whoFollow.getTaiKhoan()}}">sua thong tin</a>
-    </div>
+    <title>Thông tin người dùng</title>
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
-    <form name="changeStatus" th:action="@{'/information/' + ${pageold} + '/' + ${user.getTaiKhoan()} + '/' + ${whoFollow.getTaiKhoan()}}" method="POST" onsubmit="return lock()">
-        <div th:field="*{TrangThai}">    
-            <input type="hidden" name="TrangThai" th:value="*{TrangThai}">
-            <div th:if="${#strings.equals(user.getTrangThai(), 'mo')}">
-                <input type="submit" value="Khoa Tai Khoan">
-            </div>
-            <div th:if="${#strings.equals(user.getTrangThai(), 'khoa')}">
-                <input type="submit" value="Mo Tai Khoan">
+</head>
+
+<body>
+
+    <div class="container">
+        <h5>Thông tin cá nhân </h5>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr style="background-color: #BE81F7;">
+                        <th scope="col">Tên</th>
+                        <th scope="col">Tài khoản</th>
+                        <th scope="col">Địa chỉ</th>
+                        <th scope="col">Giới tính</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col" th:if="${user.getRole().equals('3')}">Lĩnh vực</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <tr th:object="${user}">
+                            <td th:text="*{getTen()}"></td>
+                            <td th:text="*{getTaiKhoan()}"></td>
+                            <td th:text="*{getDiaChi()}"></td>
+                            <td th:text="*{getGioiTinh()} ? 'Nam' : 'Nu'"></td>
+                            <td th:text="*{getTrangThai()}"></td>
+                            <td th:if="${user.getRole().equals('3')}">
+                                <select th:if="${linhvuc}">
+                                <option th:each="element : ${linhvuc}" th:text="${element.getTenLinhVuc()}"></option>
+                            </select>
+                                <select th:if="!${linhvuc}">
+                                <option th:text="'chua co linh vuc'"></option>
+                            </select>
+                            </td>
+                        </tr>
+                    </tr>
+                </tbody>
+            </table>
+            <a  th:href="'/' + ${pageold} + '/' + ${whoFollow.getTaiKhoan()}" class="btn btn-primary" style="border-radius: 10px; margin-top: 10px; width: 13%;">Trờ về</a>
+            <a th:href="${'/suathongtin/' + {pageold} + '/' + {user.getTaiKhoan()} + '/' + {whoFollow.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 10px; width: 13%;">Sửa thông tin</a>
+        </div>
+    </div>
+    <div class="container form-text">
+        <div class="col-sm-12">
+            <form name="changeStatus" th:action="@{'/information/' + '/' + ${pageold} +'/'+ ${user.getTaiKhoan()} + '/' + ${whoFollow.getTaiKhoan()}}" method="POST" onsubmit="return lock()">
+                <div th:field="*{TrangThai}">
+                    <input type="hidden" name="TrangThai" th:value="*{TrangThai}">
+                    <div th:if="${#strings.equals(user.getTrangThai(), 'mo')}">
+                        <input type="submit" value="Khoá tài khoản" class="btn btn-primary" style="border-radius: 10px; margin-top: 10px; width: 13%;">
+                    </div>
+                    <div th:if="${#strings.equals(user.getTrangThai(), 'khoa')}">
+                        <input type="submit" value="Mở tài khoản" class="btn btn-primary" style="border-radius: 10px; margin-top: 10px; width: 13%;">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <hr>
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12">
+                    <h5>Liên lạc với nhóm</h5>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
             </div>
         </div>
-    </form>
+    </div>
+
+
     <script th:inline="javascript">
         var user = [[${user}]];
         function lock() {
             let status = user.trangThai;
-            if(status == "mo") {
+            if (status == "mo") {
                 document.forms["changeStatus"]["TrangThai"].value = "khoa";
             } else {
                 document.forms["changeStatus"]["TrangThai"].value = "mo";
@@ -61,5 +100,8 @@
             return true;
         }
     </script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

@@ -1,32 +1,52 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <div>
-        <table>
-            <tr>
-                <th>Ten</th>
-                <th>Tai Khoan</th>
-                <th>Dia chi</th>
-            </tr>
-            <tr th:each="user:${user}">
-                <td th:text="*{user.getTen()}"></td>
-                <td th:text="*{user.getTaiKhoan()}"></td>
-                <td th:text="*{user.getDiaChi()}"></td>
-            </tr>
-        </table>
-        <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}">doi mat khau</a>
-    </div>
-    <div>
-        <a th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}">list hoi dong</a>
-        <a th:href="@{'/listcanbo/' + *{user.getTaiKhoan()}}">list can bo</a>
-        <a th:href="@{'/listncsinh/' + *{user.getTaiKhoan()}}">list nghien cuu sinh</a>
-        <a th:href="@{'/addTaiKhoan/' + *{user.getTaiKhoan()}}">add tai khoan</a>
-        <a th:href="@{'/login'}">dang xuat</a>
-    </div>
+    <title>Admin</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="/../../bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
+</head>
+
+<body>
+    <div class="container">
+        <h5>Danh sách Admin </h5>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr style="background-color: #BE81F7;">
+                        <th scope="col">Tên</th>
+                        <th scope="col">Tài khoản</th>
+                        <th scope="col">Địa chỉ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <tr th:each="user:${user}">
+                            <td th:text="*{user.getTen()}"></td>
+                            <td th:text="*{user.getTaiKhoan()}"></td>
+                            <td th:text="*{user.getDiaChi()}"></td>
+                        </tr>
+                    </tr>
+                </tbody>
+            </table>
+            <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 18%; text-align: center;">Đổi mật khẩu</a>
+        </div>
+        <div>
+            <a th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 18%; text-align: center;">Danh sách hội đồng</a>
+            <a th:href="@{'/listcanbo/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 18%; text-align: center;">Danh sách cán bộ</a>
+            <a th:href="@{'/listncsinh/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 21%; text-align: center;">Danh sách nghiên cứu sinh</a>
+            <a th:href="@{'/addTaiKhoan/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 18%; text-align: center;">Thêm tài khoản</a>
+            <a th:href="@{'/login'}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 18%; text-align: center;">Đăng xuất</a>
+        </div>
+    </div>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

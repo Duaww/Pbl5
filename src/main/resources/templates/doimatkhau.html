@@ -1,24 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"> 
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Đổi mật mật khẩu</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
 </head>
+
 <body>
-    <form name="changePass" th:action="@{/doimatkhau/{account}(account=${user.getTaiKhoan()})}" action="#" th:object="${user}" onsubmit="return validateForm()" method="POST">
-        <label >Mat Khau hien tai</label>
-        <label><input name="oldPass" type="text"></label>
-        <br>
-        <label >mat khau moi</label>
-        <label><input name="newPass" type="text"></label>
-        <br>
-        <label>xac nhan mat khau</label>
-        <label th:field="${user.getMatKhau()}"><input name="MatKhau" value="" type="text" ></label>
-        <br>
-        <input type="submit" value="doi mat khau">
-    </form>
+    <div class="container form-text">
+        <div class="row">
+            <div class="col-sm-12">
+                <h5>Đổi mật khẩu</h5>
+            </div>
+            <div class="col-sm-12">
+                <!-- Form đổi mật khẩu -->
+                <form name="changePass" th:action="@{/doimatkhau/{account}(account=${user.getTaiKhoan()})}" action="#" th:object="${user}" onsubmit="return validateForm()" method="POST">
+                    <div class="form-group">
+                        <label for="">Mật khẩu hiện tại</label>
+                        <input name="oldPass" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Mật khẩu mới</label>
+                        <input name="newPass" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Xác nhận mật khẩu</label>
+                        <!-- Mới sửa cái ni từ label thành span -->
+                        <span th:field="${user.getMatKhau()}"><input name="MatKhau" value="" type="text"  class="form-control"></span>
+                    </div>
+                    <input type="submit" value="Đổi mật khẩu" class="btn btn-primary" style="margin-top: 17px; border-radius: 10px;">
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script th:inline="javascript">
         var user = [[${user}]];
@@ -34,7 +57,7 @@
                 alert("pass nhap vao hien tai khong dung!!");
                 return false;
             }
-            if (newPass !==  confirm) {
+            if (newPass !== confirm) {
                 alert("pass moi va pass xac nhan khong trung nhau!");
                 return false;
             }
@@ -47,5 +70,8 @@
             return true;
         }
     </script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

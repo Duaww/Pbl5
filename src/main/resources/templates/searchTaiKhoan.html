@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tìm kiếm tài khoản</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+</head>
+
+<body>
+    <div class="container">
+        <h5>Tìm kiếm tài khoản</h5>
+        <form name="formSearch" th:action="@{/searchTaiKhoan/{account}(account=${changer.getTaiKhoan()})}" method="post" onsubmit="return validateForm()">
+            <label for="">Chọn trường muốn tìm kiếm: </label>
+            <select name="field" id="fields" style="height: 31px;">
+            <option value="Ten">Tên</option>
+            <option value="DiaChi">Đia chỉ</option>
+            <option value="TrangThai">Trạng thái</option>
+            </select>
+            <input type="text" name="search">
+            <span th:field="${truong}">
+            <input type="hidden" name="truong" th:value="${truong}">
+            </span>
+            <span th:field="${giatri}">
+             <input type="hidden" th:value="${giatri}" name="giatri">
+            </span>
+
+            <input type="submit" name="form_search" value="Tìm kiếm" class="btn btn-primary">
+        </form>
+    </div>
+    <div th:if="${searchList}">
+        <div class="container">
+            <h5>Danh sách tài khoản </h5>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr style="background-color: #BE81F7;">
+                            <th scope="col">Tên</th>
+                            <th scope="col">Tài khoản</th>
+                            <th scope="col">Địa chỉ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <tr th:each="user :${searchList}">
+                                <td th:text="${user.getTen()}"></td>
+                                <td th:text="${user.getTaiKhoan()}"></td>
+                                <td th:text="${user.getDiaChi()}"></td>
+                            </tr>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+
+                <a th:href="${'/admin/' + {changer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 23%; text-align: center;">Trở về</a>
+            </div>
+            <div class="col-md-6">
+                <div class="input-group">
+                    <div class="form-outline">
+                        <input id="search-focus" type="search" id="form1" class="form-control" />
+                        <label class="form-label" for="form1">Tìm kiếm</label>
+                    </div>
+                    <button type="button" class="btn btn-primary" style="margin-left: 14px; margin-bottom: 31px; border-radius: 10px;">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12">
+                    <h5>Liên lạc với nhóm</h5>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <script th:inline="javascript">
+        function validateForm() {
+            var choice = document.getElementById("fields");
+            document.forms["formSearch"]["truong"].value = choice.options[choice.selectedIndex].value;
+            document.forms["formSearch"]["giatri"].value = document.getElementsByName("search")[0].value;
+            return true;
+        }
+    </script>
+
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>

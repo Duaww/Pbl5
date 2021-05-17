@@ -1,69 +1,97 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sửa thông tin</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+
 </head>
+
 <body>
-    <form name="changeInfo" th:action="@{'/suathongtin/' + ${pageold} + '/' + ${user.getTaiKhoan()} + '/' + ${changer.getTaiKhoan()}}" th:object="${user}" onsubmit="return validateForm()" method="POST">
+    <div class="container form-text">
+        <div class="row">
+            <div class="col-sm-12">
+                <h5>Sửa thông tin cá nhân</h5>
+            </div>
+            <div class="col-sm-12">
+                <!-- Form sửa thông tin -->
+                <form name="changeInfo" th:action="@{'/suathongtin/' + ${pageold} + '/' + ${user.getTaiKhoan()} + '/' + ${changer.getTaiKhoan()}}" th:object="${user}" onsubmit="return validateForm()" method="POST">
+                    <!-- Têm -->
+                    <div class="form-group">
+                        <label for="">Tên</label>
+                        <span th:field="*{Ten}">
+                            <input name="Ten" type="text" th:value="*{Ten}" class="form-control">
+                        </span>
+                    </div>
+                    <!-- Ngày sinh -->
+                    <div class="form-group">
+                        <label for="">Ngày sinh</label>
+                        <span th:field="*{NgaySinh}">
+                            <input name="NgaySinh" type="text" th:value="*{NgaySinh}" class="form-control">
+                        </span>
+                    </div>
 
-        <label for="">Ten</label>
-        <span th:field="*{Ten}">
-            <input name="Ten" type="text" th:value="*{Ten}">
-        </span>
+                    <!-- Giới tính -->
+                    <div class="form-group">
+                        <span th:field="*{GioiTinh}">
+                            <label for="">Giới tính: </label>
+                            <input type="hidden" name="GioiTinh" th:value="*{GioiTinh}" class="form-control">
+                            <span> Nam
+                                <input type="radio" name="checkboxSex" value="nam" th:checked="*{GioiTinh} ? 'checked'" />
+                            </span>
+                        <span> Nữ
+                                <input type="radio" name="checkboxSex" value="nu"  th:checked="!*{GioiTinh} ? 'checked'" />
+                            </span>
+                        </span>
+                    </div>
+                    <!--Địa chỉ( Sửa label thành span)  -->
+                    <div class="form-group">
+                        <label for="">Địa chỉ</label>
+                        <span th:field="*{DiaChi}">
+                            <input name="DiaChi" type="text" th:value="*{DiaChi}" class="form-control">
+                        </span>
+                    </div>
+                    <!-- Số điện thoại -->
+                    <div class="form-group">
+                        <label for="">Số điện thoại</label>
+                        <span th:field="*{SDT}">
+                            <input name="SDT" type="text" th:value="*{SDT}" class="form-control">
+                        </span>
+                    </div>
+                    <!-- Gmail -->
+                    <div class="form-group">
+                        <label for="">Gmail</label>
+                        <span th:field="*{Gmail}">
+                            <input name="Gmail" type="text" th:value="*{Gmail}" class="form-control">
+                        </span>
+                    </div>
+                    <!-- Nút sửa thông tin -->
+                    <button type="submit" class="btn btn-primary" name="btnsubmit" style="margin-top: 17px; border-radius: 10px;">Thêm thông tin</button>
+                    <!-- Trở về(back) chưa xong -->
+                    <a th:href="${'/information/'+ {pageold} + '/' + {user.getTaiKhoan()} + '/' + {changer.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 18px; width: 13%;">Trở về</a>
+                </form>
+            </div>
+        </div>
+    </div>
 
-        <br>
-        <label for="">Ngay sinh</label>
-        <span th:field="*{NgaySinh}">
-            <input name="NgaySinh" type="text" th:value="*{NgaySinh}">
-        </span>
-
-
-        <br>
-        <label for="">Gioi tinh : </label>
-        <span  th:field="*{GioiTinh}" >
-            <input type="hidden" name="GioiTinh" th:value="*{GioiTinh}">
-            <span> Nam
-                <input type="radio" name="checkboxSex" value="nam" th:checked="*{GioiTinh} ? 'checked'" />
-            </span>
-            <span> Nu
-                <input type="radio" name="checkboxSex" value="nu"  th:checked="!*{GioiTinh} ? 'checked'" />
-            </span>        
-        </span>
-
-        <br>
-        <label for="">Dia chi</label>
-        <label th:field="*{DiaChi}">
-            <input name="DiaChi" type="text" th:value="*{DiaChi}">
-        </label>
-
-        <br>
-        <label for="">Sdt</label>
-        <span th:field="*{SDT}">
-            <input name="SDT" type="text" th:value="*{SDT}">
-        </span>
-
-        <br>
-        <label for="">Gmail</label>
-        <span th:field="*{Gmail}">
-            <input name="Gmail" type="text" th:value="*{Gmail}">
-        </span>
-
-        <br>
-        <input type="submit" value="doi">
-    </form>
-    <a th:href="${'/information/'+ {pageold} + '/' + {user.getTaiKhoan()} + '/' + {changer.getTaiKhoan()}}">back</a>
+    <!-- <a th:href="${ '/information/' + {user.getTaiKhoan()} + '/' + {changer.getTaiKhoan()}} ">back</a> -->
     <script>
-
-        function validateForm(){
+        function validateForm() {
             let checkbox = document.getElementsByName("checkboxSex");
             // console.log(document.forms["changeInfo"]["GioiTinh"].value);
-            for (var i = 0; i < checkbox.length; i++)  {
-                if(checkbox[i].checked === true) {
+            for (var i = 0; i < checkbox.length; i++) {
+                if (checkbox[i].checked === true) {
                     // alert(checkbox[i].value);
-                    if(checkbox[i].value == "nam") {
+                    if (checkbox[i].value == "nam") {
                         document.forms["changeInfo"]["GioiTinh"].value = "true";
                     } else {
                         document.forms["changeInfo"]["GioiTinh"].value = "false";
@@ -73,5 +101,9 @@
             return true;
         }
     </script>
+
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

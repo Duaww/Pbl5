@@ -1,22 +1,81 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>danh sach bai bao</title>
+    <title>Danh sách bài báo</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+
+
 </head>
+
 <body>
-    <table>
-        <tr>
-            <th>Ten Bai Bao</th>
-            <th>chi tiet</th>
-        </tr>
-        <tr th:each="element : ${list}">
-            <td th:text="${element.first.getTenDeTai()}"></td>
-            <td>
-                <a th:href="@{'/chiTietBaiBao/' + ${element.first.getIDDeTai()}  + '/' + ${viewer.getTaiKhoan()}}">Chi Tiet Bai Bao</a>
-            </td>
-        </tr>
-    </table>
-    <a th:href="@{'/'+ ${pageold} +'/' + ${viewer.getTaiKhoan()}}">back</a>
+    <div class="container">
+        <h5>Danh sách bài báo </h5>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr style="background-color: #BE81F7;">
+                        <th scope="col">Tên bài báo</th>
+                        <th scope="col">Chi tiết</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="element : ${list}">
+                        <td th:text="${element.first.getTenDeTai()}"></td>
+                        <td>
+                            <a th:href="@{'/chiTietBaiBao/' + ${element.first.getIDDeTai()}  + '/' + ${viewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 18%; text-align: center;">Chi tiết</a>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <a th:href="@{'/'+ ${pageold} +'/' + ${viewer.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 10px; width: 13%;">Trở về</a>
+                </div>
+                <div class="col-md-6">
+<!--                    <div class="input-group">-->
+<!--                        <div class="form-outline">-->
+<!--                            <input id="search-focus" type="search" id="form1" class="form-control" />-->
+<!--                            <label class="form-label" for="form1">Tìm kiếm</label>-->
+<!--                        </div>-->
+<!--                        <button type="button" class="btn btn-primary" style="margin-left: 14px; margin-bottom: 31px; border-radius: 10px;">-->
+<!--                            <i class="fas fa-search"></i>-->
+<!--                        </button>-->
+<!--                    </div>-->
+                </div>
+            </div>
+            <hr>
+            <div class="container-fluid padding">
+                <div class="row text-center padding">
+                    <div class="col-12">
+                        <h5>Liên lạc với nhóm</h5>
+                    </div>
+                    <div class="col-md-4 social padding">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="col-md-4 social padding">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <div class="col-md-4 social padding">
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

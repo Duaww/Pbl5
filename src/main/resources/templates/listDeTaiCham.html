@@ -1,28 +1,86 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Danh sách chấm</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
 </head>
+
 <body>
-    <h1>hello ne</h1>
-    <div th:if="${deTaiCham}">
-        <table>
-            <tr>
-                <th>Ten de tai</th>
-                <th>Ten can bo huong dan</th>
-                <th>Chi tiet de tai</th>
-            </tr>
-            <tr th:each="element : ${deTaiCham}">
-                <td th:text="${element.first.getTenDeTai()}"></td>
-                <td >
-                    <span th:if="${element.second.getTen()}"  th:text="${element.second.getTen()}"></span>
-                    <span th:if="!${element.second.getTen()}" th:text="'chua co nguoi huong dan'"></span>
-                </td>
-                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${element.first.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}">xem chi tiet</a></td>
-            </tr>
-        </table>
+    <div class="container">
+        <div th:if="${deTaiCham}">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr style="background-color: #BE81F7;">
+                            <th scope="col">Tên đề tài</th>
+                            <th scope="col">Tên cán bộ hướng dẫn</th>
+                            <th scope="col">Chi tiết đề tài</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <tr th:each="element : ${deTaiCham}">
+                                <td th:text="${element.first.getTenDeTai()}"></td>
+                                <td>
+                                    <span th:if="${element.second.getTen()}" th:text="${element.second.getTen()}"></span>
+                                    <span th:if="!${element.second.getTen()}" th:text="'chua co nguoi huong dan'"></span>
+                                </td>
+                                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${element.first.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 35%; text-align: center;">Chi tiết</a></td>
+                            </tr>
+                        </tr>
+                    </tbody>
+                    <span th:field="${checked}">
+                    <input type="hidden" name="checked" th:value="${checked}">
+                </span>
+                </table>
+            </div>
+        </div>
     </div>
-    <a th:href="@{'/canbo/' + ${viewer.getTaiKhoan()}}">back</a>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <a th:href="@{'/canbo/' + ${viewer.getTaiKhoan()}}" class="btn btn-primary" tyle="border-radius: 10px; margin-top: 10px; width: 13%;">Trở về</a>
+            </div>
+            <div class="col-md-6">
+<!--                <div class="input-group">-->
+<!--                    <div class="form-outline">-->
+<!--                        <input id="search-focus" type="search" id="form1" class="form-control" />-->
+<!--                        <label class="form-label" for="form1">Tìm kiếm</label>-->
+<!--                    </div>-->
+<!--                    <button type="button" class="btn btn-primary" style="margin-left: 14px; margin-bottom: 31px; border-radius: 10px;">-->
+<!--                            <i class="fas fa-search"></i>-->
+<!--                        </button>-->
+<!--                </div>-->
+            </div>
+        </div>
+        <hr>
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12">
+                    <h5>Liên lạc với nhóm</h5>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

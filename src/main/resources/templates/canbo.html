@@ -1,36 +1,88 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <div>
-        <table>
-            <tr>
-                <th>Ten</th>
-                <th>Tai Khoan</th>
-                <th>Dia chi</th>
-            </tr>
-            <tr th:each="user:${user}">
-                <td th:text="*{user.getTen()}"></td>
-                <td th:text="*{user.getTaiKhoan()}"></td>
-                <td th:text="*{user.getDiaChi()}"></td>
-            </tr>
-        </table>
-        <p><a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}">doi mat khau</a></p>
-        <p><a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}">doi thong tin ca nhan</a></p>
-        <p><a th:href="@{'/listHuongDan/' + ${user.getTaiKhoan()}}">list huong dan</a></p>
-        <p><a th:href="@{'/themDeTai/' + ${user.getTaiKhoan()}}">them de tai moi</a></p>
-        <p><a th:href="@{'/listChoHuongDan/' + ${user.getTaiKhoan()}}">danh sach chua co huong dan</a></p>
-        <p><a th:href="@{'/listYeuCauPheDuyet/' + ${user.getTaiKhoan()}} ">danh sach can yeu can phe duyet</a></p>
-        <p><a th:href="@{'/listDeTaiCham/'+ ${user.getTaiKhoan()}}">danh sach de tai can cham</a></p>
-        <p><a th:href="@{'/deTaiDangThucHien/canbo/' + ${user.getTaiKhoan()}}">de tai dang thuc hien</a></p>
-        <p><a th:href="@{'/dangKyLamNghienCuu/' + ${user.getTaiKhoan()}}">dang ky lam nghien cuu khoa hoc</a></p>
-        <p><a th:href="@{'/danhSachBaiBao/' + ${user.getTaiKhoan()}}">danh sach bai bao</a></p>
-        <p><a th:href="@{'/deTaiDaLamDuoc/' + ${user.getTaiKhoan()}}">danh sach de tai da lam duoc</a></p>
-        <a th:href="@{'/login'}">dang xuat</a>
-    </div>
+    <title>Cán bộ</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách nghiên cứu sinh</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
+
+</head>
+
+<body>
+    <div class="container">
+        <h5>Danh sách cán bộ </h5>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr style="background-color: #BE81F7;">
+                        <th scope="col">Tên</th>
+                        <th scope="col">Tài khoản</th>
+                        <th scope="col">Địa chỉ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <tr th:each="user:${user}">
+                            <td th:text="*{user.getTen()}"></td>
+                            <td th:text="*{user.getTaiKhoan()}"></td>
+                            <td th:text="*{user.getDiaChi()}"></td>
+                        </tr>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 22%; text-align: center;">Đổi mật khẩu</a>
+                <a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 33%; text-align: center;">Đổi thông tin cá nhân</a>
+                <a th:href="@{'/listHuongDan/' + ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 33%; text-align: center;">Danh sách hướng dẫn</a>
+                <a th:href="@{'/themDeTai/' + ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 33%; text-align: center;">Thêm đề tài mới</a>
+                <a th:href="@{'/listChoHuongDan/' + ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 44%; text-align: center;">Danh sách chưa có hướng dẫn</a>
+                <a th:href="@{'/listYeuCauPheDuyet/' + ${user.getTaiKhoan()}} " class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 48%; text-align: center;">Danh sách yêu cầu cần phê duyệt</a>
+            </div>
+            <div class="col-md-6">
+                <a th:href="@{'/listDeTaiCham/'+ ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 39%; text-align: center;">Danh sách đề tài cần chấm</a>
+                <a th:href="@{'/deTaiDangThucHien/canbo/' + ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 39%; text-align: center;">Đề tài đang thực hiện</a>
+                <a th:href="@{'/dangKyLamNghienCuu/' + ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 48%; text-align: center;">Đăng kí làm nghiên cứu khoa học</a>
+                <a th:href="@{'/danhSachBaiBao/' + ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 39%; text-align: center;">Danh sách bài báo</a>
+                <a th:href="@{'/deTaiDaLamDuoc/' + ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 43%; text-align: center;">Danh sách đề tài đã làm được</a>
+                <a th:href="@{'/login'}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 39%; text-align: center;">Đăng xuất</a>
+            </div>
+        </div>
+        <hr>
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12">
+                    <h5>Liên lạc với nhóm</h5>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>

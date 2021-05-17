@@ -1,43 +1,95 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Danh sách yêu cầu phê duyệt</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
 </head>
+
 <body>
-    <h1>danh sach can yeu cau phe duyet</h1>
-    <form name="formYeucauPheDuyet" th:action="@{'/listYeuCauPheDuyet/' + ${accViewer.getTaiKhoan()}}" method="post" onsubmit="return validateForm()">
-        <table>
-            <tr>
-                <th>Ten de tai</th>
-                <th>Nguoi thuc hien</th>
-                <th>Chi tiet de tai</th>
-                <th>gui yeu cau</th>
-            </tr>
-            <tr th:each="list : ${nguoithuchien}">
-                <td th:text="${list.first.getTenDeTai()}"></td>
-                <td>
-                    <span th:if="${list.second.getTen()}" >
-                        <a th:href="@{'/thongtinNCS/' + ${pageold} + '/' + ${list.second.getID()} + '/' + ${accViewer.getID()}}" th:text="${list.second.getTen()}"></a>
-                    </span>
-                    <span th:if="!${list.second.getTen()}" th:text="'chua co ai thuc hien'"></span>
-                </td>
-                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${list.first.getIDDeTai()} + '/' + ${accViewer.getTaiKhoan()}}">xem chi tiet</a></td>
-                <td><input type="checkbox" class="checkList" th:value="${list.first.getIDDeTai()}"></td>
-            </tr>
-        </table>
-        <span th:field="${checked}" >
-                <input type="hidden" name="checked" th:value="${checked}">
-        </span>
-        <input type="submit" value="gui yeu cau">
-    </form>
-    <a th:href="@{'/canbo/' + ${accViewer.getTaiKhoan()}}">back</a>
+    <div class="container">
+        <form name="formYeucauPheDuyet" th:action="@{'/listYeuCauPheDuyet/' + ${accViewer.getTaiKhoan()}}" method="post" onsubmit="return validateForm()">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr style="background-color: #BE81F7;">
+                            <th scope="col">Tên đề tài</th>
+                            <th scope="col">Người thực hiện</th>
+                            <th scope="col">Chi tiết đề tài</th>
+                            <th scope="col">Gửi yêu cầu</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <tr th:each="list : ${nguoithuchien}">
+                                <td th:text="${list.first.getTenDeTai()}"></td>
+                                <td>
+                                    <span th:if="${list.second.getTen()}">
+                                        <a th:href="@{'/thongtinNCS/' + ${pageold} + '/' + ${list.second.getID()} + '/' + ${accViewer.getID()}}" th:text="${list.second.getTen()}"></a>
+                                    </span>
+                                    <span th:if="!${list.second.getTen()}" th:text="'chua co ai thuc hien'"></span>
+                                </td>
+                                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${list.first.getIDDeTai()} + '/' + ${accViewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 35%; text-align: center;">Chi tiết</a></td>
+                                <td><input type="checkbox" class="checkList" th:value="${list.first.getIDDeTai()}"></td>
+                            </tr>
+                        </tr>
+                    </tbody>
+                </table>
+                <span th:field="${checked}">
+                    <input type="hidden" name="checked" th:value="${checked}">
+                    <input type="submit" value="Gửi yêu cầu" class="btn btn-primary" name="btnsubmit" style="margin-top: 17px; border-radius: 10px;">
+                </span>
+            </div>
+        </form>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <a th:href="@{'/canbo/' + ${accViewer.getTaiKhoan()}}" class="btn btn-primary" tyle="border-radius: 10px; margin-top: 10px; width: 13%;">Trở về</a>
+            </div>
+            <div class="col-md-6">
+<!--                <div class="input-group">-->
+<!--                    <div class="form-outline">-->
+<!--                        <input id="search-focus" type="search" id="form1" class="form-control" />-->
+<!--                        <label class="form-label" for="form1">Tìm kiếm</label>-->
+<!--                    </div>-->
+<!--                    <button type="button" class="btn btn-primary" style="margin-left: 14px; margin-bottom: 31px; border-radius: 10px;">-->
+<!--                            <i class="fas fa-search"></i>-->
+<!--                        </button>-->
+<!--                </div>-->
+            </div>
+        </div>
+        <hr>
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12">
+                    <h5>Liên lạc với nhóm</h5>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
     <script th:inline="javascript">
         function validateForm() {
             let Checked = "";
-            var inputElements =  document.getElementsByClassName('checkList');
-            for(var i = 0; i < inputElements.length ; i++){
-                if(inputElements[i].checked){
+            var inputElements = document.getElementsByClassName('checkList');
+            for (var i = 0; i < inputElements.length; i++) {
+                if (inputElements[i].checked) {
                     // checkedValue = inputElements[i].value;
                     Checked = Checked + "/" + inputElements[i].value;
                 }
@@ -46,5 +98,8 @@
             return true;
         }
     </script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>
