@@ -8,72 +8,79 @@
     <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href="/../static/img/favicon.ico" type="image/x-icon">
     <!-- Branch -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
 
 </head>
 
 <body>
-    <div class="container">
-        <h5>Hội đồng chấm thi </h5>
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <thead>
+<div class="d-flex" id="wrapper">
+
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+<!--            <button class="btn btn-primary" id="menu-toggle" style=" border-radius: 10px;">Danh mục</button>-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            </div>
+        </nav>
+        <div class="container-fluid form-text">
+            <h3 style="margin-top: 20px; color: black;">Hội đồng chấm thi </h3>
+            <div class="table-responsive" style="margin-top: 20px;">
+                <table class="table table-bordered table-hover">
+                    <thead>
                     <tr style="background-color: #BE81F7;">
                         <th scope="col">Tên đề tài khoa học</th>
                         <th scope="col">Danh sách cán bộ chấm thi</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr th:each="detai : ${deTaiCham}">
                         <td th:text="${detai.getTenDeTai()}"></td>
                         <td>
-                            <a th:href="@{'/danhsachcham/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 34%; text-align: center;">Danh sách cán bộ chấm thi</a>
+                            <a th:href="@{'/danhsachcham/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px;  width: 50%; text-align: center; margin-left: 26%;">Danh sách cán bộ chấm thi</a>
                         </td>
                     </tr>
-                </tbody>
+                    </tbody>
 
-            </table>
+                </table>
+            </div>
         </div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    <a th:href="@{'/hoidong/' + ${viewer.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 10px; width: 13%;">Trở về</a>
+                    <a th:href="@{'/hoidong/' + ${viewer.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 20px; width: 20%;">Trở về</a>
                 </div>
                 <div class="col-md-6">
-<!--                    <div class="input-group">-->
-<!--                        <div class="form-outline">-->
-<!--                            <input id="search-focus" type="search" id="form1" class="form-control" />-->
-<!--                            <label class="form-label" for="form1">Tìm kiếm</label>-->
-<!--                        </div>-->
-<!--                        <button type="button" class="btn btn-primary" style="margin-left: 14px; margin-bottom: 31px; border-radius: 10px;">-->
-<!--                            <i class="fas fa-search"></i>-->
-<!--                        </button>-->
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="container-fluid padding">
-                <div class="row text-center padding">
-                    <div class="col-12">
-                        <h5>Liên lạc với nhóm</h5>
-                    </div>
-                    <div class="col-md-4 social padding">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                    </div>
-                    <div class="col-md-4 social padding">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                    <div class="col-md-4 social padding">
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
 
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-12">
+                    <h5>Liên lạc với nhóm</h5>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+                <div class="col-md-4 social padding">
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+</div>
+<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+<script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
 </body>
-
 </html>

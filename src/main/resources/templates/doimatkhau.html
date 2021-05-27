@@ -7,71 +7,88 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đổi mật mật khẩu</title>
     <!-- Import boostrap and Jquery -->
-    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
     <!-- Branch -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
 
 </head>
 
 <body>
-    <div class="container form-text">
-        <div class="row">
-            <div class="col-sm-12">
-                <h5>Đổi mật khẩu</h5>
+<div class="d-flex" id="wrapper">
+
+    <div id="page-content-wrapper">
+         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+<!--            <button class="btn btn-primary" id="menu-toggle" style=" border-radius: 10px; width: 10%;">Danh mục</button>-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
             </div>
-            <div class="col-sm-12">
-                <!-- Form đổi mật khẩu -->
-                <form name="changePass" th:action="@{/doimatkhau/{account}(account=${user.getTaiKhoan()})}" action="#" th:object="${user}" onsubmit="return validateForm()" method="POST">
-                    <div class="form-group">
-                        <label for="">Mật khẩu hiện tại</label>
-                        <input name="oldPass" type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Mật khẩu mới</label>
-                        <input name="newPass" type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="">Xác nhận mật khẩu</label>
-                        <!-- Mới sửa cái ni từ label thành span -->
-                        <span th:field="${user.getMatKhau()}"><input name="MatKhau" value="" type="text"  class="form-control"></span>
-                    </div>
-                    <input type="submit" value="Đổi mật khẩu" class="btn btn-primary" style="margin-top: 17px; border-radius: 10px;">
-                </form>
+        </nav>
+        <div class="container-fluid form-text" style="margin-left: 25%;">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 style="margin-top: 20px; font-size: xx-large; color: black;">Đổi mật khẩu</h3>
+                </div>
+                <div class="col-sm-12">
+                    <!-- Form đổi mật khẩu -->
+                    <form name="changePass" th:action="@{/doimatkhau/{account}(account=${user.getTaiKhoan()})}"  th:object="${user}" onsubmit="return validateForm()" method="POST">
+                        <div class="form-group">
+                            <label for="" style="font-size:larger; color: black;">Mật khẩu hiện tại</label>
+                            <input name="oldPass" type="password" class="form-control" style="height: 50%; width: 50%;">
+                        </div>
+                        <div class="form-group">
+                            <label for="" style="font-size: larger;color: black;">Mật khẩu mới</label>
+                            <input name="newPass" type="password" class="form-control" style="height: 50%; width: 50%;">
+                        </div>
+                        <div class="form-group">
+                            <label for="" style="font-size: larger;color: black;">Xác nhận mật khẩu</label>
+                            <!-- Mới sửa cái ni từ label thành span -->
+                            <span th:field="${user.getMatKhau()}"><input name="MatKhau" value="" type="password"  class="form-control" style="height: 50%; width: 50%;"></span>
+                        </div>
+                        <input type="submit" value="Đổi mật khẩu" class="btn btn-primary" style="border-radius: 10px; ">
+                    </form>
+                </div>
             </div>
+            <br>
         </div>
     </div>
+</div>
+<script th:inline="javascript">
+    var user = [[${user}]];
 
-    <script th:inline="javascript">
-        var user = [[${user}]];
+    let pass = user.matKhau;
 
-        let pass = user.matKhau;
-
-        function validateForm() {
-            let oldPass = document.forms["changePass"]["oldPass"].value;
-            let newPass = document.forms["changePass"]["newPass"].value;
-            let confirm = document.forms["changePass"]["MatKhau"].value;
-            // let confirm = "";
-            if (pass !== oldPass) {
-                alert("pass nhap vao hien tai khong dung!!");
-                return false;
-            }
-            if (newPass !== confirm) {
-                alert("pass moi va pass xac nhan khong trung nhau!");
-                return false;
-            }
-
-            if (pass == "" || newPass == "" || confirm == "") {
-                alert("nhap thieu du lieu kia thang nay ?");
-                return false;
-            }
-            alert("change success");
-            return true;
+    function validateForm() {
+        let oldPass = document.forms["changePass"]["oldPass"].value;
+        let newPass = document.forms["changePass"]["newPass"].value;
+        let confirm = document.forms["changePass"]["MatKhau"].value;
+        // let confirm = " ";
+        if (pass == "" || newPass == "" || confirm == "") {
+            alert("Hãy nhập dữ liệu");
+            return false;
         }
-    </script>
-    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+        if (pass !== oldPass) {
+            alert("Mật khẩu hiện tại không đúng");
+            return false;
+        }
+        if (newPass !== confirm) {
+            alert("Xác nhận mật khẩu không đúng");
+            return false;
+        }
+
+        alert("Đổi mật khẩu thành công");
+        return true;
+    }
+</script>
+<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
+<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>
+<script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js "></script>
 </body>
 
 </html>

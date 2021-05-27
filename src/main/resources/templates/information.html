@@ -6,21 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thông tin người dùng</title>
+    <!-- Import boostrap and Jquery -->
     <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href="/../static/img/favicon.ico" type="image/x-icon">
     <!-- Branch -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
 </head>
 
 <body>
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+<!--            <button class="btn btn-primary" id="menu-toggle" style=" border-radius: 10px; width: 10%;">Danh mục</button>-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-    <div class="container">
-        <h5>Thông tin cá nhân </h5>
-        <div class="table-responsive">
-            <table class="table table-bordered table-hover">
-                <thead>
+            </div>
+        </nav>
+        <div class="container-fluid form-text">
+            <h3 style="margin-top: 20px; color: black;">Thông tin người dùng </h3>
+            <div class="table-responsive" style="margin-top: 20px;">
+                <table class="table table-bordered table-hover">
+                    <thead>
                     <tr style="background-color: #BE81F7;">
                         <th scope="col">Tên</th>
                         <th scope="col">Tài khoản</th>
@@ -29,45 +42,54 @@
                         <th scope="col">Trạng thái</th>
                         <th scope="col" th:if="${user.getRole().equals('3')}">Lĩnh vực</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     <tr>
-                        <tr th:object="${user}">
-                            <td th:text="*{getTen()}"></td>
-                            <td th:text="*{getTaiKhoan()}"></td>
-                            <td th:text="*{getDiaChi()}"></td>
-                            <td th:text="*{getGioiTinh()} ? 'Nam' : 'Nu'"></td>
-                            <td th:text="*{getTrangThai()}"></td>
-                            <td th:if="${user.getRole().equals('3')}">
-                                <select th:if="${linhvuc}">
+                    <tr th:object="${user}">
+                        <td th:text="*{getTen()}"></td>
+                        <td th:text="*{getTaiKhoan()}"></td>
+                        <td th:text="*{getDiaChi()}"></td>
+                        <td th:text="*{getGioiTinh()} ? 'Nam' : 'Nữ'"></td>
+                        <td th:text="*{getTrangThai()}"></td>
+                        <td th:if="${user.getRole().equals('3')}">
+                            <select th:if="${linhvuc}">
                                 <option th:each="element : ${linhvuc}" th:text="${element.getTenLinhVuc()}"></option>
                             </select>
-                                <select th:if="!${linhvuc}">
-                                <option th:text="'chua co linh vuc'"></option>
+                            <select th:if="!${linhvuc}">
+                                    <option th:text="'Chưa có chuyên ngành'"></option>
                             </select>
-                            </td>
-                        </tr>
+                        </td>
                     </tr>
-                </tbody>
-            </table>
-            <a  th:href="'/' + ${pageold} + '/' + ${whoFollow.getTaiKhoan()}" class="btn btn-primary" style="border-radius: 10px; margin-top: 10px; width: 13%;">Trờ về</a>
-            <a th:href="${'/suathongtin/' + {pageold} + '/' + {user.getTaiKhoan()} + '/' + {whoFollow.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 10px; width: 13%;">Sửa thông tin</a>
+                    </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
         </div>
-    </div>
-    <div class="container form-text">
-        <div class="col-sm-12">
-            <form name="changeStatus" th:action="@{'/information/' + '/' + ${pageold} +'/'+ ${user.getTaiKhoan()} + '/' + ${whoFollow.getTaiKhoan()}}" method="POST" onsubmit="return lock()">
-                <div th:field="*{TrangThai}">
-                    <input type="hidden" name="TrangThai" th:value="*{TrangThai}">
-                    <div th:if="${#strings.equals(user.getTrangThai(), 'mo')}">
-                        <input type="submit" value="Khoá tài khoản" class="btn btn-primary" style="border-radius: 10px; margin-top: 10px; width: 13%;">
-                    </div>
-                    <div th:if="${#strings.equals(user.getTrangThai(), 'khoa')}">
-                        <input type="submit" value="Mở tài khoản" class="btn btn-primary" style="border-radius: 10px; margin-top: 10px; width: 13%;">
-                    </div>
+
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <a th:href="'/' + ${pageold} + '/' + ${whoFollow.getTaiKhoan()}" class="btn btn-primary" style="border-radius: 10px; margin-top: 20px; width: 30%;">Trở về</a>
+                    <a th:href="${'/suathongtin/' + {pageold} + '/' + {user.getTaiKhoan()} + '/' + {whoFollow.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 20px; width: 30%;">Sửa thông tin</a>
+                    <form name="changeStatus" th:action="@{'/information/' + ${pageold} + '/' +  ${user.getTaiKhoan()} + '/' + ${whoFollow.getTaiKhoan()}}" method="POST" onsubmit="return lock()">
+                        <div th:field="*{TrangThai}">
+                            <input type="hidden" name="TrangThai" th:value="*{TrangThai}">
+                            <div th:if="${#strings.equals(user.getTrangThai(), 'mo')}">
+                                <input type="submit" value="Khoá tài khoản" class="btn btn-primary" style="border-radius: 10px; margin-top: 10px; width: 30%;">
+                            </div>
+                            <div th:if="${#strings.equals(user.getTrangThai(), 'khoa')}">
+                                <input type="submit" value="Mở tài khoản" class="btn btn-primary" style="border-radius: 10px; margin-top: 10px; width: 30%;">
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
+
+            </div>
         </div>
+
         <hr>
         <div class="container-fluid padding">
             <div class="row text-center padding">
@@ -87,21 +109,25 @@
         </div>
     </div>
 
+</div>
 
-    <script th:inline="javascript">
-        var user = [[${user}]];
-        function lock() {
-            let status = user.trangThai;
-            if (status == "mo") {
-                document.forms["changeStatus"]["TrangThai"].value = "khoa";
-            } else {
-                document.forms["changeStatus"]["TrangThai"].value = "mo";
-            }
-            return true;
+<script th:inline="javascript">
+    var user = [[${ user}]];
+
+    function lock() {
+        let status = user.trangThai;
+        if (status == "mo") {
+            document.forms["changeStatus"]["TrangThai"].value = "khoa";
+        } else {
+            document.forms["changeStatus"]["TrangThai"].value = "mo";
         }
-    </script>
-    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+        return true;
+    }
+</script>
+
+<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+<script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
 </body>
 
 </html>

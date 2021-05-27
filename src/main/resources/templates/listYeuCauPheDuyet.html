@@ -8,62 +8,66 @@
     <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href="/../static/img/favicon.ico" type="image/x-icon">
     <!-- Branch -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
 </head>
 
 <body>
-    <div class="container">
-        <form name="formYeucauPheDuyet" th:action="@{'/listYeuCauPheDuyet/' + ${accViewer.getTaiKhoan()}}" method="post" onsubmit="return validateForm()">
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                    <thead>
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+<!--            <button class="btn btn-primary" id="menu-toggle" style=" border-radius: 10px; width: 10%;">Danh mục</button>-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            </div>
+        </nav>
+        <div class="container-fluid form-text">
+            <h3 style="margin-top: 20px; color: black;">Danh sách yêu cầu phê duyệt</h3>
+            <form name="formYeucauPheDuyet" th:action="@{'/listYeuCauPheDuyet/' + ${accViewer.getTaiKhoan()}}" method="post" onsubmit="return validateForm()">
+                <div class="table-responsive" style="margin-top: 20px;">
+                    <table class="table table-bordered table-hover">
+                        <thead>
                         <tr style="background-color: #BE81F7;">
                             <th scope="col">Tên đề tài</th>
                             <th scope="col">Người thực hiện</th>
                             <th scope="col">Chi tiết đề tài</th>
                             <th scope="col">Gửi yêu cầu</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr>
-                            <tr th:each="list : ${nguoithuchien}">
-                                <td th:text="${list.first.getTenDeTai()}"></td>
-                                <td>
-                                    <span th:if="${list.second.getTen()}">
+                        <tr th:each="list : ${nguoithuchien}">
+                            <td th:text="${list.first.getTenDeTai()}"></td>
+                            <td>
+                                            <span th:if="${list.second.getTen()}">
                                         <a th:href="@{'/thongtinNCS/' + ${pageold} + '/' + ${list.second.getID()} + '/' + ${accViewer.getID()}}" th:text="${list.second.getTen()}"></a>
                                     </span>
-                                    <span th:if="!${list.second.getTen()}" th:text="'chua co ai thuc hien'"></span>
-                                </td>
-                                <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${list.first.getIDDeTai()} + '/' + ${accViewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 35%; text-align: center;">Chi tiết</a></td>
-                                <td><input type="checkbox" class="checkList" th:value="${list.first.getIDDeTai()}"></td>
-                            </tr>
+                                <span th:if="!${list.second.getTen()}" th:text="'chua co ai thuc hien'"></span>
+                            </td>
+                            <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${list.first.getIDDeTai()} + '/' + ${accViewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px;  width: 30%; text-align: center; margin-left: 32%;">Chi tiết</a></td>
+                            <td><input type="checkbox" class="checkList" th:value="${list.first.getIDDeTai()}" style="border-radius: 10px; margin-top: 10px; width: 40%; margin-left: 29%; height: 20px"></td>
                         </tr>
-                    </tbody>
-                </table>
-                <span th:field="${checked}">
+                        </tr>
+                        </tbody>
+                    </table>
+                    <span th:field="${checked}">
                     <input type="hidden" name="checked" th:value="${checked}">
-                    <input type="submit" value="Gửi yêu cầu" class="btn btn-primary" name="btnsubmit" style="margin-top: 17px; border-radius: 10px;">
+                    <input type="submit" value="Gửi yêu cầu" class="btn btn-primary"style="margin-top: 17px; border-radius: 10px; width: 10%;">
+                    <a th:href="@{'/canbo/' + ${accViewer.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
                 </span>
-            </div>
-        </form>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <a th:href="@{'/canbo/' + ${accViewer.getTaiKhoan()}}" class="btn btn-primary" tyle="border-radius: 10px; margin-top: 10px; width: 13%;">Trở về</a>
-            </div>
-            <div class="col-md-6">
-<!--                <div class="input-group">-->
-<!--                    <div class="form-outline">-->
-<!--                        <input id="search-focus" type="search" id="form1" class="form-control" />-->
-<!--                        <label class="form-label" for="form1">Tìm kiếm</label>-->
-<!--                    </div>-->
-<!--                    <button type="button" class="btn btn-primary" style="margin-left: 14px; margin-bottom: 31px; border-radius: 10px;">-->
-<!--                            <i class="fas fa-search"></i>-->
-<!--                        </button>-->
-<!--                </div>-->
+                </div>
+            </form>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                </div>
             </div>
         </div>
         <hr>
@@ -84,22 +88,25 @@
             </div>
         </div>
     </div>
-    <script th:inline="javascript">
-        function validateForm() {
-            let Checked = "";
-            var inputElements = document.getElementsByClassName('checkList');
-            for (var i = 0; i < inputElements.length; i++) {
-                if (inputElements[i].checked) {
-                    // checkedValue = inputElements[i].value;
-                    Checked = Checked + "/" + inputElements[i].value;
-                }
+</div>
+
+<script th:inline="javascript">
+    function validateForm() {
+        let Checked = "";
+        var inputElements = document.getElementsByClassName('checkList');
+        for (var i = 0; i < inputElements.length; i++) {
+            if (inputElements[i].checked) {
+                // checkedValue = inputElements[i].value;
+                Checked = Checked + "/" + inputElements[i].value;
             }
-            document.forms["formYeucauPheDuyet"]["checked"].value = Checked;
-            return true;
         }
-    </script>
-    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+        document.forms["formYeucauPheDuyet"]["checked"].value = Checked;
+        return true;
+    }
+</script>
+<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+<script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
 </body>
 
 </html>

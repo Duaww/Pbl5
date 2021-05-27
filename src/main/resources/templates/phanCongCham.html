@@ -8,18 +8,32 @@
     <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href="/../static/img/favicon.ico" type="image/x-icon">
     <!-- Branch -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
 </head>
 
 <body>
-    <div class="container">
-        <form name="themHoiDongCham" th:action="@{'/phanCongCham/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" method="post" onsubmit="return validateForm()">
-            <h5>Danh sách nghiên cứu sinh </h5>
-            <div class="table-responsive">
-                <table class="table table-bordered table-hover">
-                    <thead>
+<div class="d-flex" id="wrapper">
+    <!-- Sidebar-->
+    <div id="page-content-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+<!--            <button class="btn btn-primary" id="menu-toggle" style=" border-radius: 10px; width: 10%;">Danh mục</button>-->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            </div>
+        </nav>
+        <div class="container-fluid form-text">
+
+            <form name="themHoiDongCham" th:action="@{'/phanCongCham/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" method="post" onsubmit="return validateForm()">
+                <h3 style="margin-top: 20px; color: black;">Chọn cán bộ chấm thi </h3>
+                <div class="table-responsive" style="margin-top: 20px;">
+                    <table class="table table-bordered table-hover">
+                        <thead>
                         <tr style="background-color: #BE81F7;">
                             <th scope="col">Tên</th>
                             <th scope="col">Tài khoản</th>
@@ -27,48 +41,42 @@
                             <th scope="col">Lĩnh vực</th>
                             <th scope="col">Chấm thi</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
                         <tr th:each="canbo : ${linhVucCuaCanBo}">
                             <td th:text="${canbo.key.getTen()}"></td>
                             <td th:text="${canbo.key.getTaiKhoan()}"></td>
                             <td th:text="${canbo.key.getDiaChi()}"></td>
                             <td>
-                                <select>
+                                <select style="margin-top: 4%; margin-left: 40%;">
                                     <option th:each="linhvuc : ${canbo.value}" th:text="${linhvuc.getTenLinhVuc()}"></option>
                                 </select>
                             </td>
                             <td>
-                                <input class="checkList" type="checkbox" th:value="${canbo.key.getID()}" th:checked="${hoidongcham.contains(canbo.key.getID())}">
+                                <input class="checkList" type="checkbox" th:value="${canbo.key.getID()}" th:checked="${hoidongcham.contains(canbo.key.getID())}" style="border-radius: 10px; margin-top: 10px; width: 40%; margin-left: 29%; height: 20px">
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-                <span th:field="${checked}">
-                    <input type="hidden" name="checked" th:value="${checked}">
-                </span>
-                <span th:field="${notChecked}">
-                    <input type="hidden" name="notChecked" th:value="${notChecked}">
-                </span>
-                <input type="submit" value="Thay đổi" class="btn btn-primary " style="border-radius: 10px; margin-top: 10px; width: 13%; ">
-            </div>
-        </form>
-    </div>
-    <div class=" container ">
-        <div class="row ">
-            <div class="col-md-6 ">
-                <a th:href="@{'/dangThucHien/' + ${viewer.getTaiKhoan()}}" class="btn btn-primary " style="border-radius: 10px; margin-top: 10px; width: 13%; ">Trở về</a>
-            </div>
-            <div class="col-md-6 ">
-<!--                <div class="input-group ">-->
-<!--                    <div class="form-outline ">-->
-<!--                        <input id="search-focus " type="search " id="form1 " class="form-control " />-->
-<!--                        <label class="form-label " for="form1 ">Tìm kiếm</label>-->
-<!--                    </div>-->
-<!--                    <button type="button " class="btn btn-primary " style="margin-left: 14px; margin-bottom: 31px; border-radius: 10px; ">-->
-<!--                            <i class="fas fa-search "></i>-->
-<!--                        </button>-->
-<!--                </div>-->
+                        </tbody>
+                    </table>
+                    <span th:field="${checked}">
+                            <input type="hidden" name="checked" th:value="${checked}">
+                        </span>
+                    <span th:field="${notChecked}">
+                            <input type="hidden" name="notChecked" th:value="${notChecked}">
+                        </span>
+                    <input type="submit" value="Thay đổi" class="btn btn-primary " style="border-radius: 10px; margin-top: 20px; width: 10%; ">
+                    <a th:href="@{'/dangThucHien/' + ${viewer.getTaiKhoan()}}" class="btn btn-primary " style="border-radius: 10px; margin-top: 20px; width: 10%; ">Trở về</a>
+                </div>
+            </form>
+        </div>
+        <div class="container-fluid ">
+            <div class="row ">
+                <div class="col-md-6 ">
+
+                </div>
+                <div class="col-md-6 ">
+
+                </div>
             </div>
         </div>
         <hr>
@@ -88,29 +96,29 @@
                 </div>
             </div>
         </div>
-
     </div>
-    </div>
-    <script th:inline="javascript">
-        function validateForm() {
-            let Checked = "";
-            let notCheck = "";
-            var inputElements =  document.getElementsByClassName('checkList');
-            for(var i = 0; i < inputElements.length ; i++){
-                if(inputElements[i].checked){
-                    // checkedValue = inputElements[i].value;
-                    Checked = Checked + "/" + inputElements[i].value;
-                } else {
-                    notCheck = notCheck + "/" + inputElements[i].value;
-                }
+</div>
+<script th:inline="javascript">
+    function validateForm() {
+        let Checked = "";
+        let notCheck = "";
+        var inputElements = document.getElementsByClassName('checkList');
+        for (var i = 0; i < inputElements.length; i++) {
+            if (inputElements[i].checked) {
+                // checkedValue = inputElements[i].value;
+                Checked = Checked + "/" + inputElements[i].value;
+            } else {
+                notCheck = notCheck + "/" + inputElements[i].value;
             }
-            document.forms["themHoiDongCham"]["checked"].value = Checked;
-            document.forms["themHoiDongCham"]["notChecked"].value = notCheck;
-            return true;
         }
-    </script>
-    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+        document.forms["themHoiDongCham"]["checked"].value = Checked;
+        document.forms["themHoiDongCham"]["notChecked"].value = notCheck;
+        return true;
+    }
+</script>
+<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+<script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
 </body>
 
 </html>

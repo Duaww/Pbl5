@@ -228,7 +228,7 @@ public class DeTaiController {
             }
         }
         if (linhvucCuaDeTai.size()==0) {
-            linhvucCuaDeTai.add(new LinhVuc("chua co linh vuc"));
+            linhvucCuaDeTai.add(new LinhVuc("Chưa có lĩnh vực"));
         }
         User nguoiHuongDan = new User();
         if (detai.getIDNguoihuongdan() !=null) {
