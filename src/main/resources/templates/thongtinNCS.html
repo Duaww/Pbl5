@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styles1.css">
     <!-- Tạo icon trên Title -->
-    <link rel="icon" href="/../static/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/.././static/img/favicon.ico" type="image/x-icon">
     <!-- Branch -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
@@ -18,41 +18,85 @@
 </head>
 
 <body>
-<div class="d-flex" id="wrapper">
-    <div id="page-content-wrapper">
-         <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-<!--            <button class="btn btn-primary" id="menu-toggle" style=" border-radius: 10px; width: 10%;">Danh mục</button>-->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
-        </nav>
-        <div class="container-fluid form-text" style="margin-left: 25%;">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h3 style="margin-top: 20px;font-size: xx-large;color: black; ">Thông tin cá nhân</h3>
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <!-- <div class="sidebar-heading">Danh mục</div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Trang chủ</a>
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Hội đồng</a>
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Nghiên cứu sinh</a>
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Đề tài</a>
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Danh mục</a>
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Hỗ trợ</a>
+            </div> -->
+        </div>
+        <div id="page-content-wrapper">
+            <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <button class="btn btn-primary" id="menu-toggle" style=" border-radius: 10px; width: 10%;">Danh mục</button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#!">
+                                Trang chủ 
+                                <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Tài khoản
+                            </a>
+                            <div class="dropdown-menu">
+                                <a th:href="@{'/doimatkhau/' + ${user.getTaiKhoan()}}" class="dropdown-item">Đổi mật khẩu</a>
+                                <a th:href="@{'/login'}" class="dropdown-item">Đăng xuất</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Đề tài
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a th:href="@{'/listDeTai/' +   ${user.getTaiKhoan()}}" class="dropdown-item">Danh sách đề tài</a>
+                                <a th:href="@{'/dangThucHien/' + ${user.getTaiKhoan()}}" class="dropdown-item">Danh sách đề tài đang thực hiện</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{'/hoidongchamthi/' + ${user.getTaiKhoan()}}">Hội đồng chấm thi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Hỗ trợ</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="col-sm-12">
-                    <!-- Form sửa thông tin -->
-                    <form th:object="${user}">
-                        <!-- Têm -->
-                        <div class="form-group">
-                            <label for="" style="font-size: larger;color: black; ">Tên</label>
-                            <span th:field="*{Ten}">
-                                    <input name="Ten" type="text" th:value="*{Ten}" class="form-control" style="height: 50%; width: 50%;">
+            </nav> -->
+            <div class="container-fluid form-text" style="margin-left: 29%;">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3 style="margin-top: 20px;font-size: xx-large;color: black; ">Thông tin cá nhân</h5>
+                    </div>
+                    <div class="col-sm-12">
+                        <!-- Form sửa thông tin -->
+                        <form th:object="${user}">
+                            <!-- Têm -->
+                            <div class="form-group">
+                                <label for="" style="font-size: larger;color: black; ">Tên</label>
+                                <span th:field="*{Ten}">
+                                    <input name="Ten" type="text" th:value="*{Ten}" class="form-control" style="height: 35%; width: 35%;">
                             </span>
-                        </div>
-                        <!-- Ngày sinh -->
-                        <div class="form-group">
-                            <label for="" style="font-size: larger;color: black; ">Ngày sinh</label>
-                            <span th:field="*{NgaySinh}">
-                                    <input name="NgaySinh" type="text" th:value="*{NgaySinh}" class="form-control" style="height: 50%; width: 50%;">
+                            </div>
+                            <!-- Ngày sinh -->
+                            <div class="form-group">
+                                <label for="" style="font-size: larger;color: black; ">Ngày sinh</label>
+                                <span th:field="*{NgaySinh}">
+                                    <input name="NgaySinh" type="text" th:value="*{NgaySinh}" class="form-control" style="height: 35%; width: 35%;">
                             </span>
-                        </div>
+                            </div>
 
-                        <!-- Giới tính -->
-                        <div class="form-group">
-                            <label for="" style="font-size: larger;color: black; ">Giới tính: </label>
-                            <span th:field="*{GioiTinh}">
+                            <!-- Giới tính -->
+                            <div class="form-group">
+                                <label for="" style="font-size: larger;color: black; ">Giới tính: </label>
+                                <span th:field="*{GioiTinh}">
                                     <input type="hidden" name="GioiTinh" th:value="*{GioiTinh}">
                                     <span style="color: black;"> Nam
                                         <input type="radio" name="checkboxSex" value="nam" th:checked="*{GioiTinh} ? 'checked'" />
@@ -61,51 +105,66 @@
                                         <input type="radio" name="checkboxSex" value="nu"  th:checked="!*{GioiTinh} ? 'checked'" />
                                     </span>
                                 </span>
-                        </div>
-                        <!--Địa chỉ( Sửa label thành span)  -->
-                        <div class="form-group">
-                            <label for="" style="font-size: larger; color: black; margin-top: -5px;">Địa chỉ</label>
-                            <span th:field="*{DiaChi}">
-                                    <input name="DiaChi" type="text" th:value="*{DiaChi}" class="form-control" style="height: 50%; width: 50%;">
+                            </div>
+                            <!--Địa chỉ( Sửa label thành span)  -->
+                            <div class="form-group">
+                                <label for="" style="font-size: larger; color: black; margin-top: -5px;">Địa chỉ</label>
+                                <span th:field="*{DiaChi}">
+                                    <input name="DiaChi" type="text" th:value="*{DiaChi}" class="form-control" style="height: 35%; width: 35%;">
                             </span>
-                        </div>
-                        <!-- Số điện thoại -->
-                        <div class="form-group">
-                            <label for="" style="font-size: larger; color: black;">Số điện thoại</label>
-                            <span th:field="*{SDT}">
-                                    <input name="SDT" type="text" th:value="*{SDT}" class="form-control" style="height: 50%; width: 50%;">
+                            </div>
+                            <!-- Số điện thoại -->
+                            <div class="form-group">
+                                <label for="" style="font-size: larger; color: black;">Số điện thoại</label>
+                                <span th:field="*{SDT}">
+                                    <input name="SDT" type="text" th:value="*{SDT}" class="form-control" style="height: 35%; width: 35%;">
                             </span>
-                        </div>
-                        <!-- Gmail -->
-                        <div class="form-group">
-                            <label for="" style="font-size: larger;color: black; ">Gmail</label>
-                            <span th:field="*{Gmail}">
-                                    <input name="Gmail" type="text" th:value="*{Gmail}" class="form-control" style="height: 50%; width: 50%;">
+                            </div>
+                            <!-- Gmail -->
+                            <div class="form-group">
+                                <label for="" style="font-size: larger;color: black; ">Gmail</label>
+                                <span th:field="*{Gmail}">
+                                    <input name="Gmail" type="text" th:value="*{Gmail}" class="form-control"style="height: 35%; width: 35%;">
                             </span>
-                        </div>
-                        <!-- Nút sửa thông tin -->
-                        <!-- Trở về(back) chưa xong -->
-                        <a th:href="@{ '/'+ ${pageold} +'/' + ${nguoihuongdan.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
-                    </form>
+                            </div>
+                            <!-- Nút sửa thông tin -->
+                            <!-- Trở về(back) chưa xong -->
+                            <a th:href="@{ '/'+ ${pageold} +'/' + ${nguoihuongdan.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6">
 
+                    </div>
                 </div>
             </div>
+            <!-- <div class="container-fluid padding">
+                <div class="row text-center padding">
+                    <div class="col-12">
+                        <h5>Liên lạc với nhóm</h5>
+                    </div>
+                    <div class="col-md-4 social padding">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                    <div class="col-md-4 social padding">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <div class="col-md-4 social padding">
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div> -->
         </div>
+    </div>
+    <div class="container form-text">
 
     </div>
-</div>
-<div class="container form-text">
-
-</div>
-<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
-<script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
 </body>
 
 </html>

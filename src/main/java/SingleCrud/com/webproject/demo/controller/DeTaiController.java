@@ -299,6 +299,7 @@ public class DeTaiController {
 
     @GetMapping("/listChoHuongDan/{accViewer}")
     public String getChoHuongDan(Model model, @PathVariable("accViewer") String accViewer) {
+        User viewer = userService.findByName(accViewer);
         List<DeTai> deTaiList = deTaiService.findAll();
         List<NguoiThucHien> nguoiThucHienList = nguoiThucHienService.findAll();
         List<Pair<DeTai, User>> nguoidexuat = new ArrayList<Pair<DeTai, User>>();
@@ -306,7 +307,10 @@ public class DeTaiController {
             if(deTaiList.get(i).getIDNguoihuongdan() == null) {
                 for (int j = 0; j < nguoiThucHienList.size(); j++) {
                     if (deTaiList.get(i).getIDDeTai().equals(nguoiThucHienList.get(j).getIDDeTai())) {
-                        nguoidexuat.add(Pair.of(deTaiList.get(i), userService.findById(nguoiThucHienList.get(j).getIDNguoiThucHien())));
+                        User nguoithuchien = userService.findById(nguoiThucHienList.get(j).getIDNguoiThucHien());
+                        if (!nguoithuchien.equals(viewer)){
+                            nguoidexuat.add(Pair.of(deTaiList.get(i), userService.findById(nguoiThucHienList.get(j).getIDNguoiThucHien())));
+                        }
                     }
                 }
             }
@@ -314,7 +318,7 @@ public class DeTaiController {
         String checked = "";
         String pageOld = "listChoHuongDan";
         model.addAttribute("pageold", pageOld);
-        model.addAttribute("viewer", userService.findByName(accViewer));
+        model.addAttribute("viewer", viewer);
         model.addAttribute("nguoidexuat", nguoidexuat);
         model.addAttribute("checked", checked);
         return "listChoHuongDan";

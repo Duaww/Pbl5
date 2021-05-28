@@ -17,114 +17,115 @@
 </head>
 
 <body>
-<div class="d-flex" id="wrapper">
-    <!-- Sidebar-->
-    <!-- <div class="bg-light border-right" id="sidebar-wrapper">
-        <div class="sidebar-heading">Danh mục</div>
-        <div class="list-group list-group-flush">
-            <a class="list-group-item list-group-item-action bg-light" href="#!">Trang chủ</a>
-            <a class="list-group-item list-group-item-action bg-light" href="#!">Hội đồng</a>
-            <a class="list-group-item list-group-item-action bg-light" href="#!">Nghiên cứu sinh</a>
-            <a class="list-group-item list-group-item-action bg-light" href="#!">Đề tài</a>
-            <a class="list-group-item list-group-item-action bg-light" href="#!">Danh mục</a>
-            <a class="list-group-item list-group-item-action bg-light" href="#!">Hỗ trợ</a>
-        </div>
-    </div> -->
-    <div id="page-content-wrapper">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-            <!-- <button class="btn btn-primary" id="menu-toggle" style=" border-radius: 10px; width: 10%;">Danh mục</button> -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                    <li class="nav-item active">
-<!--                    <li class="nav-item">-->
-<!--                        <a th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}" class="nav-link">Trang chủ</a>-->
-<!--                    </li>-->
-                    </li>
-                    <li class="nav-item">
-                        <a th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}" class="nav-link">Danh sách hội đồng</a>
-                    </li>
-                    <li class="nav-item">
-                        <a th:href="@{'/listcanbo/' + *{user.getTaiKhoan()}}" class="nav-link">Danh sách cán bộ</a>
-                    </li>
-                    <li class="nav-item">
-                        <a th:href="@{'/listncsinh/' + *{user.getTaiKhoan()}}" class="nav-link">Danh sách nghiên cứu sinh</a>
-                    </li>
-<!--                    <li class="nav-item ">-->
-<!--                        <a href="# " , class="nav-link ">Hỗ trợ</a>-->
-<!--                    </li>-->
+    <div class="d-flex" id="wrapper">
+<!--         Sidebar-->
+<!--        <div class="bg-light border-right" id="sidebar-wrapper">-->
+<!--            <div class="sidebar-heading">Danh mục</div>-->
+<!--            <div class="list-group list-group-flush">-->
+<!--                <a class="list-group-item list-group-item-action bg-light" href="#!">Trang chủ</a>-->
+<!--                <a class="list-group-item list-group-item-action bg-light" href="#!">Hội đồng</a>-->
+<!--                <a class="list-group-item list-group-item-action bg-light" href="#!">Nghiên cứu sinh</a>-->
+<!--                <a class="list-group-item list-group-item-action bg-light" href="#!">Đề tài</a>-->
+<!--                <a class="list-group-item list-group-item-action bg-light" href="#!">Danh mục</a>-->
+<!--                <a class="list-group-item list-group-item-action bg-light" href="#!">Hỗ trợ</a>-->
+<!--            </div>-->
+<!--        </div>-->
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+<!--                <button class="btn btn-primary" id="menu-toggle" style=" border-radius: 10px; width: 10%;">Danh mục</button>-->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+<!--                        <li class="nav-item active">-->
+<!--                            <li class="nav-item">-->
+<!--                                <a th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}" class="nav-link">Trang chủ</a>-->
+<!--                            </li>-->
+<!--                        </li>-->
+                        <li class="nav-item">
+                            <a th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}" class="nav-link">Danh sách hội đồng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{'/listcanbo/' + *{user.getTaiKhoan()}}" class="nav-link">Danh sách cán bộ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{'/listncsinh/' + *{user.getTaiKhoan()}}" class="nav-link">Danh sách nghiên cứu sinh</a>
+                        </li>
+<!--                        <li class="nav-item ">-->
+<!--                            <a href="# " , class="nav-link ">Hỗ trợ</a>-->
+<!--                        </li>-->
 
-                    <!-- <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#!" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#!">Action</a>
-                            <a class="dropdown-item" href="#!">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#!">Something else here</a>
+                        <!-- <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#!" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#!">Action</a>
+                                <a class="dropdown-item" href="#!">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#!">Something else here</a>
+                            </div>
+                        </li> -->
+                    </ul>
+                </div>
+            </nav>
+            <div class="container-fluid">
+                <h3 style="margin-top: 20px;font-size: xx-large; margin-left: 12.5%">Danh sách Admin </h3>
+                <div class="table-responsive" style="margin-top: 20px;">
+
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr style="background-color: #BE81F7;">
+                                <th scope="col">Tên</th>
+                                <th scope="col">Tài khoản</th>
+                                <th scope="col">Địa chỉ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <tr th:each="user:${user}">
+                                    <td th:text="*{user.getTen()}"></td>
+                                    <td th:text="*{user.getTaiKhoan()}"></td>
+                                    <td th:text="*{user.getDiaChi()}"></td>
+                                </tr>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 20px; width: 18%; text-align: center; margin-left: 12.5%; margin-bottom: 20px;">Đổi mật khẩu</a>
+                    <a th:href="@{'/login'}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 20px; width: 18%; text-align: center;  margin-bottom: 20px;">Đăng xuất</a>
+                    <a th:href="@{'/addTaiKhoan/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 20px; width: 18%; text-align: center;  margin-bottom: 20px;">Thêm tài khoản</a>
+                </div>
+                <div>
+                    <!-- <a th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 24%; text-align: center;">Danh sách hội đồng</a>
+                    <a th:href="@{'/listcanbo/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 24%; text-align: center;">Danh sách cán bộ</a>
+                    <a th:href="@{'/listncsinh/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 24%; text-align: center;">Danh sách nghiên cứu sinh</a> -->
+                </div>
+                <hr>
+                <div class="container-fluid padding">
+                    <div class="row text-center padding">
+                        <div class="col-12">
+                            <h5>Liên lạc với nhóm</h5>
                         </div>
-                    </li> -->
-                </ul>
-            </div>
-        </nav>
-        <div class="container-fluid">
-            <h3 style="margin-top: 20px; font-size: xx-large; margin-left: 12.5%;">Thông tin của tài khoản Admin </h3>
-            <div class="table-responsive" style="margin-top: 20px;">
-                <table class="table table-bordered table-hover">
-                    <thead>
-                    <tr style="background-color: #BE81F7;">
-                        <th scope="col">Tên</th>
-                        <th scope="col">Tài khoản</th>
-                        <th scope="col">Địa chỉ</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                    <tr th:each="user:${user}">
-                        <td th:text="*{user.getTen()}"></td>
-                        <td th:text="*{user.getTaiKhoan()}"></td>
-                        <td th:text="*{user.getDiaChi()}"></td>
-                    </tr>
-                    </tr>
-                    </tbody>
-                </table>
-                <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 20px; width: 18%; text-align: center; margin-left: 12.5%; margin-bottom: 20px;">Đổi mật khẩu</a>
-                <a th:href="@{'/login'}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 20px; width: 18%; text-align: center;  margin-bottom: 20px;">Đăng xuất</a>
-                <a th:href="@{'/addTaiKhoan/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 20px; width: 18%; text-align: center;  margin-bottom: 20px;">Thêm tài khoản</a>
-            </div>
-            <div>
-                <!-- <a th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 24%; text-align: center;">Danh sách hội đồng</a>
-                <a th:href="@{'/listcanbo/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 24%; text-align: center;">Danh sách cán bộ</a>
-                <a th:href="@{'/listncsinh/' + *{user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px; margin-top: 10px; width: 24%; text-align: center;">Danh sách nghiên cứu sinh</a> -->
-            </div>
-            <hr>
-            <div class="container-fluid padding">
-                <div class="row text-center padding">
-                    <div class="col-12">
-                        <h5>Liên lạc với nhóm</h5>
-                    </div>
-                    <div class="col-md-4 social padding">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                    </div>
-                    <div class="col-md-4 social padding">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                    <div class="col-md-4 social padding">
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <div class="col-md-4 social padding">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                        </div>
+                        <div class="col-md-4 social padding">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                        <div class="col-md-4 social padding">
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
     </div>
+    </div>
+    </div>
 
-</div>
-</div>
-</div>
-
-<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
-<script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
 </body>
 
 </html>

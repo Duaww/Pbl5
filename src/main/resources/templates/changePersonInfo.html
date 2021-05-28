@@ -19,36 +19,89 @@
 </head>
 
 <body>
-<div class="d-flex" id="wrapper">
-
-    <div id="page-content-wrapper">
-
-        <div class="container-fluid">
+    <div class="d-flex" id="wrapper">
+        <!-- Sidebar-->
+        <!-- <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Danh mục</div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Trang chủ</a>
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Hội đồng</a>
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Nghiên cứu sinh</a>
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Đề tài</a>
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Danh mục</a>
+                <a class="list-group-item list-group-item-action bg-light" href="#!">Hỗ trợ</a>
+            </div>
+        </div> -->
+        <div id="page-content-wrapper">
+            <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <button class="btn btn-primary" id="menu-toggle" style=" border-radius: 10px;">Danh mục</button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 140px;">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" , class="nav-link active">Trang chủ</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Tài khoản
+                        </a>
+                            <div class="dropdown-menu">
+                                <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}" class="dropdown-item">Đổi mật khẩu</a>
+                                <a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}" class="dropdown-item">Đổi thông tin cá nhân</a>
+                                <a th:href="@{'/login'}" class="dropdown-item">Đăng xuất</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " th:href="@{'/danhSachBaiBao/' + ${user.getTaiKhoan()}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Bài báo
+                        </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Đề tài
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a th:href="@{'/listHuongDan/' + ${user.getTaiKhoan()}}" class="dropdown-item">Danh sách hướng dẫn</a>
+                                <a th:href="@{'/themDeTai/' + ${user.getTaiKhoan()}}" class="dropdown-item">Thêm đề tài mới</a>
+                                <a th:href="@{'/listChoHuongDan/' + ${user.getTaiKhoan()}}" class="dropdown-item">Danh sách chưa có hướng dẫn</a>
+                                <a th:href="@{'/listYeuCauPheDuyet/' + ${user.getTaiKhoan()}}" class="dropdown-item">Danh sách yêu cầu cần phê duyệt</a>
+                                <a th:href="@{'/listDeTaiCham/'+ ${user.getTaiKhoan()}}" class="dropdown-item">Danh sách đề tài cần chấm</a>
+                                <a th:href="@{'/deTaiDangThucHien/canbo/' + ${user.getTaiKhoan()}}" class="dropdown-item">Đề tài đang thực hiện</a>
+                                <a th:href="@{'/dangKyLamNghienCuu/' + ${user.getTaiKhoan()}}" class="dropdown-item">Đăng kí làm nghiên cứu khoa học</a>
+                                <a th:href="@{'/deTaiDaLamDuoc/' + ${user.getTaiKhoan()}}" class="dropdown-item">Danh sách đề tài đã làm được</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Hỗ trợ</a>
+                    </ul>
+                </div>
+            </nav> -->
             <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h3 style="font-size: xx-large; margin-top: 20px; margin-left: 25%;">Sửa thông tin người dùng</h3>
-                    </div>
-                    <div class="col-sm-12" style="margin-left: 25%;">
-                        <form name="changeInfo" th:action="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}" th:object="${user}" onsubmit="return validateForm()" method="POST">
-                            <!-- Tên -->
-                            <div class="form-group">
-                                <label for="" style="font-size: larger;">Tên</label>
-                                <span th:field="*{Ten}">
-                                    <input name="Ten" type="text" th:value="*{Ten}" class="form-control" style="height: 50%; width: 50%;">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 style="font-size: xx-large; margin-top: 20px; margin-left: 28%;">Sửa thông tin người dùng</h3>
+                        </div>
+                        <div class="col-sm-12" style="margin-left: 28%;">
+                            <form name="changeInfo" th:action="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}" th:object="${user}" onsubmit="return validateForm()" method="POST">
+                                <!-- Tên -->
+                                <div class="form-group">
+                                    <label for="" style="font-size: larger;">Tên</label>
+                                    <span th:field="*{Ten}">
+                                    <input name="Ten" type="text" th:value="*{Ten}" class="form-control" style="height: 35%; width: 35%;">
                                 </span>
-                            </div>
+                                </div>
 
-                            <!-- Ngày sinh-->
-                            <div class="form-group">
-                                <label for="" style="font-size: larger;">Ngày sinh</label>
-                                <span th:field="*{NgaySinh}">
-                                    <input name="NgaySinh" type="text" th:value="*{NgaySinh}" class="form-control" style="height: 50%; width: 50%;">
+                                <!-- Ngày sinh-->
+                                <div class="form-group">
+                                    <label for="" style="font-size: larger;">Ngày sinh</label>
+                                    <span th:field="*{NgaySinh}">
+                                    <input name="NgaySinh" type="text" th:value="*{NgaySinh}" class="form-control" style="height: 35%; width: 35%;">
                                 </span>
-                            </div>
+                                </div>
 
-                            <!-- Giới tính -->
-                            <div class="form-group">
+                                <!-- Giới tính -->
+                                <div class="form-group">
                                     <span th:field="*{GioiTinh}">
                                     <label for="" style="font-size: larger;">Giới tính: </label>
                                     <input type="hidden" name="GioiTinh" th:value="*{GioiTinh}">
@@ -59,62 +112,62 @@
                                         <input type="radio" name="checkboxSex" value="nu"  th:checked="!*{GioiTinh} ? 'checked'" />
                                     </span>
                                     </span>
-                            </div>
+                                </div>
 
-                            <!-- Địa chỉ -->
-                            <div class="form-group">
-                                <label for="" style="font-size: larger; margin-top: -8px;">Địa chỉ</label>
-                                <span th:field="*{DiaChi}">
-                                    <input name="DiaChi" type="text" th:value="*{DiaChi}" class="form-control" style="height: 50%; width: 50%;">
+                                <!-- Địa chỉ -->
+                                <div class="form-group">
+                                    <label for="" style="font-size: larger; margin-top: -8px;">Địa chỉ</label>
+                                    <span th:field="*{DiaChi}">
+                                    <input name="DiaChi" type="text" th:value="*{DiaChi}" class="form-control" style="height: 35%; width: 35%;">
                                 </span>
-                            </div>
+                                </div>
 
-                            <!-- Số điện thoại -->
-                            <div class="form-group">
-                                <label for="" style="font-size: larger;">Số điện thoại</label>
-                                <span th:field="*{SDT}">
-                                    <input name="SDT" type="text" th:value="*{SDT}" class="form-control" style="height: 50%; width: 50%;">
+                                <!-- Số điện thoại -->
+                                <div class="form-group">
+                                    <label for="" style="font-size: larger;">Số điện thoại</label>
+                                    <span th:field="*{SDT}">
+                                    <input name="SDT" type="text" th:value="*{SDT}" class="form-control" style="height: 35%; width: 35%;">
                                 </span>
-                            </div>
+                                </div>
 
-                            <!-- Gmail -->
-                            <div class="form-group">
-                                <label for="" style="font-size: larger;">Gmail</label>
-                                <span th:field="*{Gmail}">
-                                    <input name="Gmail" type="text" th:value="*{Gmail}" class="form-control" style="height: 50%; width: 50%;">
+                                <!-- Gmail -->
+                                <div class="form-group">
+                                    <label for="" style="font-size: larger;">Gmail</label>
+                                    <span th:field="*{Gmail}">
+                                    <input name="Gmail" type="text" th:value="*{Gmail}" class="form-control" style="height: 35%; width: 35%;">
                                 </span>
-                            </div>
-                            <button type="submit" class="btn btn-primary" name="btnsubmit" style="border-radius: 10px; width: 13%;">Sửa thông tin</button>
-                            <a th:href="${'/' + {role} + '/' + {user.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px;width: 13%;">Trở về</a>
-                        </form>
+                                </div>
+                                <button type="submit" class="btn btn-primary" name="btnsubmit" style="border-radius: 10px; width: 13%;">Sửa thông tin</button>
+                                <a th:href="${'/' + {role} + '/' + {user.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px;width: 13%;">Trở về</a>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
+    </div>
 
-<script>
-    function validateForm() {
-        let checkbox = document.getElementsByName("checkboxSex");
-        // console.log(document.forms["changeInfo"]["GioiTinh"].value);
-        for (var i = 0; i < checkbox.length; i++) {
-            if (checkbox[i].checked === true) {
-                // alert(checkbox[i].value);
-                if (checkbox[i].value == "nam") {
-                    document.forms["changeInfo"]["GioiTinh"].value = "true";
-                } else {
-                    document.forms["changeInfo"]["GioiTinh"].value = "false";
+    <script>
+        function validateForm() {
+            let checkbox = document.getElementsByName("checkboxSex");
+            // console.log(document.forms["changeInfo"]["GioiTinh"].value);
+            for (var i = 0; i < checkbox.length; i++) {
+                if (checkbox[i].checked === true) {
+                    // alert(checkbox[i].value);
+                    if (checkbox[i].value == "nam") {
+                        document.forms["changeInfo"]["GioiTinh"].value = "true";
+                    } else {
+                        document.forms["changeInfo"]["GioiTinh"].value = "false";
+                    }
                 }
             }
+            return true;
         }
-        return true;
-    }
-</script>
-<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
-<script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+    </script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
 </body>
 
 </html>

@@ -103,7 +103,19 @@ public class UserController {
 
     @GetMapping("/doimatkhau/{account}")
     public String formdoiPass(Model model, @PathVariable("account") String account) {
-        model.addAttribute("user", userService.findByName(account));
+        User changer = userService.findByName(account);
+        String pageold = "";
+        if (changer.getRole().equals("1")){
+            pageold = "admin";
+        } else if (changer.getRole().equals("2")) {
+            pageold = "hoidong";
+        } else if (changer.getRole().equals("3")) {
+            pageold = "canbo";
+        } else  {
+            pageold = "nghiencuusinh";
+        }
+        model.addAttribute("pageold", pageold);
+        model.addAttribute("user", changer);
         return "doimatkhau";
     }
 
@@ -413,7 +425,7 @@ public class UserController {
         model.addAttribute("detai", deTaiService.findById(idDeTai));
         model.addAttribute("viewer", userService.findByName(accViewer));
         model.addAttribute("hoidongcham",  idHoiDongChamCuaDeTai);
-        model.addAttribute("linhVucCuaCanBo", linhVucCuaCanBo);
+        model.addAttribute( "linhVucCuaCanBo", linhVucCuaCanBo);
         model.addAttribute("checked", checked);
         model.addAttribute("notChecked", notChecked);
         return "phanCongCham";
