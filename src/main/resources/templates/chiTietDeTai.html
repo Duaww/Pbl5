@@ -149,17 +149,15 @@
                                 <input  type="submit" value="Update tiến độ" class="btn btn-primary"style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">
                             </form>
                         </div>
-                        <div>
-                            <p th:if="${pageold.equals( 'chiTietBaiBao')} ">
+                        <div th:if="${pageold.equals( 'chiTietBaiBao')}">
                                 <a th:href="@{ '/' + ${pageold} + '/'+ ${detai.getIDDeTai()} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
-                            </p>
-                            <p th:if="${pageold.equals( 'deTaiDangThucHien')} ">
-                                <a th:if="${viewer.getRole().equals( '3')} " th:href="@{ '/' + ${pageold} + '/canbo/' + ${viewer.getTaiKhoan()}} " class="btn btn-primary "style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
-                                <a th:if="${viewer.getRole().equals( '4')} " th:href="@{ '/' + ${pageold} + '/nghiencuusinh/' + ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về </a>
-                            </p>
-                            <p th:if="${!pageold.equals( 'chiTietBaiBao') && !pageold.equals( 'deTaiDangThucHien')} ">
-                                <a th:href="@{ '/' + ${pageold} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;"Trở về</a>
-                            </p>
+                        </div>
+                        <div th:if="${pageold.equals( 'deTaiDangThucHien')} ">
+                            <a th:if="${viewer.getRole().equals( '3')} " th:href="@{ '/' + ${pageold} + '/canbo/' + ${viewer.getTaiKhoan()}} " class="btn btn-primary "style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
+                            <a th:if="${viewer.getRole().equals( '4')} " th:href="@{ '/' + ${pageold} + '/nghiencuusinh/' + ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về </a>
+                        </div>
+                        <div th:if="${!pageold.equals( 'chiTietBaiBao') && !pageold.equals( 'deTaiDangThucHien')}">
+                                <a th:href="@{ '/' + ${pageold} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
                         </div>
                     </div>
                 </div>
