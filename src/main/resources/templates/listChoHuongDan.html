@@ -89,12 +89,16 @@
                                 <tr>
                                     <tr th:each="list : ${nguoidexuat}">
                                         <td th:text="${list.first.getTenDeTai()}"></td>
-                                        <td th:text="${list.first.getTrangThai()}"></td>
+                                        <td>
+                                            <span th:if="${list.first.getTrangThai().equals('OK')}" th:text="'OK'"></span>
+                                            <span th:if="${list.first.getTrangThai().equals('dangxet')}" th:text="'Đang xét'"></span>
+                                            <span th:if="${list.first.getTrangThai().equals('chuaxet')}" th:text="'Chưa xét'"></span>
+                                        </td>
                                         <td>
                                             <span th:if="${list.second.getTen()}">
-                                    <a th:href="@{'/thongtinNCS/' + ${pageold} + '/' + ${list.second.getID()} + '/' + ${viewer.getID()}}" th:text="${list.second.getTen()}"></a>
-                                </span>
-                                            <span th:if="!${list.second.getTen()}" th:text="'chua co ai thuc hien'"></span>
+                                                <a th:href="@{'/thongtinNCS/' + ${pageold} + '/' + ${list.second.getID()} + '/' + ${viewer.getID()}}" th:text="${list.second.getTen()}"></a>
+                                            </span>
+                                            <span th:if="!${list.second.getTen()}" th:text="'Chưa có ai thực hiện'"></span>
                                         </td>
                                         <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${list.first.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px;  width: 60%; text-align: center;">Chi tiết</a></td>
                                         <td><input type="checkbox" class="checkList" th:value="${list.first.getIDDeTai()}" style="border-radius: 10px; margin-top: 10px; width: 40%;height: 20px"></td>

@@ -314,6 +314,7 @@ public class UserController {
     @PostMapping("/addTaiKhoan/{accountChanger}")
     public String postAddTaiKhoan(@PathVariable("accountChanger") String accountChanger,  RedirectAttributes redirectAttrs, @ModelAttribute User newUser) {
         userService.addUser(newUser);
+        System.out.println("ok");
         redirectAttrs.addAttribute("accountChanger", accountChanger);
         return "redirect:/admin/{accountChanger}";
     }

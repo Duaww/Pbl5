@@ -98,6 +98,10 @@
             let newPass = document.forms["changePass"]["newPass"].value;
             let confirm = document.forms["changePass"]["MatKhau"].value;
             // let confirm = " ";
+            if (pass == "" || newPass == "" || confirm == "") {
+                alert("Hãy nhập mật khẩu");
+                return false;
+            }
             if (pass !== oldPass) {
                 alert("Mật khẩu hiện tại không đúng");
                 return false;
@@ -107,10 +111,6 @@
                 return false;
             }
 
-            if (pass == " " || newPass == " " || confirm == " ") {
-                alert("Hãy nhập mật khẩu");
-                return false;
-            }
             alert("Đổi mật khẩu thành công");
             return true;
         }

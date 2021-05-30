@@ -109,7 +109,11 @@
                                 <span th:if="${nguoiHuongDan.getTen()}" th:text="'Người hướng dẫn : ' + ${nguoiHuongDan.getTen()}"></span>
                                 <span th:if="!${nguoiHuongDan.getTen()}" th:text="'Người hướng dẫn : Chưa có người hướng dẫn '"></span>
                             </div>
-                            <p th:text="'Trạng thái : ' + ${detai.getTrangThai()}"></p>
+                            <p>
+                                <span th:if="${detai.getTrangThai().equals('OK')}" th:text="'Trạng thái : OK'"></span>
+                                <span th:if="${detai.getTrangThai().equals('dangxet')}" th:text="'Trạng thái : Đang xét'"></span>
+                                <span th:if="${detai.getTrangThai().equals('chuaxet')}" th:text="'Trạng thái : Chưa xét'"></span>
+                            </p>
                             <div>
                                 <p th:if="${nguoithuchien.getTen()}" th:text="'Người thực hiện đề tài : ' + ${nguoithuchien.getTen()}"></p>
                                 <p th:if="!${nguoithuchien.getTen()}" th:text="'Người thực hiện đề tài : Chưa có người thực hiện'"></p>

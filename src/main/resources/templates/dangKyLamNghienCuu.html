@@ -93,7 +93,11 @@
                                 <tr>
                                     <tr th:each="detai : ${deTaiCoThe}">
                                         <td th:text="${detai.getTenDeTai()}"></td>
-                                        <td th:text="${detai.getTrangThai()}"></td>
+                                        <td>
+                                            <span th:if="${detai.getTrangThai().equals('OK')}" th:text="'OK'"></span>
+                                            <span th:if="${detai.getTrangThai().equals('dangxet')}" th:text="'Đang xét'"></span>
+                                            <span th:if="${detai.getTrangThai().equals('chuaxet')}" th:text="'Chưa xét'"></span>
+                                        </td>
                                         <td><a th:href="@{'/chiTietDeTai/dangKyLamNghienCuu/' + ${detai.getIDDeTai()} + '/' + ${user.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px;  width: 35%; text-align: center; margin-left: 5%;">Chi tiết</a></td>
                                         <td><input type="checkbox" class="checkList" th:value="${detai.getIDDeTai()}" style="border-radius: 10px; margin-top: 10px; width: 40%;height: 20px"></td>
                                     </tr>

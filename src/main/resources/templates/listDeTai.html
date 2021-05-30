@@ -74,16 +74,15 @@
                     <form name="formFilter" th:action="@{/listDeTai/{account}(account=${viewer.getTaiKhoan()})}" style="margin-top: 20px;" method="post" onsubmit="return validateForm()">
                         <label style="color: black;"><strong>Chọn trạng thái muốn lọc</strong></label>
                         <select name="field" id="fields" style="height: 35px;">
-                <option value="all">Tất cả</option>
-                <option value="ok">OK</option>
-                <option value="dangxet">Đang xét</option>
-                <option value="chuaxet">Chưa xét</option>
-             </select>
+                            <option value="all">Tất cả</option>
+                            <option value="OK">OK</option>
+                            <option value="dangxet">Đang xét</option>
+                            <option value="chuaxet">Chưa xét</option>
+                        </select>
                         <span th:field="${status}">
-                <input type="hidden" name="status" th:value="${status}">
-                </span>
+                            <input type="hidden" name="status" th:value="${status}">
+                        </span>
                         <input type="submit" name="form_filter" value="Lọc" class="btn btn-primary" style="border-radius: 10px; margin-top: -0.5%;">
-
                     </form>
                 </div>
             </div>
@@ -107,14 +106,15 @@
                                             <span th:if="${element.second.getTen()}" th:text="${element.second.getTen()}"></span>
                                             <span th:if="!${element.second.getTen()}" th:text="'Chưa có người hướng dẫn'"></span>
                                         </td>
-                                        <td th:text="${element.first.getTrangThai()}"></td>
+                                        <td>
+                                            <span th:if="${element.first.getTrangThai().equals('OK')}" th:text="'OK'"></span>
+                                            <span th:if="${element.first.getTrangThai().equals('dangxet')}" th:text="'Đang xét'"></span>
+                                            <span th:if="${element.first.getTrangThai().equals('chuaxet')}" th:text="'Chưa xét'"></span>
+                                        </td>
                                         <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${element.first.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px;  width: 50%; text-align: center; ">Chi tiết</a></td>
                                     </tr>
                                 </tr>
                             </tbody>
-                            <span th:field="${checked}">
-                    <input type="hidden" name="checked" th:value="${checked}">
-                </span>
                         </table>
                         <a th:href="@{'/hoidong/' + ${viewer.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 20px; width: 10%; margin-left: 12.5%;">Trở về</a>
                     </div>

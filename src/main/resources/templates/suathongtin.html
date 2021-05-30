@@ -91,7 +91,9 @@
                             <div class="form-group">
                                 <label for="" style="font-size: larger; color: black;">Ngày sinh</label>
                                 <span th:field="*{NgaySinh}">
-                                    <input name="NgaySinh" type="text" th:value="*{NgaySinh}" class="form-control" style="height: 35%; width: 35%;">
+<!--                                    <input name="NgaySinh" type="text" th:value="*{NgaySinh}" class="form-control" style="height: 35%; width: 35%;">-->
+                                    <input name="NgaySinh" type="date" th:value="*{NgaySinh}" class="form-control" style="height: 35%; width: 35%;">
+
                                 </span>
                             </div>
 
@@ -103,7 +105,7 @@
                                     <span style="color: black;"> Nam
                                         <input type="radio" name="checkboxSex" value="nam" th:checked="*{GioiTinh} ? 'checked'" />
                                     </span>
-                                <span style="color: black;"> Nữ
+                                    <span style="color: black;"> Nữ
                                         <input type="radio" name="checkboxSex" value="nu"  th:checked="!*{GioiTinh} ? 'checked'" />
                                     </span>
                                 </span>

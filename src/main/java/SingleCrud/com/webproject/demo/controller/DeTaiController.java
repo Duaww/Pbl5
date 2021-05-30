@@ -75,6 +75,7 @@ public class DeTaiController {
 
     @PostMapping("/listDeTai/{accountView}")
     public String postListDeTai(Model model, @PathVariable("accountView") String accountView, @ModelAttribute("status") String status) {
+//        System.out.println(status);
         User viewer = userService.findByName(accountView);
         model.addAttribute("viewer", viewer);
         List<DeTai> statusList = deTaiService.findByStatus(status);

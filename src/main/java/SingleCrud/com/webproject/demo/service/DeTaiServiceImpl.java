@@ -55,7 +55,7 @@ public class DeTaiServiceImpl implements DeTaiService {
     public void changeStatus(String idDeTai, String status) {
         DeTai detai = this.findById(idDeTai);
         if(status.equals("Pheduyet")) {
-            detai.setTrangThai("ok");
+            detai.setTrangThai("OK");
         } else if (status.equals("Huybo")) {
             detai.setTrangThai("chuaxet");
         }
