@@ -306,6 +306,8 @@ public class UserController {
     @GetMapping("/addTaiKhoan/{accountChanger}")
     public String getAddTaiKhoan(Model model,  @PathVariable("accountChanger") String accountChanger) {
         User changer = userService.findByName(accountChanger);
+        List<String> danhSachTaiKhoanDangCo = userService.findAll().stream().map(element -> element.getTaiKhoan()).collect(Collectors.toList());
+        model.addAttribute("danhSachTaiKhoan", danhSachTaiKhoanDangCo);
         model.addAttribute("user", new User());
         model.addAttribute("changer", changer);
         return "addTaiKhoan";
@@ -314,7 +316,7 @@ public class UserController {
     @PostMapping("/addTaiKhoan/{accountChanger}")
     public String postAddTaiKhoan(@PathVariable("accountChanger") String accountChanger,  RedirectAttributes redirectAttrs, @ModelAttribute User newUser) {
         userService.addUser(newUser);
-        System.out.println("ok");
+//        System.out.println("ok");
         redirectAttrs.addAttribute("accountChanger", accountChanger);
         return "redirect:/admin/{accountChanger}";
     }
@@ -471,6 +473,8 @@ public class UserController {
 
     @GetMapping("/dangky")
     public String getDangKy(Model model) {
+        List<String> danhSachTaiKhoanDangCo = userService.findAll().stream().map(element -> element.getTaiKhoan()).collect(Collectors.toList());
+        model.addAttribute("danhSachTaiKhoan", danhSachTaiKhoanDangCo);
         model.addAttribute("user", new User());
         return "dangky";
     }

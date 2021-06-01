@@ -151,6 +151,34 @@
 
     <script>
         function validateForm() {
+
+            var input = document.getElementsByTagName("input");
+            var arrayConverted = Object.values(input);
+            var filterArray = arrayConverted.filter((element) => {
+                return element.type !== "hidden";
+            });
+            var tempSex = 0;
+            for (var i = 0; i < filterArray.length; i++) {
+                if (filterArray[i].type === "radio") {
+                    if ( filterArray[i].name === "checkboxSex" && filterArray[i].checked === false ) {
+                        tempSex++;
+                    }
+                } else {
+                    if ( filterArray[i].value === "") {
+                        alert("Xin hãy nhập đầy đủ thông tin");
+                        return false;
+                    } else if (filterArray[i].value.length < 8) {
+                        alert("Thông tin nhập vào phải từ 8 kí tự trở lên");
+                        return false;
+                    }
+                }
+
+                if ( tempSex == 2 ) {
+                    alert("Xin hãy chọn giới tính");
+                    return false;
+                }
+            }
+
             let checkbox = document.getElementsByName("checkboxSex");
             // console.log(document.forms["changeInfo"]["GioiTinh"].value);
             for (var i = 0; i < checkbox.length; i++) {
@@ -163,6 +191,7 @@
                     }
                 }
             }
+            alert("Sửa thông tin thành công");
             return true;
         }
     </script>

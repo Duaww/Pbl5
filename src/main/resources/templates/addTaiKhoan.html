@@ -77,9 +77,8 @@
                                 <label for=" " style="font-size: larger; color: black;">Ngày sinh</label>
                                 <span th:field="*{NgaySinh}">
 <!--                                <input name="NgaySinh" type="text" th:value="*{NgaySinh}" class="form-control" style="height: 35%; width: 35%;">-->
-                                <input name="NgaySinh" type="date" th:value="*{NgaySinh}" class="form-control" style="height: 35%; width: 35%;">
-
-                            </span>
+                                    <input name="NgaySinh" type="date" th:value="*{NgaySinh}" class="form-control" style="height: 35%; width: 35%;">
+                                </span>
                             </div>
 
                             <!-- Giới tính -->
@@ -100,40 +99,47 @@
                             <div class="form-group ">
                                 <label for=" " style="font-size: larger; color: black; margin-top: -5px;">Gmail</label>
                                 <span th:field="*{Gmail}">
-                                <input name="Gmail" type="text" th:value="*{Gmail} " class="form-control" style="height: 35%; width: 35%;">
-                            </span>
+                                    <input name="Gmail" type="text" th:value="*{Gmail} " class="form-control" style="height: 35%; width: 35%;">
+                                </span>
                             </div>
 
                             <!-- Số điện thoại -->
                             <div class="form-group ">
                                 <label for=" " style="font-size: larger; color: black;">Số điện thoại</label>
                                 <span th:field="*{SDT}">
-                                <input name="SDT" type="text" th:value="*{SDT}" class="form-control" style="height: 35%; width: 35%;">
-                            </span>
+                                    <input name="SDT" type="text" th:value="*{SDT}" class="form-control" style="height: 35%; width: 35%;">
+                                </span>
                             </div>
 
                             <!--Địa chỉ( Sửa label thành span)  -->
                             <div class="form-group ">
                                 <label for=" " style="font-size: larger; color: black;">Địa chỉ</label>
                                 <span th:field="*{DiaChi}">
-                                <input name="DiaChi" type="text" th:value="*{DiaChi}" class="form-control" style="height: 35%; width: 35%;">
-                            </span>
+                                    <input name="DiaChi" type="text" th:value="*{DiaChi}" class="form-control" style="height: 35%; width: 35%;">
+                                </span>
                             </div>
 
                             <!-- Tài khoản -->
                             <div class="form-group ">
                                 <label for=" " style="color: black;">Tài khoản</label>
                                 <span th:field="*{TaiKhoan}">
-                                <input name="TaiKhoan" type="text" th:value="*{TaiKhoan}" class="form-control" style="height: 35%; width: 35%;">
-                            </span>
+                                    <input name="TaiKhoan" type="text" th:value="*{TaiKhoan}" class="form-control" style="height: 35%; width: 35%;">
+                                </span>
                             </div>
 
                             <!-- Mật khẩu -->
                             <div class="form-group ">
                                 <label for=" " style="font-size: larger; color: black;">Mật khẩu</label>
                                 <span th:field="*{MatKhau}">
-                                <input name="MatKhau" type="password" th:value="*{MatKhau}" class="form-control "style="height: 35%; width: 35%;">
-                            </span>
+                                    <input name="MatKhau" type="password" th:value="*{MatKhau}" class="form-control "style="height: 35%; width: 35%;">
+                                </span>
+                            </div>
+
+                            <div class="form-group ">
+                                <label for=" " style="font-size: larger; color: black;">Xác nhận mật khẩu</label>
+                                <span>
+                                    <input name="XacNhanMatKhau" type="password" class="form-control "style="height: 35%; width: 35%;">
+                                </span>
                             </div>
 
                             <!-- Cấp quyền -->
@@ -164,8 +170,57 @@
 
 
 
-    <script>
+    <script th:inline="javascript">
         function validateForm() {
+            var danhSachTaiKhoan = [[${danhSachTaiKhoan}]];
+            var form = document.forms["addAccount"];
+            var input = document.getElementsByTagName("input");
+            var arrayConverted = Object.values(input);
+            var filterArray = arrayConverted.filter((element) => {
+                return element.type !== "hidden";
+            });
+            var tempSex = 0, tempRole = 0;
+            for (var i = 0; i < filterArray.length; i++) {
+                if (filterArray[i].type === "radio") {
+                    if ( filterArray[i].name === "checkboxSex" && filterArray[i].checked === false ) {
+                        tempSex++;
+                    } else if ( filterArray[i].name === "checkboxRole" && filterArray[i].checked === false ) {
+                        tempRole++;
+                    }
+                } else {
+                    if ( filterArray[i].value === "") {
+                        alert("Xin hãy nhập đầy đủ thông tin");
+                        return false;
+                    } else if (filterArray[i].value.length < 8) {
+                        alert("Thông tin nhập vào phải từ 8 kí tự trở lên");
+                        return false;
+                    }
+                }
+
+                if ( tempSex == 2 ) {
+                    alert("Xin hãy chọn giới tính");
+                    return false;
+                } else if ( tempRole == 2 ) {
+                    alert("Xin hãy chọn quyền người dùng");
+                    return false;
+                }
+            }
+
+            var account = form["TaiKhoan"].value;
+            var password = form["MatKhau"].value;
+            var confirmPassword = form["XacNhanMatKhau"].value;
+
+
+            if (danhSachTaiKhoan.includes(account)) {
+                alert("Tài khoản đã tồn tại xin hay chọn tài khoản khác");
+                return false;
+            }
+
+            if (password !== confirmPassword) {
+                alert("Xác nhận mật khẩu không trùng khớp");
+                return false;
+            }
+
             let checkboxSex = document.getElementsByName("checkboxSex");
 
             for (var i = 0; i < checkboxSex.length; i++) {

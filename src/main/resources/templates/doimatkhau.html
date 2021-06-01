@@ -98,8 +98,13 @@
             let newPass = document.forms["changePass"]["newPass"].value;
             let confirm = document.forms["changePass"]["MatKhau"].value;
             // let confirm = " ";
+
             if (pass == "" || newPass == "" || confirm == "") {
                 alert("Hãy nhập mật khẩu");
+                return false;
+            }
+            if ( newPass.length < 8 || confirm.length < 8 ) {
+                alert("Mật khẩu nhập vào phải ít nhất 8 kí tự");
                 return false;
             }
             if (pass !== oldPass) {

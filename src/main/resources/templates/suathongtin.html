@@ -131,6 +131,19 @@
                                     <input name="Gmail" type="text" th:value="*{Gmail}" class="form-control" style="height: 35%; width: 35%;">
                                 </span>
                             </div>
+
+                            <div th:if="${user.getRole().equals('2') || user.getRole().equals('3')}" class="form-group ">
+                                <label for=" " style="margin-top: 20px; font-size: larger; color: black;">Cấp quyền: </label>
+                                <span th:field="*{Role}">
+                                    <input type="hidden" name="Role" th:value="*{Role}">
+                                    <span style="color: black;"> Hội đồng
+                                        <input type="radio" name="checkboxRole" value="hoidong" th:checked="${user.getRole().equals('2')}" />
+                                    </span>
+                                    <span style="color: black;"> Cán bộ
+                                        <input type="radio" name="checkboxRole" value="canbo"  th:checked="${user.getRole().equals('3')}"/>
+                                    </span>
+                                </span>
+                            </div>
                             <!-- Nút sửa thông tin -->
                             <button type="submit" class="btn btn-primary" style=" border-radius: 10px; width: 13%;">Sửa thông tin</button>
                             <!-- Trở về(back) chưa xong -->
@@ -146,6 +159,39 @@
     <!-- <a th:href="${ '/information/' + {user.getTaiKhoan()} + '/' + {changer.getTaiKhoan()}} ">back</a> -->
     <script>
         function validateForm() {
+
+            var input = document.getElementsByTagName("input");
+            var arrayConverted = Object.values(input);
+            var filterArray = arrayConverted.filter((element) => {
+                return element.type !== "hidden";
+            });
+            var tempSex = 0, tempRole = 0;
+            for (var i = 0; i < filterArray.length; i++) {
+                if (filterArray[i].type === "radio") {
+                    if ( filterArray[i].name === "checkboxSex" && filterArray[i].checked === false ) {
+                        tempSex++;
+                    } else if ( filterArray[i].name === "checkboxRole" && filterArray[i].checked === false ) {
+                        tempRole++;
+                    }
+                } else {
+                    if ( filterArray[i].value === "") {
+                        alert("Xin hãy nhập đầy đủ thông tin");
+                        return false;
+                    } else if (filterArray[i].value.length < 8) {
+                        alert("Thông tin nhập vào phải từ 8 kí tự trở lên");
+                        return false;
+                    }
+                }
+
+                if ( tempSex == 2 ) {
+                    alert("Xin hãy chọn giới tính");
+                    return false;
+                } else if ( tempRole == 2 ) {
+                    alert("Xin hãy chọn quyền người dùng");
+                    return false;
+                }
+            }
+
             let checkbox = document.getElementsByName("checkboxSex");
             // console.log(document.forms["changeInfo"]["GioiTinh"].value);
             for (var i = 0; i < checkbox.length; i++) {
@@ -158,6 +204,23 @@
                     }
                 }
             }
+
+            let checkboxRole = document.getElementsByName("checkboxRole");
+
+            for (var i = 0; i < checkboxRole.length; i++) {
+                if (checkboxRole[i].checked === true) {
+                    // alert(checkbox[i].value);
+                    if (checkboxRole[i].value == "hoidong") {
+                        console.log("hoidong");
+                        document.forms["changeInfo"]["Role"].value = "2";
+                    } else {
+                        console.log("canbo");
+                        document.forms["changeInfo"]["Role"].value = "3";
+                    }
+                }
+            }
+
+            alert("Sửa thông tin thành công");
             return true;
         }
     </script>

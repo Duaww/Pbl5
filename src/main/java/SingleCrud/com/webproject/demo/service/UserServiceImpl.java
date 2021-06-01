@@ -83,6 +83,7 @@ public class UserServiceImpl implements UserService {
         user.setSDT(newUser.getSDT());
         user.setGioiTinh(newUser.getGioiTinh());
         user.setGmail(newUser.getGmail());
+        user.setRole(newUser.getRole());
         userRepository.save(user);
         return user;
     }
@@ -123,14 +124,15 @@ public class UserServiceImpl implements UserService {
                 }
             }
             return searchList;
-        } else  if (truong.equals("TrangThai")) {
-            for (int i = 0 ; i < userList.size(); i++) {
-                if (userList.get(i).getTrangThai().toLowerCase().contains(giatri.toLowerCase())) {
-                    searchList.add(userList.get(i));
-                }
-            }
-            return searchList;
         }
+//        else  if (truong.equals("TrangThai")) {
+//            for (int i = 0 ; i < userList.size(); i++) {
+//                if (userList.get(i).getTrangThai().toLowerCase().contains(giatri.toLowerCase())) {
+//                    searchList.add(userList.get(i));
+//                }
+//            }
+//            return searchList;
+//        }
         return null;
     }
 
