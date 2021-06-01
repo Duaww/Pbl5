@@ -219,9 +219,12 @@
                     }
                 }
             }
-
-            alert("Sửa thông tin thành công");
-            return true;
+            var confirmForm = confirm("Bạn chắc chắn muốn thay đổi thông tin không ?");
+            if (confirmForm) {
+                alert("Sửa thông tin thành công");
+                return true;
+            }
+            return false;
         }
     </script>
 

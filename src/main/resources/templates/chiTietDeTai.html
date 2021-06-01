@@ -179,7 +179,13 @@
         function validateForm() {
             var x = document.getElementsByName("textTienDo")[0].value;
             document.forms["updateTienDo"]["newTienDo"].value = x;
-            console.log(document.forms["updateTienDo"]["newTienDo"].value);
+            var confirmForm = confirm("Bạn chắc chắn muốn thay đổi tiến độ không ?");
+            if (confirmForm) {
+                alert("Cập nhật tiến độ thành công");
+                return true;
+            }
+            return false;
+            // console.log(document.forms["updateTienDo"]["newTienDo"].value);
         }
     </script>
 

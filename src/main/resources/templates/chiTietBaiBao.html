@@ -76,7 +76,7 @@
                 </div> -->
             </nav>
             <div class="container-fluid">
-                <h3 style="margin-top:20px; font-size: xx-large; margin-left: 12.5%;">Chi tiết bài báo </h5>
+                <h3 style="margin-top:20px; font-size: xx-large; margin-left: 12.5%;">Chi tiết bài báo </h3>
                     <div th:if="${baibao}">
                         <div class="table-responsive" style="margin-top: 20px;">
                             <table class="table table-bordered table-hover">
@@ -92,7 +92,7 @@
                                 <tbody>
                                     <tr>
                                         <td th:text="${detai.getTenDeTai()}"></td>
-                                        <td th:text="${baibao.getNoiDung()}"></td>
+                                        <td th:text="${baibao.getNoiDung()}" style="max-width:350px;"></td>
                                         <td th:text="${baibao.getNgayDang()}"></td>
                                         <!-- cai ni bi loi, chua biet tai soa -->
                                         <td><a th:href="@{'/chiTietDeTai/'+ ${pageold} + '/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px;  width: 35%; text-align: center; margin-left: 2%;">Chi tiết</a>
