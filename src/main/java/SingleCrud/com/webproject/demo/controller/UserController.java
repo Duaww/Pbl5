@@ -69,13 +69,19 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginacc(@ModelAttribute User user, RedirectAttributes redirectAttrs) {
+    public String loginacc(@ModelAttribute User user, RedirectAttributes redirectAttrs, Model model) {
         User userLogin = userService.login(user);
+        boolean wrongAcc = false;
+        boolean locked = false;
         if (userLogin == null) {
-            return "redirect:/saiTaiKhoan";
+            wrongAcc = true;
+            model.addAttribute("wrongAcc", wrongAcc);
+            return login(model);
         }
         if(userLogin.getTrangThai().equals("khoa")) {
-            return "redirect:/lockAccount";
+            locked = true;
+            model.addAttribute("locked", locked);
+            return login(model);
         }
         String option = userLogin.getRole();
         redirectAttrs.addAttribute("account", user.getTaiKhoan());

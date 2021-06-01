@@ -140,6 +140,34 @@
         </div>
 
     </div>
+    <script th:inline="javascript">
+        window.onload = function () {
+            var wrongAcc = [[${wrongAcc}]];
+            var locked = [[${locked}]];
+            if (wrongAcc === true) {
+                alert("Sai tài khoản hoặc mật khẩu");
+            }
+            if (locked === true) {
+                alert("Tài khoản đã bị khóa");
+            }
+        }
+        function validateForm() {
+            var input = document.getElementsByTagName("input");
+            var arrayConverted = Object.values(input);
+            var filterArray = arrayConverted.filter((element) => {
+                return element.type !== "hidden";
+            });
+
+            for (var i = 0; i < filterArray.length; i++) {
+                if ( filterArray[i].value === "") {
+                    alert("Xin hãy nhập đầy đủ thông tin");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+    </script>
     <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
     <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
