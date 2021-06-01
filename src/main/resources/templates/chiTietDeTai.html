@@ -18,85 +18,9 @@
 
 <body>
     <div class="d-flex" id="wrapper">
-        <!-- Sidebar-->
         <div class="bg-light border-right" id="sidebar-wrapper">
-            <!-- <div class="sidebar-heading">Danh mục</div>
-            <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action bg-light" href="#!">Trang chủ</a>
-                <a class="list-group-item list-group-item-action bg-light" href="#!">Hội đồng</a>
-                <a class="list-group-item list-group-item-action bg-light" href="#!">Nghiên cứu sinh</a>
-                <a class="list-group-item list-group-item-action bg-light" href="#!">Đề tài</a>
-                <a class="list-group-item list-group-item-action bg-light" href="#!">Danh mục</a>
-                <a class="list-group-item list-group-item-action bg-light" href="#!">Hỗ trợ</a>
-            </div> -->
         </div>
         <div id="page-content-wrapper" class="container-fluid">
-            <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-                <button class="btn btn-primary" id="menu-toggle" style=" border-radius: 10px;">Danh mục</button>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 60px;">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Trở về
-                        </a>
-                            <div class="dropdown-menu">
-                                <p th:if="${pageold.equals('chiTietBaiBao')}">
-                                    <a th:href="@{'/' + ${pageold} + '/'+ ${detai.getIDDeTai()} +'/'+ ${viewer.getTaiKhoan()}}" class="nav-link">Trở về chi tiết bài báo</a>
-                                </p>
-                                <p th:if="${pageold.equals('deTaiDangThucHien')}">
-                                    <a th:if="${viewer.getRole().equals('3')}" th:href="@{'/' + ${pageold} + '/canbo/' + ${viewer.getTaiKhoan()}}" class="nav-link">Trở về đề tài đang thực hiện</a>
-
-                                </p>
-                                <p th:if="${pageold.equals('deTaiDangThucHien')}">
-
-                                    <a th:if="${viewer.getRole().equals('4')}" th:href="@{'/' + ${pageold} + '/nghiencuusinh/' + ${viewer.getTaiKhoan()}}" class="nav-link">Trở về phân quyền</a>
-                                </p>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="#" , class="nav-link active">Trang chủ</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Tài khoản
-                        </a>
-                            <div class="dropdown-menu">
-                                <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}" class="dropdown-item">Đổi mật khẩu</a>
-                                <a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}" class="dropdown-item">Đổi thông tin cá nhân</a>
-                                <a th:href="@{'/login'}" class="dropdown-item">Đăng xuất</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " th:href="@{'/danhSachBaiBao/' + ${user.getTaiKhoan()}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Bài báo
-                        </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Đề tài
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a th:href="@{'/listHuongDan/' + ${user.getTaiKhoan()}}" class="dropdown-item">Danh sách hướng dẫn</a>
-                                <a th:href="@{'/themDeTai/' + ${user.getTaiKhoan()}}" class="dropdown-item">Thêm đề tài mới</a>
-                                <a th:href="@{'/listChoHuongDan/' + ${user.getTaiKhoan()}}" class="dropdown-item">Danh sách chưa có hướng dẫn</a>
-                                <a th:href="@{'/listYeuCauPheDuyet/' + ${user.getTaiKhoan()}}" class="dropdown-item">Danh sách yêu cầu cần phê duyệt</a>
-                                <a th:href="@{'/listDeTaiCham/'+ ${user.getTaiKhoan()}}" class="dropdown-item">Danh sách đề tài cần chấm</a>
-                                <a th:href="@{'/deTaiDangThucHien/canbo/' + ${user.getTaiKhoan()}}" class="dropdown-item">Đề tài đang thực hiện</a>
-                                <a th:href="@{'/dangKyLamNghienCuu/' + ${user.getTaiKhoan()}}" class="dropdown-item">Đăng kí làm nghiên cứu khoa học</a>
-                                <a th:href="@{'/deTaiDaLamDuoc/' + ${user.getTaiKhoan()}}" class="dropdown-item">Danh sách đề tài đã làm được</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Hỗ trợ</a>
-                    </ul>
-                </div>
-            </nav> -->
             <div class="container-fluid" style="margin-left: 29%;">
                 <div class="row">
                     <div class="col-sm-12">
@@ -169,7 +93,6 @@
         </div>
     </div>
     </div>
-
     </div>
     <script th:inline="javascript">
         function isClicked(name) {
@@ -188,7 +111,6 @@
             // console.log(document.forms["updateTienDo"]["newTienDo"].value);
         }
     </script>
-
     <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
     <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>
     <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js "></script>
