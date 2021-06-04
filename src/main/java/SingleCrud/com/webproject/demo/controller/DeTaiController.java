@@ -209,8 +209,8 @@ public class DeTaiController {
         return "dangThucHien";
     }
 
-    @GetMapping("/suaDeTai/{idDeTai}/{accountView}")
-    public String getSuaDeTai(@PathVariable("idDeTai") String idDeTai, @PathVariable("accountView") String accViewer, Model model) {
+    @GetMapping("/suaDeTai/{pageold}/{idDeTai}/{accountView}")
+    public String getSuaDeTai(@PathVariable("idDeTai") String idDeTai, @PathVariable("accountView") String accViewer, @PathVariable("pageold") String pageold, Model model) {
         DeTai detai = deTaiService.findById(idDeTai);
         List<ChuyenMon> chuyenMonList = chuyenmonService.findAll();
         List<LinhVuc> linhvucList = linhvucService.findAll();
@@ -240,14 +240,15 @@ public class DeTaiController {
         model.addAttribute("linhVucCuaDeTai", linhvucCuaDeTai);
         model.addAttribute("viewer", viewer);
         model.addAttribute("status", status);
+        model.addAttribute("pageold", pageold);
         return "suaDeTai";
     }
 
-    @PostMapping("/suaDeTai/{idDeTai}/{accountView}")
-    public String postSuaDeTai(@PathVariable("idDeTai") String idDeTai, @PathVariable("accountView") String accViewer, Model model, @ModelAttribute DeTai newDeTai ) {
+    @PostMapping("/suaDeTai/{pageold}/{idDeTai}/{accountView}")
+    public String postSuaDeTai(@PathVariable("idDeTai") String idDeTai, @PathVariable("accountView") String accViewer, @PathVariable("pageold") String pageold, Model model, @ModelAttribute DeTai newDeTai ) {
         DeTai deTai = deTaiService.findById(idDeTai);
         deTaiService.update(deTai, newDeTai);
-        return getSuaDeTai(idDeTai, accViewer, model);
+        return getSuaDeTai(idDeTai, accViewer, pageold , model);
     }
 
     @GetMapping("/themDeTai/{accountView}")
@@ -587,5 +588,18 @@ public class DeTaiController {
         model.addAttribute("detai", detai);
         model.addAttribute("linhVucCuaDeTai", linhvucCuaDeTai);
         return "xemDeTai";
+    }
+
+    @GetMapping("/xoaDeTai/{idDeTai}/{accountView}")
+    public String xoaDeTai(RedirectAttributes redirectAttributes, @PathVariable("idDeTai") String idDeTai, @PathVariable("accountView") String accountView) {
+        deTaiHoanThanhService.deleteByIdDeTai(idDeTai);
+        baiBaoService.deleteByIdDeTai(idDeTai);
+        chuyenmonService.deleteByIdDeTai(idDeTai);
+        nguoiThucHienService.deleteByIdDeTai(idDeTai);
+        deTaiDangThucHienService.deleteByIdDeTai(idDeTai);
+        hoiDongChamService.deleteByIdDeTai(idDeTai);
+        deTaiService.deleteById(idDeTai);
+        redirectAttributes.addAttribute("accountView", accountView);
+        return "redirect:/listDeTai/{accountView}";
     }
 }

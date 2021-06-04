@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface BaiBaoService {
     List<BaiBao> findAll();
+
+    void deleteByIdDeTai(String idDeTai);
 }

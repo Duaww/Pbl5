@@ -8,4 +8,6 @@ public interface ChuyenMonService {
     List<ChuyenMon> findAll();
 
     void addChuyenMon(String idLinhVuc, String idDeTai);
+
+    void deleteByIdDeTai(String idDeTai);
 }

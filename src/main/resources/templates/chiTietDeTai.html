@@ -59,6 +59,9 @@
                                 <input type="submit" name="Huybo" value="Hủy bỏ" onclick="isClicked(this.name)" class="btn btn-primary" style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">
                             </form>
                         </div>
+                        <div th:if="${viewer.getRole().equals('2')}" >
+                            <a id="xoaDeTai" th:href="@{ '/xoaDeTai/'  + ${detai.getIDDeTai()} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Xoá đề tài</a>
+                        </div>
                         <div th:if="${viewer.getRole().equals('3') && pageold.equals('listHuongDan')}">
                             <label for="" style="margin-top: 20px;">Tiến độ: </label>
                             <textarea th:if="${plane}" th:text="${plane}" class="form-control" style="width: 35%; height: 35%;">
@@ -77,14 +80,20 @@
                                 <input  type="submit" value="Update tiến độ" class="btn btn-primary"style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">
                             </form>
                         </div>
-                        <div th:if="${pageold.equals( 'chiTietBaiBao')}">
+                        <div th:if="${pageold.equals('deTaiDangThucHien')}">
+                            <a th:href="@{ '/suaDeTai/' + '/' +  ${pageold}  + '/' + ${detai.getIDDeTai()} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Sửa đề tài</a>
+                        </div>
+                        <div th:if="${viewer.getRole().equals('3') && pageold.equals('listHuongDan')}">
+                            <a th:href="@{ '/suaDeTai/' + '/' +  ${pageold}  + '/' + ${detai.getIDDeTai()} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Sửa đề tài</a>
+                        </div>
+                        <div th:if="${pageold.equals('chiTietBaiBao')}">
                                 <a th:href="@{ '/' + ${pageold} + '/'+ ${detai.getIDDeTai()} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
                         </div>
-                        <div th:if="${pageold.equals( 'deTaiDangThucHien')} ">
+                        <div th:if="${pageold.equals('deTaiDangThucHien')} ">
                             <a th:if="${viewer.getRole().equals( '3')} " th:href="@{ '/' + ${pageold} + '/canbo/' + ${viewer.getTaiKhoan()}} " class="btn btn-primary "style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
                             <a th:if="${viewer.getRole().equals( '4')} " th:href="@{ '/' + ${pageold} + '/nghiencuusinh/' + ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về </a>
                         </div>
-                        <div th:if="${!pageold.equals( 'chiTietBaiBao') && !pageold.equals( 'deTaiDangThucHien')}">
+                        <div th:if="${!pageold.equals('chiTietBaiBao') && !pageold.equals('deTaiDangThucHien')}">
                                 <a th:href="@{ '/' + ${pageold} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
                         </div>
                     </div>
@@ -95,6 +104,8 @@
     </div>
     </div>
     <script th:inline="javascript">
+        var detai = [[${detai}]];
+
         function isClicked(name) {
             document.forms["formPheDuyet"]["status"].value = name;
         }
@@ -110,6 +121,15 @@
             return false;
             // console.log(document.forms["updateTienDo"]["newTienDo"].value);
         }
+        document.getElementById("xoaDeTai").addEventListener("click", function(event) {
+            var confirmForm = confirm("Bạn chắc chắn muốn xóa đề tài " + detai.tenDeTai);
+            if (!confirmForm) {
+                event.preventDefault();
+            } else {
+               alert("Xóa đề tài thành công");
+            }
+        })
+
     </script>
     <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
     <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>

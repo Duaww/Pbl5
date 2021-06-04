@@ -9,5 +9,5 @@ public interface HoiDongChamService {
 
     void updateListByUser(String idDeTai, List<String> idHoiDongChamCuaDeTai);
 
-    void deleteById(String idDeTai);
+    void deleteByIdDeTai(String idDeTai);
 }

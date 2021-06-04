@@ -12,4 +12,6 @@ public interface NguoiThucHienService {
     void add(NguoiThucHien nguoiThucHien);
 
     List<NguoiThucHien> findDeTaiByIDUser(String idUser);
+
+    void deleteByIdDeTai(String idDeTai);
 }

@@ -20,4 +20,6 @@ public interface DeTaiService {
     void updateNguoiHuongDan(DeTai deTai, String idnguoihuongdan);
 
     void updateStatus(DeTai deTai, String status);
+
+    void deleteById(String idDeTai);
 }

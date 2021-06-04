@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DeTaiHoanThanhServiceImpl implements DeTaiHoanThanhService {
@@ -31,5 +32,18 @@ public class DeTaiHoanThanhServiceImpl implements DeTaiHoanThanhService {
             }
         }
         return null;
+    }
+
+    @Override
+    public void deleteByIdDeTai(String idDeTai) {
+        List<String> idlist = deTaiHoanThanhRepository.findAll().stream().map(element -> {
+            return element.getIDDeTai().equals(idDeTai) ? element.getID() : "";
+        }).filter(element -> {
+            return !element.equals("");
+        }).collect(Collectors.toList());
+
+        for (int i = 0; i < idlist.size(); i++) {
+            deTaiHoanThanhRepository.deleteById(idlist.get(i));
+        }
     }
 }

@@ -11,4 +11,6 @@ public interface DeTaiDangThucHienService {
     void updateTienDo(DeTaiDangThucHien  deTaiDangThucHien, String idDeTai , String newTiendo);
 
     DeTaiDangThucHien findByIdDeTai(String idDeTai);
+
+    void deleteByIdDeTai(String idDeTai);
 }

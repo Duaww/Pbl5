@@ -89,5 +89,10 @@ public class DeTaiServiceImpl implements DeTaiService {
         deTaiRepository.save(deTai);
     }
 
+    @Override
+    public void deleteById(String idDeTai) {
+        deTaiRepository.deleteById(idDeTai);
+    }
+
 
 }

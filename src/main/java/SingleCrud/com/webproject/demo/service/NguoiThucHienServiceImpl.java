@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class NguoiThucHienServiceImpl implements NguoiThucHienService {
@@ -50,5 +51,18 @@ public class NguoiThucHienServiceImpl implements NguoiThucHienService {
             }
         }
         return deTaiCuaUser;
+    }
+
+    @Override
+    public void deleteByIdDeTai(String idDeTai) {
+        List<String> idNguoiThucHien = nguoiThucHienRepository.findAll().stream().map(element -> {
+            return element.getIDDeTai().equals(idDeTai) ? element.getID() : "";
+        }).filter(element -> {
+            return !element.equals("");
+        }).collect(Collectors.toList());
+
+        for (int i = 0; i < idNguoiThucHien.size(); i++) {
+            nguoiThucHienRepository.deleteById(idNguoiThucHien.get(i));
+        }
     }
 }

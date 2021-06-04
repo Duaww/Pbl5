@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HoiDongChamServiceImpl implements HoiDongChamService {
@@ -25,7 +26,7 @@ public class HoiDongChamServiceImpl implements HoiDongChamService {
 
     @Override
     public void updateListByUser(String idDeTai, List<String> idHoiDongChamCuaDeTai) {
-        this.deleteById(idDeTai);
+        this.deleteByIdDeTai(idDeTai);
         for (int i = 0; i < idHoiDongChamCuaDeTai.size(); i++) {
             HoiDongCham newHoiDongCham = new HoiDongCham(idHoiDongChamCuaDeTai.get(i), idDeTai);
             hoiDongChamRepository.save(newHoiDongCham);
@@ -34,7 +35,7 @@ public class HoiDongChamServiceImpl implements HoiDongChamService {
     }
 
     @Override
-    public void deleteById(String idDeTai) {
+    public void deleteByIdDeTai(String idDeTai) {
         List<HoiDongCham> hoiDongChamList = this.findAll();
         for (int i = 0; i < hoiDongChamList.size(); i++) {
             if (hoiDongChamList.get(i).getIDDeTai().equals(idDeTai)) {
@@ -42,4 +43,6 @@ public class HoiDongChamServiceImpl implements HoiDongChamService {
             }
         }
     }
+
+
 }
