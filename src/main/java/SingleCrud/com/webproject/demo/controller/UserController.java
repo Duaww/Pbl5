@@ -345,6 +345,9 @@ public class UserController {
     @PostMapping("/changePersonInfo/{accountUser}")
     public String postChangePersonInfo(@PathVariable("accountUser") String accountUser,  @ModelAttribute User newUser,  RedirectAttributes redirectAttrs) {
         User user = userService.findByName(accountUser);
+            if (newUser.getRole() == null) {
+                newUser.setRole(user.getRole());
+            }
         userService.update(user, newUser);
         redirectAttrs.addAttribute("accountUser", accountUser);
         String option = user.getRole();

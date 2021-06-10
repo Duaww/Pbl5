@@ -125,14 +125,7 @@ public class UserServiceImpl implements UserService {
             }
             return searchList;
         }
-//        else  if (truong.equals("TrangThai")) {
-//            for (int i = 0 ; i < userList.size(); i++) {
-//                if (userList.get(i).getTrangThai().toLowerCase().contains(giatri.toLowerCase())) {
-//                    searchList.add(userList.get(i));
-//                }
-//            }
-//            return searchList;
-//        }
+
         return null;
     }
 

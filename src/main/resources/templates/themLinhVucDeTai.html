@@ -226,6 +226,11 @@
                 Checked = Checked + "/" + inputElements[i].value;
             }
         }
+        if (Checked === "") {
+            alert("Hãy chọn lĩnh vực cho đề tài");
+            return false;
+        }
+        alert("thêm đề tài thành công");
         document.forms["formThemLinhVuc"]["checked"].value = Checked;
         return true;
     }

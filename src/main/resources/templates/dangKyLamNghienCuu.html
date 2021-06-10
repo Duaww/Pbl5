@@ -95,7 +95,12 @@
                         Checked = Checked + "/" + inputElements[i].value;
                     }
                 }
+                var confirmForm = confirm("Bạn có chắc muốn làm các đề tài này");
+                if (!confirmForm) {
+                    return false;
+                }
                 document.forms["dangKyLamDeTai"]["checked"].value = Checked;
+                alert("Đăng kí thành công");
                 return true;
             }
         </script>

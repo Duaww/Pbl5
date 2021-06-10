@@ -32,6 +32,9 @@
                                     <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}">Đổi mật khẩu</a>
                                 </li>
                                 <li>
+                                    <a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}">Đổi thông tin cá nhân</a>
+                                </li>
+                                <li>
                                     <a th:href="@{'/login'}">Đăng xuất</a>
                                 </li>
                             </ul>

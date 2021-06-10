@@ -116,9 +116,20 @@
         function lock() {
             let status = user.trangThai;
             if (status == "mo") {
-                document.forms["changeStatus"]["TrangThai"].value = "khoa";
+                var confirmForm = confirm("Bạn có muốn khóa tài khoản " + user.taiKhoan);
+                if (confirmForm) {
+                    document.forms["changeStatus"]["TrangThai"].value = "khoa";
+                } else {
+                   return false;
+
+                }
             } else {
-                document.forms["changeStatus"]["TrangThai"].value = "mo";
+                var confirmForm = confirm("Bạn có muốn mở tài khoản " + user.taiKhoan);
+                if (confirmForm) {
+                    document.forms["changeStatus"]["TrangThai"].value = "mo";
+                } else {
+                    return false;
+                }
             }
             return true;
         }
