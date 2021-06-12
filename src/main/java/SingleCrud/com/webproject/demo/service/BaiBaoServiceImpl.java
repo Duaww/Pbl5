@@ -24,9 +24,7 @@ public class BaiBaoServiceImpl implements  BaiBaoService {
 
     @Override
     public void deleteByIdDeTai(String idDeTai) {
-        List<String> idBaiBao = baiBaoRepository.findAll().stream().map(element -> {
-            return element.getIDDeTai().equals(idDeTai) ? element.getIDBaiBao() : "";
-        }).filter(element -> {
+        List<String> idBaiBao = baiBaoRepository.findAll().stream().map(element -> element.getIDDeTai().equals(idDeTai) ? element.getIDBaiBao() : "").filter(element -> {
             return !element.equals("");
         }).collect(Collectors.toList());
 

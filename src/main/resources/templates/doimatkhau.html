@@ -34,7 +34,9 @@
                         <form name="changePass" th:action="@{/doimatkhau/{account}(account=${user.getTaiKhoan()})}" action="#" th:object="${user}" onsubmit="return validateForm()" method="POST">
                             <div class="form-group">
                                 <label for="" style="font-size:larger; color: black;">Mật khẩu hiện tại</label>
-                                <input name="oldPass" type="password" class="form-control" style="height: 35%; width: 35%;">
+                                <span th:field="${oldPass}">
+                                    <input name="oldPass" type="password" th:value="${oldPass}" class="form-control" style="height: 35%; width: 35%;">
+                                </span>
                             </div>
                             <div class="form-group">
                                 <label for="" style="font-size: larger;color: black;">Mật khẩu mới</label>
@@ -55,35 +57,33 @@
         </div>
     </div>
     <script th:inline="javascript">
-        var user = [[${user}]];
+        window.onload = function () {
+            var truePass = [[${truePass}]];
+            if (truePass === false) {
+                alert("Mật khẩu hiện tại không đúng");
+            } else if (truePass === true) {
+                alert("Đổi mật khẩu thành công");
+            }
 
-        let pass = user.matKhau;
-
+        }
         function validateForm() {
-            let oldPass = document.forms["changePass"]["oldPass"].value;
+            let pass = document.forms["changePass"]["oldPass"].value;
             let newPass = document.forms["changePass"]["newPass"].value;
-            let confirm = document.forms["changePass"]["MatKhau"].value;
-            // let confirm = " ";
-
-            if (pass == "" || newPass == "" || confirm == "") {
+            let confirmPass = document.forms["changePass"]["MatKhau"].value;
+            if (pass == "" || newPass == "" || confirmPass == "") {
                 alert("Hãy nhập mật khẩu");
                 return false;
             }
-            if ( newPass.length < 8 || confirm.length < 8 ) {
+            if ( newPass.length < 8 || confirmPass.length < 8 ) {
                 alert("Mật khẩu nhập vào phải ít nhất 8 kí tự");
                 return false;
             }
-            if (pass !== oldPass) {
-                alert("Mật khẩu hiện tại không đúng");
-                return false;
-            }
-            if (newPass !== confirm) {
+            if (newPass !== confirmPass) {
                 alert("Xác nhận mật khẩu không trùng khớp");
                 return false;
             }
-            var confirmForm = confirm("Bạn chắc chắn muốn thay đổi mật khẩu không ?");
+            var confirmForm = confirm("Bạn chắc chắn muốn thay đổi mật khẩu ?");
             if (confirmForm) {
-                alert("Đổi mật khẩu thành công");
                 return true;
             }
             return false;

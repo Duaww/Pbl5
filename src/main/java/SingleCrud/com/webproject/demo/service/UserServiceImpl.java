@@ -4,6 +4,7 @@ package SingleCrud.com.webproject.demo.service;
 import SingleCrud.com.webproject.demo.model.User;
 import SingleCrud.com.webproject.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -14,10 +15,12 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
     
     @Override
@@ -70,7 +73,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User updatePass(User user, String newPass) {
-        user.setMatKhau(newPass);
+        user.setMatKhau(this.passwordEncoder.encode(newPass));
         userRepository.save(user);
         return user;
     }
@@ -90,8 +93,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User addUser(User user) {
-        User newUser = new User(user.getTaiKhoan(), user.getMatKhau(), user.getTen(), user.getNgaySinh(), user.getGioiTinh(), user.getGmail(), user.getSDT(), user.getDiaChi(), user.getRole());
-//        System.out.println(newUser);
+        User newUser = new User(user.getTaiKhoan(), this.passwordEncoder.encode(user.getMatKhau()), user.getTen(), user.getNgaySinh(),
+                user.getGioiTinh(), user.getGmail(), user.getSDT(), user.getDiaChi(), user.getRole());
         userRepository.save(newUser);
         return newUser;
     }
@@ -127,6 +130,11 @@ public class UserServiceImpl implements UserService {
         }
 
         return null;
+    }
+
+    @Override
+    public boolean comparePass(String oldPass, String enCode) {
+        return passwordEncoder.matches(oldPass, enCode);
     }
 
 

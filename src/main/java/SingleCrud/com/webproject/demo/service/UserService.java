@@ -22,4 +22,7 @@ public interface UserService {
     User updateStatus(User user, String status);
 
     List<User> search(String truong, String giatri);
+
+    boolean comparePass(String oldPass, String enCode);
+
 }

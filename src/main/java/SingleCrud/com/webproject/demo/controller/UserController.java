@@ -3,11 +3,15 @@ package SingleCrud.com.webproject.demo.controller;
 import SingleCrud.com.webproject.demo.model.*;
 import SingleCrud.com.webproject.demo.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.net.Authenticator;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -63,27 +67,26 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("user", new User());
+    public String login(Model model, boolean wrongAcc) {
+        model.addAttribute("wrongAcc", wrongAcc);
         return "login";
     }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String loginacc(@ModelAttribute User user, RedirectAttributes redirectAttrs, Model model) {
-        User userLogin = userService.login(user);
-        boolean wrongAcc = false;
+    @GetMapping("/login/{wrongAcc}")
+    public String loginError(Model model) {
+            boolean wrongAcc = true;
+            return login(model, wrongAcc);
+    }
+    @GetMapping("/UserPage")
+    public String redirectPage(RedirectAttributes redirectAttrs, Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findByName(authentication.getName());
         boolean locked = false;
-        if (userLogin == null) {
-            wrongAcc = true;
-            model.addAttribute("wrongAcc", wrongAcc);
-            return login(model);
-        }
-        if(userLogin.getTrangThai().equals("khoa")) {
+        if(user.getTrangThai().equals("khoa")) {
             locked = true;
             model.addAttribute("locked", locked);
-            return login(model);
+            return login(model, false);
         }
-        String option = userLogin.getRole();
+        String option = user.getRole();
         redirectAttrs.addAttribute("account", user.getTaiKhoan());
         if (option.equals("1")) {
             return "redirect:/admin/{account}";
@@ -96,6 +99,7 @@ public class UserController {
         }
         return "redirect:/index";
     }
+
 
     @GetMapping("/lockAccount")
     public String getLockAccount() {
@@ -120,29 +124,26 @@ public class UserController {
         } else  {
             pageold = "nghiencuusinh";
         }
+        String oldPass = "";
+        model.addAttribute("oldPass", oldPass);
         model.addAttribute("pageold", pageold);
         model.addAttribute("user", changer);
         return "doimatkhau";
     }
 
     @PostMapping("/doimatkhau/{account}")
-    public String doiPassPost(@PathVariable("account") String account, @ModelAttribute User newUser, RedirectAttributes redirectAttrs) {
+    public String doiPassPost(Model model, @PathVariable("account") String account,
+                              @ModelAttribute("oldPass") String oldPass,
+                              @ModelAttribute User newUser, RedirectAttributes redirectAttrs) {
 //        System.out.println(newUser);
 //        System.out.println(account);
         User user = userService.findByName(account);
-        userService.updatePass(user, newUser.getMatKhau());
-        String option = user.getRole();
-        redirectAttrs.addAttribute("account", account);
-        if (option.equals("1")) {
-            return "redirect:/admin/{account}";
-        } else if (option.equals("2")) {
-            return "redirect:/hoidong/{account}";
-        } else if (option.equals("3")) {
-            return "redirect:/canbo/{account}";
-        } else if (option.equals("4")) {
-            return "redirect:/nghiencuusinh/{account}";
+        boolean truePass = userService.comparePass(oldPass, user.getMatKhau());
+        model.addAttribute("truePass", truePass);
+        if (truePass) {
+            userService.updatePass(user, newUser.getMatKhau());
         }
-        return "redirect:/index";
+        return formdoiPass(model, account);
     }
 
     @GetMapping("/listhoidong/{account}")
@@ -494,4 +495,5 @@ public class UserController {
         userService.addUser(newUser);
         return "redirect:/login";
     }
+
 }
