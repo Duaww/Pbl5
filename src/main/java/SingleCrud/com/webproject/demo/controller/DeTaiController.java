@@ -528,7 +528,7 @@ public class DeTaiController {
         String pageold = "deTaiDaLamDuoc";
         model.addAttribute("pageold", pageold);
         model.addAttribute("detai", deTaiThucHien);
-        model.addAttribute("accViewer", user);
+        model.addAttribute("user", user);
         return "deTaiDaLamDuoc";
     }
 

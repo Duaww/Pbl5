@@ -8,7 +8,9 @@
     <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style2.css">
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/responsive.css">
     <!-- Tạo icon trên Title -->
     <link rel="icon" href="/.././static/img/favicon.ico" type="image/x-icon">
     <!-- Branch -->
@@ -21,8 +23,38 @@
     <div class="d-flex" id="wrapper">
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <a href="#" , class="navbar-branch">
+                    <img src="/../static/img/dhbk.png" height="60" alt="#">
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="collapse navbar-collapse container-fluid" id="navbarSupportedContent" style="margin-right: 7%;">
+                    <ul id="nav" class="navbar-nav ml-auto">
+                        <li class="nav-item"><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Tài khoản</a>
+                            <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
+                                <li style="height: 40%; width: 100%;">
+                                    <a th:href="@{'/doimatkhau/' + ${viewer.getTaiKhoan()}}">Đổi mật khẩu</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/changePersonInfo/' + ${viewer.getTaiKhoan()}}">Thay đổi thông tin cá nhân</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/login'}">Đăng xuất</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a class="nav-link " th:href="@{ '/hoidongchamthi/' + ${viewer.getTaiKhoan()}} ">Hội đồng chấm thi</a></li>
+                        <li><a href="#">Đề tài</a>
+                            <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
+                                <li>
+                                    <a th:href="@{ '/listDeTai/' + ${viewer.getTaiKhoan()}} " style="width:100%">Danh sách đề tài</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{ '/dangThucHien/' + ${viewer.getTaiKhoan()}} " style="width:100%">Danh sách đề tài đang thực hiện</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </nav>
             <div class="container-fluid form-text">

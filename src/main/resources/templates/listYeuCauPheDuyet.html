@@ -8,7 +8,9 @@
     <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
     <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style2.css">
     <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/responsive.css">
     <!-- Tạo icon trên Title -->
     <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
     <!-- Branch -->
@@ -20,9 +22,55 @@
     <div class="d-flex" id="wrapper">
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <a href="#" class="navbar-branch">
+                    <img src="/../static/img/dhbk.png" height="60" alt="#">
+                </a>
 <!--                <button class="btn btn-primary" id="menu-toggle" style=" border-radius: 10px; width: 10%;">Danh mục</button>-->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul id="nav" class="navbar-nav ml-auto">
+                        <li class="nav-item"><a href="#">Trang chủ</a></li>
+                        <li><a href="#">Đề tài</a>
+                            <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
+                                <li style="height: 40%; width: 100%;">
+                                    <a th:href="@{'/listHuongDan/' + ${accViewer.getTaiKhoan()}}">Danh sách hướng dẫn</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/themDeTai/' + ${accViewer.getTaiKhoan()}}">Thêm đề tài mới</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/listChoHuongDan/' + ${accViewer.getTaiKhoan()}}">Danh sách chưa có hướng dẫn</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/listYeuCauPheDuyet/' + ${accViewer.getTaiKhoan()}}">Danh sách yêu cầu phê duyệt</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/listDeTaiCham/'+ ${accViewer.getTaiKhoan()}}">Danh sách chấm</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/deTaiDangThucHien/canbo/' + ${accViewer.getTaiKhoan()}}">Danh sách đề tài đang thực hiện</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/dangKyLamNghienCuu/' + ${accViewer.getTaiKhoan()}}">Đăng kí nghiên cứu khoa học</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/deTaiDaLamDuoc/' + ${accViewer.getTaiKhoan()}}">Danh sách đề tài đã làm được</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a th:href="@{'/danhSachBaiBao/' + ${accViewer.getTaiKhoan()}}">Bài báo</a></li>
+                        <li><a href="#">Tài khoản</a>
+                            <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
+                                <li>
+                                    <a th:href="@{'/doimatkhau/' + ${accViewer.getTaiKhoan()}}" style="width:100%">Đổi mật khẩu</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/changePersonInfo/' + ${accViewer.getTaiKhoan()}}" style="width:100%">Đổi thông tin cá nhân</a>
+                                </li>
+                                <li><a th:href="@{'/login'}">Đăng xuất</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </nav>
             <div class="container-fluid form-text">
@@ -59,8 +107,8 @@
                         <div style="margin-top: 20px;">
                             <input type="submit" value="Gửi yêu cầu" class="btn btn-primary"style="margin-left: 12.5%; border-radius: 10px; width: 10%;">
                              <a th:href="@{'/canbo/' + ${accViewer.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px;; width: 10%;">Trở về</a>
-                             </span>
                         </div>
+                        </span>
                 </form>
             </div>
         </div>

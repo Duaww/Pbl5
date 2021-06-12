@@ -10,6 +10,7 @@
     <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style2.css">
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styles1.css">
     <!-- Tạo icon trên Title -->
     <link rel="icon" href="/.././static/img/favicon.ico" type="image/x-icon">
@@ -22,8 +23,22 @@
     <div class="d-flex" id="wrapper">
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+                <a href="#" , class="navbar-branch">
+                    <img src="/../static/img/dhbk.png" height="60" alt="#">
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul id="nav" class="navbar-nav ml-auto mt-2 mt-lg-0" style="padding-left: 9%;">
+                        <li class="nav-item">
+                            <a th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}">Danh sách hội đồng</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{'/listcanbo/' + *{user.getTaiKhoan()}}" class="nav-link">Danh sách cán bộ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a th:href="@{'/listncsinh/' + *{user.getTaiKhoan()}}" class="nav-link">Danh sách nghiên cứu sinh</a>
+                        </li>
+                    </ul>
                 </div>
             </nav>
             <div class="container-fluid form-text">
