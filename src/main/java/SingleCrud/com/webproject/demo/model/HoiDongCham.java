@@ -20,6 +20,9 @@ public class HoiDongCham {
     private String IDCanBo;
     @Column(name = "\"IDDeTai\"")
     private String IDDeTai;
+    @Column(name = "\"Diem\"")
+    private String Diem;
+
 
     public String getID() {
         return ID;
@@ -45,12 +48,21 @@ public class HoiDongCham {
         this.IDDeTai = IDDeTai;
     }
 
+    public String getDiem() {
+        return Diem;
+    }
+
+    public void setDiem(String Diem) {
+        this.Diem = Diem;
+    }
+
     public HoiDongCham() {
 
     }
 
-    public HoiDongCham(String IDCanBo, String IDDeTai) {
+    public HoiDongCham(String IDCanBo, String IDDeTai, String Diem) {
         this.IDCanBo = IDCanBo;
         this.IDDeTai = IDDeTai;
+        this.Diem = Diem;
     }
 }

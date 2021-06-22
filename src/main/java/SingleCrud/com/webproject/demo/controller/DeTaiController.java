@@ -106,6 +106,7 @@ public class DeTaiController {
         String plane = "";
         String status = "";
         String newTienDo = "";
+        String diem = hoiDongChamService.findByDeTaiAndUser(idDeTai, userService.findByName(accViewer).getID()).getDiem();
         User nguoithuchien = new User();
         User viewer = userService.findByName(accViewer);
         for (int i = 0; i < nguoiThucHienList.size(); i++) {
@@ -147,16 +148,21 @@ public class DeTaiController {
         model.addAttribute("status", status);
         model.addAttribute("newTienDo", newTienDo);
         model.addAttribute("plane",  plane);
+        model.addAttribute("diem", diem);
         return "chiTietDeTai";
     }
 
     @PostMapping("/chiTietDeTai/{pageold}/{idDeTai}/{accountView}")
-    public String postUpdate(Model model, @PathVariable("idDeTai") String idDeTai, @PathVariable("accountView") String accViewer, @PathVariable("pageold") String pageold, @ModelAttribute("status") String status, @ModelAttribute("newTienDo") String newTiendo) {
+    public String postUpdate(Model model, @PathVariable("idDeTai") String idDeTai, @PathVariable("accountView") String accViewer, @PathVariable("pageold") String pageold, @ModelAttribute("status") String status, @ModelAttribute("newTienDo") String newTiendo, @ModelAttribute("diem") String diem) {
         if (!status.equals("")) {
             deTaiService.changeStatus(idDeTai, status);
         } else if (!newTiendo.equals("")) {
             DeTaiDangThucHien deTaiDangThucHien =  deTaiDangThucHienService.findByIdDeTai(idDeTai);
             deTaiDangThucHienService.updateTienDo(deTaiDangThucHien, idDeTai , newTiendo);
+        } else if (!diem.equals("")) {
+            User user = userService.findByName(accViewer);
+            HoiDongCham hoiDongCham = hoiDongChamService.findByDeTaiAndUser(idDeTai, user.getID());
+            hoiDongChamService.updateDiem(hoiDongCham, diem);
         }
         return getChiTiet(idDeTai, accViewer, pageold, model);
     }
@@ -602,4 +608,5 @@ public class DeTaiController {
         redirectAttributes.addAttribute("accountView", accountView);
         return "redirect:/listDeTai/{accountView}";
     }
+
 }

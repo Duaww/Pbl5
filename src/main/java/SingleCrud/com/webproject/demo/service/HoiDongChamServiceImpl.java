@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,7 +29,7 @@ public class HoiDongChamServiceImpl implements HoiDongChamService {
     public void updateListByUser(String idDeTai, List<String> idHoiDongChamCuaDeTai) {
         this.deleteByIdDeTai(idDeTai);
         for (int i = 0; i < idHoiDongChamCuaDeTai.size(); i++) {
-            HoiDongCham newHoiDongCham = new HoiDongCham(idHoiDongChamCuaDeTai.get(i), idDeTai);
+            HoiDongCham newHoiDongCham = new HoiDongCham(idHoiDongChamCuaDeTai.get(i), idDeTai, null);
             hoiDongChamRepository.save(newHoiDongCham);
         }
 
@@ -42,6 +43,25 @@ public class HoiDongChamServiceImpl implements HoiDongChamService {
                 hoiDongChamRepository.delete(hoiDongChamList.get(i));
             }
         }
+    }
+
+    @Override
+    public HoiDongCham findByDeTaiAndUser(String idDeTai, String idCanBo) {
+        List<HoiDongCham> hoiDongChamList = this.findAll();
+        Optional<HoiDongCham> optional = hoiDongChamList.stream().filter(element -> element.getIDDeTai().equals(idDeTai))
+                                                                    .filter(element -> element.getIDCanBo().equals(idCanBo))
+                                                                    .findFirst();
+        HoiDongCham hoiDongCham = null;
+        if (optional.isPresent()) {
+            hoiDongCham = optional.get();
+        }
+        return hoiDongCham;
+    }
+
+    @Override
+    public void updateDiem(HoiDongCham hoiDongCham, String diem) {
+        hoiDongCham.setDiem(diem);
+        hoiDongChamRepository.save(hoiDongCham);
     }
 
 

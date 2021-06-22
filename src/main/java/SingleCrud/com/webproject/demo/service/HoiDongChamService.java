@@ -10,4 +10,8 @@ public interface HoiDongChamService {
     void updateListByUser(String idDeTai, List<String> idHoiDongChamCuaDeTai);
 
     void deleteByIdDeTai(String idDeTai);
+
+    HoiDongCham findByDeTaiAndUser(String idDeTai, String idCanBo);
+
+    void updateDiem(HoiDongCham hoiDongCham, String diem);
 }
