@@ -368,7 +368,9 @@ public class UserController {
         List<DeTai> deTaiCham = new ArrayList<DeTai>();
         List<DeTai> deTaiFilter = new ArrayList<DeTai>();
         for (int i = 0; i < hoiDongChamList.size(); i++) {
-            deTaiCham.add(deTaiService.findById(hoiDongChamList.get(i).getIDDeTai()));
+            if (hoiDongChamList.get(i).getDiem() == null) {
+                deTaiCham.add(deTaiService.findById(hoiDongChamList.get(i).getIDDeTai()));
+            }
         }
         for (int i = 0; i < deTaiCham.size(); i++) {
             if (!deTaiFilter.contains(deTaiCham.get(i))) {

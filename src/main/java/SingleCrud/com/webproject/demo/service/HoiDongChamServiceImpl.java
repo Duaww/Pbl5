@@ -64,5 +64,13 @@ public class HoiDongChamServiceImpl implements HoiDongChamService {
         hoiDongChamRepository.save(hoiDongCham);
     }
 
+    @Override
+    public List<HoiDongCham> findByIdDeTai(String idDeTai) {
+        List<HoiDongCham> hoiDongChamList = this.findAll();
+        List<HoiDongCham> deTaiCham = hoiDongChamList.stream().filter(element ->
+                element.getIDDeTai().equals(idDeTai)).collect(Collectors.toList());
+        return deTaiCham;
+    }
+
 
 }

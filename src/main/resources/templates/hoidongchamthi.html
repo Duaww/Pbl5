@@ -29,7 +29,7 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse container-fluid" id="navbarSupportedContent" style="margin-right: 7%;">
                     <ul id="nav" class="navbar-nav ml-auto">
-                        <li class="nav-item"><a href="#">Trang chủ</a></li>
+                        <li class="nav-item"><a  th:href="@{'/hoidong/' + ${viewer.getTaiKhoan()}}">Trang chủ</a></li>
                         <li><a href="#">Tài khoản</a>
                             <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
                                 <li style="height: 40%; width: 100%;">
@@ -44,6 +44,7 @@
                             </ul>
                         </li>
                         <li><a class="nav-link " th:href="@{ '/hoidongchamthi/' + ${viewer.getTaiKhoan()}} ">Hội đồng chấm thi</a></li>
+                        <li><a class="nav-link " th:href="@{ '/danhsachdacham/' + ${viewer.getTaiKhoan()}} ">Danh sách đề tài đã chấm</a></li>
                         <li><a href="#">Đề tài</a>
                             <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
                                 <li>

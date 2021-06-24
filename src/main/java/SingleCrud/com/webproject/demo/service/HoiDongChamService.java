@@ -14,4 +14,6 @@ public interface HoiDongChamService {
     HoiDongCham findByDeTaiAndUser(String idDeTai, String idCanBo);
 
     void updateDiem(HoiDongCham hoiDongCham, String diem);
+
+    List<HoiDongCham> findByIdDeTai(String idDeTai);
 }

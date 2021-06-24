@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 public class DeTaiController {
@@ -607,6 +608,44 @@ public class DeTaiController {
         deTaiService.deleteById(idDeTai);
         redirectAttributes.addAttribute("accountView", accountView);
         return "redirect:/listDeTai/{accountView}";
+    }
+
+    @GetMapping("/danhsachdacham/{accountView}")
+    public String xemDeTaiDaCham(@PathVariable("accountView") String accountView, Model model) {
+        User viewer = userService.findByName(accountView);
+        List<HoiDongCham> hoiDongChamList = hoiDongChamService.findAll();
+        List<String> deTaiDaCham = hoiDongChamList.stream()
+                .map(element -> element.getDiem() != null ? element.getIDDeTai() : "")
+                .filter(element -> !element.equals("")).collect(Collectors.toList());
+
+        List<DeTai> deTaiList = new ArrayList<DeTai>();
+        for (int i = 0; i < deTaiDaCham.size(); i++) {
+            DeTai deTai = deTaiService.findById(deTaiDaCham.get(i));
+            if (!deTaiList.contains(deTai)) {
+                deTaiList.add(deTai);
+            }
+        }
+        model.addAttribute("deTaiCham", deTaiList);
+        model.addAttribute("viewer", viewer);
+        return "danhsachdacham";
+    }
+
+    @GetMapping("/diemDeTai/{idDeTai}/{accountView}")
+    public String diemDeTai(@PathVariable("idDeTai") String idDeTai, @PathVariable("accountView") String accountView,
+                            Model model) {
+        User user = userService.findByName(accountView);
+        DeTai deTai = deTaiService.findById(idDeTai);
+        List<HoiDongCham> deTaiCham = hoiDongChamService.findByIdDeTai(idDeTai);
+        List<Pair<User, String>> danhSachNguoiCham = new ArrayList<Pair<User, String>>();
+        for (int i = 0; i < deTaiCham.size(); i++) {
+            User user1 = userService.findById(deTaiCham.get(i).getIDCanBo());
+            Pair<User, String> nguoiCham = Pair.of(user1, deTaiCham.get(i).getDiem());
+            danhSachNguoiCham.add(nguoiCham);
+        }
+        model.addAttribute("viewer", user);
+        model.addAttribute("detai", deTai);
+        model.addAttribute("danhSachNguoiCham", danhSachNguoiCham);
+        return "diemDeTai";
     }
 
 }
