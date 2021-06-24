@@ -5,6 +5,8 @@ import SingleCrud.com.webproject.demo.repository.DeTaiHoanThanhRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,5 +47,13 @@ public class DeTaiHoanThanhServiceImpl implements DeTaiHoanThanhService {
         for (int i = 0; i < idlist.size(); i++) {
             deTaiHoanThanhRepository.deleteById(idlist.get(i));
         }
+    }
+
+    @Override
+    public void insertDeTai(String idDeTai, float diem) {
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        DeTaiHoanThanh deTaiHoanThanh = new DeTaiHoanThanh(idDeTai, String.valueOf(diem), format.format(date), null);
+        deTaiHoanThanhRepository.save(deTaiHoanThanh);
     }
 }

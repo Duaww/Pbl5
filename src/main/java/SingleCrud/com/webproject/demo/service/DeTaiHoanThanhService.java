@@ -9,4 +9,6 @@ public interface DeTaiHoanThanhService {
     DeTaiHoanThanh findByID(String id);
 
     void deleteByIdDeTai(String idDeTai);
+
+    void insertDeTai(String idDeTai, float diem);
 }

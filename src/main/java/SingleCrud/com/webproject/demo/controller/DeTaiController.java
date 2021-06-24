@@ -107,7 +107,7 @@ public class DeTaiController {
         String plane = "";
         String status = "";
         String newTienDo = "";
-        String diem = hoiDongChamService.findByDeTaiAndUser(idDeTai, userService.findByName(accViewer).getID()).getDiem();
+
         User nguoithuchien = new User();
         User viewer = userService.findByName(accViewer);
         for (int i = 0; i < nguoiThucHienList.size(); i++) {
@@ -149,7 +149,10 @@ public class DeTaiController {
         model.addAttribute("status", status);
         model.addAttribute("newTienDo", newTienDo);
         model.addAttribute("plane",  plane);
-        model.addAttribute("diem", diem);
+        if (pageold.equals("listDeTaiCham") && viewer.getRole().equals("3")) {
+            String diem = hoiDongChamService.findByDeTaiAndUser(idDeTai, userService.findByName(accViewer).getID()).getDiem();
+            model.addAttribute("diem", diem);
+        }
         return "chiTietDeTai";
     }
 
@@ -642,10 +645,34 @@ public class DeTaiController {
             Pair<User, String> nguoiCham = Pair.of(user1, deTaiCham.get(i).getDiem());
             danhSachNguoiCham.add(nguoiCham);
         }
+        boolean hoanthanh = false;
+        List<String> idHoanThanhList = deTaiHoanThanhService.findAll().stream()
+                .map(element -> element.getIDDeTai())
+                .collect(Collectors.toList());
+        if (idHoanThanhList.contains(idDeTai)) {
+            hoanthanh = true;
+        }
+        model.addAttribute("hoanthanh", hoanthanh);
         model.addAttribute("viewer", user);
         model.addAttribute("detai", deTai);
         model.addAttribute("danhSachNguoiCham", danhSachNguoiCham);
         return "diemDeTai";
+    }
+
+    @PostMapping("/diemDeTai/{idDeTai}/{accountView}")
+    public String nghiemThuDeTai(@PathVariable("idDeTai") String idDeTai, @PathVariable("accountView") String accountView,
+                                 Model model) {
+        User user = userService.findByName(accountView);
+        DeTai deTai = deTaiService.findById(idDeTai);
+        List<HoiDongCham> deTaiCham = hoiDongChamService.findByIdDeTai(idDeTai);
+        float diem = 0;
+
+        for (int i = 0; i < deTaiCham.size(); i++) {
+            diem = diem + Float.parseFloat(deTaiCham.get(i).getDiem());
+        }
+        diem = diem / deTaiCham.size();
+        deTaiHoanThanhService.insertDeTai(idDeTai ,diem);
+        return diemDeTai(idDeTai, accountView, model);
     }
 
 }
