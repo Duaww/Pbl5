@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Đề tài</title>
+    <title>Đề tài đã hoàn thành</title>
     <!-- Import boostrap and Jquery -->
     <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
@@ -60,23 +60,27 @@
             </div>
         </nav>
         <div class="container-fluid form-text">
-            <h3 style="margin-top: 20px;color: black; margin-left: 12.5%;">Danh sách đề tài đã chấm</h3>
+            <h3 style="margin-top: 20px;color: black; margin-left: 12.5%;">Danh sách đề tài đã hoàn thành</h3>
         </div>
         <div class="container-fluid">
-            <div th:if="${deTaiCham}">
+            <div th:if="${list}">
                 <div class="table-responsive" style="margin-top: 20px;">
                     <table class="table table-bordered table-hover">
                         <thead>
                         <tr style="background-color: #BE81F7;">
                             <th scope="col">Tên đề tài</th>
-                            <th scope="col">Xem điểm đề tài</th>
+                            <th scope="col">Tên người thực hiện</th>
+                            <th scope="col">Điểm</th>
+                            <th scope="col">Ngày hoàn thành</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                        <tr th:each="element : ${deTaiCham}">
-                            <td th:text="${element.getTenDeTai()}"></td>
-                            <td><a th:href="@{'/diemDeTai/' + ${element.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px;  width: 50%; text-align: center; ">Điểm đề tài</a></td>
+                        <tr th:each="element : ${list}">
+                            <td th:text="${element.first.first.getTenDeTai()}"></td>
+                            <td th:text="${element.first.second.getTen()}"></td>
+                            <td th:text="${element.second.getDiem()}"></td>
+                            <td th:text="${element.second.getNgayHoanThanh()}"></td>
                         </tr>
                         </tr>
                         </tbody>

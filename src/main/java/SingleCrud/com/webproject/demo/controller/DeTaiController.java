@@ -640,7 +640,12 @@ public class DeTaiController {
         List<Pair<User, String>> danhSachNguoiCham = new ArrayList<Pair<User, String>>();
         for (int i = 0; i < deTaiCham.size(); i++) {
             User user1 = userService.findById(deTaiCham.get(i).getIDCanBo());
-            Pair<User, String> nguoiCham = Pair.of(user1, deTaiCham.get(i).getDiem());
+            Pair<User, String> nguoiCham = null;
+            if (deTaiCham.get(i).getDiem() == null) {
+                nguoiCham = Pair.of(user1, "Chưa chấm điểm");
+            } else {
+                nguoiCham = Pair.of(user1, deTaiCham.get(i).getDiem());
+            }
             danhSachNguoiCham.add(nguoiCham);
         }
         boolean hoanthanh = false;
@@ -698,4 +703,28 @@ public class DeTaiController {
         return getVietBao(pageold, idDeTai, accountViewer, model);
     }
 
+    @GetMapping("daHoanThanh/{accountViewer}")
+    public String getHoanThanh(@PathVariable("accountViewer") String accountViewer, Model model) {
+        User viewer = userService.findByName(accountViewer);
+        List<DeTaiHoanThanh> hoanThanhList = deTaiHoanThanhService.findAll();
+        List<NguoiThucHien> nguoiThucHienList = nguoiThucHienService.findAll();
+        List< Pair< Pair<DeTai, User>, DeTaiHoanThanh > > list = new ArrayList<
+                Pair< Pair<DeTai, User>, DeTaiHoanThanh > >();
+        for (int i = 0; i < hoanThanhList.size(); i++) {
+            Pair<DeTai, User> nguoithuchien = null;
+            for (int j = 0; j < nguoiThucHienList.size(); j++) {
+                DeTai deTai = deTaiService.findById(hoanThanhList.get(i).getIDDeTai());
+                if (nguoiThucHienList.get(j).getIDDeTai().equals(deTai.getIDDeTai())) {
+                    User user = userService.findById(nguoiThucHienList.get(j).getIDNguoiThucHien());
+                    nguoithuchien = Pair.of(deTai, user);
+                }
+            }
+            if (nguoithuchien != null) {
+                list.add(Pair.of(nguoithuchien, hoanThanhList.get(i)));
+            }
+        }
+        model.addAttribute("list", list);
+        model.addAttribute("viewer", viewer);
+        return "daHoanThanh";
+    }
 }
