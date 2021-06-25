@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Viết báo</title>
+    <!-- Import boostrap and Jquery -->
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href="/.././static/img/favicon.ico" type="image/x-icon">
+    <!-- Branch -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+
+</head>
+
+<body>
+<div class="d-flex" id="wrapper">
+
+    <div class="bg-light border-right" id="sidebar-wrapper">
+    </div>
+    <div id="page-content-wrapper">
+        <div class="container-fluid form-text" style="margin-left: 29%;">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h5 style="margin-top: 20px; font-size: xx-large; color: black;">Viết báo</h5>
+                </div>
+                <div class="col-sm-12">
+                    <!-- Form sửa thông tin -->
+                    <form name="vietBao" th:action="@{'/vietBao/' + ${pageold} + '/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" onsubmit="return validateForm()" th:object="${detai}" method="post">
+                        <!-- Têm -->
+                        <div class="form-group">
+                            <label for="" style="font-size: larger; color: black;">Tên đề tài</label>
+                            <span th:field="*{TenDeTai}">
+                                    <input name="TenDeTai" type="text" th:value="*{TenDeTai}" class="form-control" style="height: 35%; width: 35%;">
+                            </span>
+                        </div>
+                        <!-- mô tả -->
+                        <div class="form-group">
+                            <label for="" style="font-size: larger; color: black;">Nội dung</label>
+                            <span th:field="${noidung}">
+                                <input type="hidden" name="noidung" th:value="${noidung}">
+                            </span>
+                            <span>
+                                <textarea id="noiDung" th:if="${baibao.getNoiDung()}" th:text="${baibao.getNoiDung()}" class="form-control"style="height: 35%; width: 35%;"></textarea>
+                                <textarea id="noiDung" th:if="!${baibao.getNoiDung()}" th:text="''" class="form-control"style="height: 35%; width: 35%;"></textarea>
+                            </span>
+                        </div>
+
+                        <!-- Nút sửa thông tin -->
+                        <input type="submit" value="Lưu" class="btn btn-primary" name="btnsubmit" style="margin-top: 20px; border-radius: 10px;width: 10%;">
+                        <!-- Trở về(back) chưa xong -->
+                        <a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script>
+        function validateForm() {
+            var confirmForm = confirm("Bạn có chắc muốn lưu nội dung bài báo");
+            if (!confirmForm) {
+                return false;
+            }
+            document.forms["vietBao"]["noidung"].value = document.getElementById("noiDung").value;
+            alert("Lưu thành công");
+            return true;
+        }
+    </script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+</body>
+
+</html>

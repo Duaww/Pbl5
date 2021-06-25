@@ -91,6 +91,9 @@
                                 <li>
                                     <a th:href="@{'/deTaiDangThucHien/nghiencuusinh/' + ${user.getTaiKhoan()}}" style="width:100%">Đề tài đang thực hiện</a>
                                 </li>
+                                <li>
+                                    <a th:href="@{'/deTaiDaLamDuoc/' + ${user.getTaiKhoan()}}" style="width:100%">Danh sách đề tài đã làm được</a>
+                                </li>
                             </ul>
                         </li>
                         <li><a class="nav-link" th:href="@{'/dangKyLamNghienCuu/' + ${user.getTaiKhoan()}}">Đăng kí làm nghiên cứu</a></li>

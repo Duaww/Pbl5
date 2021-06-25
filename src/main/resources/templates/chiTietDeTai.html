@@ -85,16 +85,6 @@
                         <div th:if="${viewer.getRole().equals('3') && pageold.equals('listHuongDan')}">
                             <a th:href="@{ '/suaDeTai/'  +  ${pageold}  + '/' + ${detai.getIDDeTai()} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Sửa đề tài</a>
                         </div>
-                        <div th:if="${pageold.equals('chiTietBaiBao')}">
-                                <a th:href="@{ '/' + ${pageold} + '/'+ ${detai.getIDDeTai()} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
-                        </div>
-                        <div th:if="${pageold.equals('deTaiDangThucHien')} ">
-                            <a th:if="${viewer.getRole().equals('3')} " th:href="@{ '/' + ${pageold} + '/canbo/' + ${viewer.getTaiKhoan()}} " class="btn btn-primary "style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
-                            <a th:if="${viewer.getRole().equals('4')} " th:href="@{ '/' + ${pageold} + '/nghiencuusinh/' + ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về </a>
-                        </div>
-                        <div th:if="${!pageold.equals('chiTietBaiBao') && !pageold.equals('deTaiDangThucHien')}">
-                            <a th:href="@{ '/' + ${pageold} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
-                        </div>
                         <div th:if="${pageold.equals('listDeTaiCham') && viewer.getRole().equals('3')}">
                             <form name="updateDiem" th:action="@{'/chiTietDeTai/' + ${pageold} + '/'+ ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" onsubmit="return validateForm()" method="post">
                                 <span th:field="${diem}">
@@ -105,6 +95,20 @@
                                 <input  type="submit" value="Update điểm" class="btn btn-primary"style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">
                             </form>
                         </div>
+                        <div th:if="${pageold.equals('deTaiDaLamDuoc')}">
+                            <a th:href="@{ '/vietBao/'  +  ${pageold}  + '/' + ${detai.getIDDeTai()} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Viết bài báo</a>
+                        </div>
+                        <div th:if="${pageold.equals('chiTietBaiBao')}">
+                                <a th:href="@{ '/' + ${pageold} + '/'+ ${detai.getIDDeTai()} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
+                        </div>
+                        <div th:if="${pageold.equals('deTaiDangThucHien')} ">
+                            <a th:if="${viewer.getRole().equals('3')} " th:href="@{ '/' + ${pageold} + '/canbo/' + ${viewer.getTaiKhoan()}} " class="btn btn-primary "style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
+                            <a th:if="${viewer.getRole().equals('4')} " th:href="@{ '/' + ${pageold} + '/nghiencuusinh/' + ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về </a>
+                        </div>
+                        <div th:if="${!pageold.equals('chiTietBaiBao') && !pageold.equals('deTaiDangThucHien')}">
+                            <a th:href="@{ '/' + ${pageold} + '/'+ ${viewer.getTaiKhoan()}} " class="btn btn-primary " style="margin-top: 17px; border-radius: 10px; margin-top: 20px; width: 10%;">Trở về</a>
+                        </div>
+
                     </div>
                 </div>
             </div>

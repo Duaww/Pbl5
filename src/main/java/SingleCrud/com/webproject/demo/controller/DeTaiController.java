@@ -9,10 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -673,6 +671,31 @@ public class DeTaiController {
         diem = diem / deTaiCham.size();
         deTaiHoanThanhService.insertDeTai(idDeTai ,diem);
         return diemDeTai(idDeTai, accountView, model);
+    }
+
+    @GetMapping("/vietBao/{pageold}/{idDeTai}/{accountViewer}")
+    public String getVietBao(@PathVariable("pageold") String pageold, @PathVariable("idDeTai") String idDeTai,
+                             @PathVariable("accountViewer") String accountViewer, Model model) {
+        DeTai deTai = deTaiService.findById(idDeTai);
+        User viewer = userService.findByName(accountViewer);
+        BaiBao baiBao = baiBaoService.findByIdDeTai(idDeTai);
+        String noidung = "";
+        model.addAttribute("pageold", pageold);
+        model.addAttribute("detai", deTai);
+        model.addAttribute("viewer", viewer);
+        model.addAttribute("baibao", baiBao);
+        model.addAttribute("noidung", noidung);
+        return "vietBao";
+    }
+
+    @PostMapping("/vietBao/{pageold}/{idDeTai}/{accountViewer}")
+    public String postVietBao(@PathVariable("pageold") String pageold, @PathVariable("idDeTai") String idDeTai,
+                             @PathVariable("accountViewer") String accountViewer, @ModelAttribute("noidung") String noidung
+                            ,Model model) {
+        BaiBao baiBao = baiBaoService.findByIdDeTai(idDeTai);
+        String idBaiBao = baiBaoService.themBaiBao(baiBao, idDeTai,noidung);
+        deTaiHoanThanhService.updateBaiBao(idBaiBao, idDeTai);
+        return getVietBao(pageold, idDeTai, accountViewer, model);
     }
 
 }

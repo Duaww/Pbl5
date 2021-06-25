@@ -56,4 +56,16 @@ public class DeTaiHoanThanhServiceImpl implements DeTaiHoanThanhService {
         DeTaiHoanThanh deTaiHoanThanh = new DeTaiHoanThanh(idDeTai, String.valueOf(diem), format.format(date), null);
         deTaiHoanThanhRepository.save(deTaiHoanThanh);
     }
+
+    @Override
+    public void updateBaiBao(String idBaiBao, String idDeTai) {
+        List<DeTaiHoanThanh> hoanThanhList = this.findAll();
+        for (int i = 0; i < hoanThanhList.size(); i++) {
+            if (hoanThanhList.get(i).getIDDeTai().equals(idDeTai)) {
+                hoanThanhList.get(i).setIDBaiBao(idBaiBao);
+                deTaiHoanThanhRepository.save(hoanThanhList.get(i));
+                break;
+            }
+        }
+    }
 }

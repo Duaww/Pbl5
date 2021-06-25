@@ -437,6 +437,14 @@ public class UserController {
                 idHoiDongChamCuaDeTai.add(hoiDongChamList.get(i).getIDCanBo());
             }
         }
+        boolean chamRoi =  false;
+        List<HoiDongCham> listDangCham = hoiDongChamService.findByIdDeTai(idDeTai);
+        for (int i = 0; i < listDangCham.size(); i++) {
+            if (listDangCham.get(i).getDiem() != null) {
+                chamRoi = true;
+            }
+        }
+        model.addAttribute("chamRoi", chamRoi);
         model.addAttribute("detai", deTaiService.findById(idDeTai));
         model.addAttribute("viewer", userService.findByName(accViewer));
         model.addAttribute("hoidongcham",  idHoiDongChamCuaDeTai);

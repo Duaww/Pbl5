@@ -11,4 +11,6 @@ public interface DeTaiHoanThanhService {
     void deleteByIdDeTai(String idDeTai);
 
     void insertDeTai(String idDeTai, float diem);
+
+    void updateBaiBao(String idBaiBao, String idDeTai);
 }

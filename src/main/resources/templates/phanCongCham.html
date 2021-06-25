@@ -127,22 +127,46 @@
         </div>
     </div>
     <script th:inline="javascript">
+        var check =  false;
+        var checkList = [];
+        window.onload = function () {
+            var chamRoi = [[${chamRoi}]];
+            check = chamRoi;
+            checkList = document.getElementsByClassName('checkList');
+            checkList = Object.values(checkList);
+            checkList = checkList.filter(function (element) {
+                return element.checked == true;
+            });
+        }
         function validateForm() {
-            let Checked = "";
-            let notCheck = "";
-            var inputElements = document.getElementsByClassName('checkList');
-            for (var i = 0; i < inputElements.length; i++) {
-                if (inputElements[i].checked) {
-                    // checkedValue = inputElements[i].value;
-                    Checked = Checked + "/" + inputElements[i].value;
-                } else {
-                    notCheck = notCheck + "/" + inputElements[i].value;
+            if (check == true) {
+                alert("Đề tài đã được cán bộ chấm nên không thể thay đổi");
+                var inputElements = document.getElementsByClassName('checkList');
+                for (var i = 0; i < inputElements.length; i++) {
+                    if (checkList.includes(inputElements[i])) {
+                        inputElements[i].checked = true;
+                    } else {
+                        inputElements[i].checked = false;
+                    }
                 }
+                return false;
+            } else {
+                let Checked = "";
+                let notCheck = "";
+                var inputElements = document.getElementsByClassName('checkList');
+                for (var i = 0; i < inputElements.length; i++) {
+                    if (inputElements[i].checked) {
+                        // checkedValue = inputElements[i].value;
+                        Checked = Checked + "/" + inputElements[i].value;
+                    } else {
+                        notCheck = notCheck + "/" + inputElements[i].value;
+                    }
+                }
+                document.forms["themHoiDongCham"]["checked"].value = Checked;
+                document.forms["themHoiDongCham"]["notChecked"].value = notCheck;
+                alert("Phân công người chấm thành công");
+                return true;
             }
-            document.forms["themHoiDongCham"]["checked"].value = Checked;
-            document.forms["themHoiDongCham"]["notChecked"].value = notCheck;
-            alert("Phân công người chấm thành công");
-            return true;
         }
     </script>
     <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
