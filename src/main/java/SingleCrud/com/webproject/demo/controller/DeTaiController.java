@@ -756,19 +756,38 @@ public class DeTaiController {
         Iterator<Row> rowIterator = sheet.iterator();
         while (rowIterator.hasNext()) {
             Row row = rowIterator.next();
-
-            //For each row, iterate through each columns
             Iterator<Cell> cellIterator = row.cellIterator();
+            int position = 0;
+            String tenDeTai = "";
+            String moTa = "";
+            String[] linhVuc = new String[]{};
             while (cellIterator.hasNext()) {
                 Cell cell = cellIterator.next();
                 String rowTitle = "tên đề tài";
                 if(cell.getStringCellValue().toLowerCase().equals(rowTitle.toLowerCase())) {
                     break;
                 }
-                System.out.print(cell.getStringCellValue() + "\t\t");
+                if ( position == 0 ) {
+                    tenDeTai = cell.getStringCellValue();
+                    position++;
+                } else if ( position == 1) {
+                    moTa = cell.getStringCellValue();
+                    position++;
+                } else {
+                    DeTai deTai = new DeTai(tenDeTai, moTa, null);
+                    String idDeTai = deTaiService.addDeTai(deTai);
+                    linhVuc = cell.getStringCellValue().split(",");
+                    for (int i = 0;  i < linhVuc.length; i++) {
+                        linhVuc[i] = linhVuc[i].trim();
+                        LinhVuc linhvucDeTai = linhvucService.findByName(linhVuc[i]);
+                        if (linhvucDeTai == null) {
+                            System.out.println("không tìm ra lĩnh vực có tên : " + linhVuc[i]);
+                        }
+                        chuyenmonService.addChuyenMon(linhvucDeTai.getIDLinhVuc(), idDeTai);
+                    }
+                }
             }
-            System.out.println("");
         }
-        return getThemDanhSachDeTai(accountView, model);
+        return getListDeTai(model, accountView);
     }
 }

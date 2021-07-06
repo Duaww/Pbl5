@@ -33,4 +33,15 @@ public class LinhVucServiceImpl implements LinhVucService {
         }
         return null;
     }
+
+    @Override
+    public LinhVuc findByName(String tenLinhVuc) {
+        List<LinhVuc> linhVucList = this.findAll();
+        for (int i = 0; i < linhVucList.size(); i++) {
+            if (linhVucList.get(i).getTenLinhVuc().toLowerCase().equals(tenLinhVuc.toLowerCase())) {
+                return linhVucList.get(i);
+            }
+        }
+        return null;
+    }
 }

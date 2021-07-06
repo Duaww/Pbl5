@@ -58,7 +58,7 @@
             </nav>
             <div class="container-fluid form-text">
                 <form name="themHoiDongCham" th:action="@{'/phanCongCham/' + ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" method="post" onsubmit="return validateForm()">
-                    <h3 style="margin-top: 20px; color: black; margin-left: 12.5%;">Chọn cán bộ chấm thi </h3>
+                    <h3 style="margin-top: 20px; color: black; margin-left: 12.5%;">Chọn cán bộ chấm thi cho đề tài <p th:text="${detai.getTenDeTai()}"></p> </h3>
                     <div class="table-responsive" style="margin-top: 20px;">
                         <table class="table table-bordered table-hover">
                             <thead>
