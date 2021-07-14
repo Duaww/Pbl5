@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sửa thông tin</title>
     <!-- Import boostrap and Jquery -->
-    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
-    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/SuaThongTin.css">
     <!-- Tạo icon trên Title -->
-    <link rel="icon" href="/.././static/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
     <!-- Branch -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
@@ -20,96 +21,82 @@
 </head>
 
 <body>
-    <div class="d-flex" id="wrapper">
-        <!-- Sidebar-->
-        <div class="bg-light border-right" id="sidebar-wrapper">
-        </div>
-        <div id="page-content-wrapper">
-            <div class="container-fluid form-text" style="margin-left: 29%;">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h3 style="margin-top:20px; font-size: xx-large; color: black;">Sửa thông tin cá nhân</h3>
-                    </div>
-                    <div class="col-sm-12">
-                        <!-- Form sửa thông tin -->
-                        <form name="changeInfo" th:action="@{'/suathongtin/' + ${pageold} + '/' + ${user.getTaiKhoan()} + '/' + ${changer.getTaiKhoan()}}" th:object="${user}" onsubmit="return validateForm()" method="POST">
-                            <!-- Têm -->
-                            <div class="form-group">
-                                <label for="" style="font-size: larger; color: black;">Tên</label>
-                                <span th:field="*{Ten}">
-                                    <input name="Ten" type="text" th:value="*{Ten}" class="form-control" style="height: 35%; width: 35%;">
-                                </span>
-                            </div>
-                            <!-- Ngày sinh -->
-                            <div class="form-group">
-                                <label for="" style="font-size: larger; color: black;">Ngày sinh</label>
-                                <span th:field="*{NgaySinh}">
-<!--                                    <input name="NgaySinh" type="text" th:value="*{NgaySinh}" class="form-control" style="height: 35%; width: 35%;">-->
-                                    <input name="NgaySinh" type="date" th:value="*{NgaySinh}" class="form-control" style="height: 35%; width: 35%;">
-
-                                </span>
-                            </div>
-
-                            <!-- Giới tính -->
-                            <div class="form-group">
-                                <span th:field="*{GioiTinh}">
-                                    <label for="" style="font-size: larger; color: black;">Giới tính: </label>
-                                    <input type="hidden" name="GioiTinh" th:value="*{GioiTinh}" class="form-control">
-                                    <span style="color: black;"> Nam
-                                        <input type="radio" name="checkboxSex" value="nam" th:checked="*{GioiTinh} ? 'checked'" />
-                                    </span>
-                                    <span style="color: black;"> Nữ
-                                        <input type="radio" name="checkboxSex" value="nu"  th:checked="!*{GioiTinh} ? 'checked'" />
-                                    </span>
-                                </span>
-                            </div>
-                            <!--Địa chỉ( Sửa label thành span)  -->
-                            <div class="form-group">
-                                <label for="" style="font-size: larger; color: black; margin-top: -5px;">Địa chỉ</label>
-                                <span th:field="*{DiaChi}">
-                                    <input name="DiaChi" type="text" th:value="*{DiaChi}" class="form-control" style="height: 35%; width: 35%;">
-                                </span>
-                            </div>
-                            <!-- Số điện thoại -->
-                            <div class="form-group">
-                                <label for="" style=" font-size: larger; color: black;">Số điện thoại</label>
-                                <span th:field="*{SDT}">
-                                    <input name="SDT" type="text" th:value="*{SDT}" class="form-control" style="height: 35%; width: 35%;">
-                                </span>
-                            </div>
-                            <!-- Gmail -->
-                            <div class="form-group">
-                                <label for="" style="font-size: larger; color: black;">Gmail</label>
-                                <span th:field="*{Gmail}">
-                                    <input name="Gmail" type="text" th:value="*{Gmail}" class="form-control" style="height: 35%; width: 35%;">
-                                </span>
-                            </div>
-
-                            <div th:if="${user.getRole().equals('2') || user.getRole().equals('3')}" class="form-group ">
-                                <label for=" " style="margin-top: 20px; font-size: larger; color: black;">Cấp quyền: </label>
-                                <span th:field="*{Role}">
-                                    <input type="hidden" name="Role" th:value="*{Role}">
-                                    <span style="color: black;"> Hội đồng
-                                        <input type="radio" name="checkboxRole" value="hoidong" th:checked="${user.getRole().equals('2')}" />
-                                    </span>
-                                    <span style="color: black;"> Cán bộ
-                                        <input type="radio" name="checkboxRole" value="canbo"  th:checked="${user.getRole().equals('3')}"/>
-                                    </span>
-                                </span>
-                            </div>
-                            <!-- Nút sửa thông tin -->
-                            <button type="submit" class="btn btn-primary" style=" border-radius: 10px; width: 13%;">Sửa thông tin</button>
-                            <!-- Trở về(back) chưa xong -->
-                            <a th:href="${'/information/'+ {pageold} + '/' + {user.getTaiKhoan()} + '/' + {changer.getTaiKhoan()}}" class="btn btn-primary" style="border-radius: 10px; width: 13%;">Trở về</a>
-                        </form>
-                    </div>
-                </div>
+    <div class="Suathongtin">
+        <h3 >Sửa thông tin cá nhân</h3>
+        <!-- Form sửa thông tin -->
+        <form name="changeInfo" th:action="@{'/suathongtin/' + ${pageold} + '/' + ${user.getTaiKhoan()} + '/' + ${changer.getTaiKhoan()}}" th:object="${user}" onsubmit="return validateForm()" method="POST">
+            <!-- Têm -->
+            <div class="form_group">
+                <label >Họ và tên </label>
+                <span th:field="*{Ten}">
+                    <input class="Name_input form-control" name="Ten" type="text" th:value="*{Ten}" >
+                </span>
             </div>
-        </div>
+            <!-- Ngày sinh -->
+            <div class="form_group">
+                <label for="">Ngày sinh</label>
+                <span th:field="*{NgaySinh}">
+                    <input name="NgaySinh" type="date" th:value="*{NgaySinh}" class="form-control" >
+
+                </span>
+            </div>
+            <!-- Giới tính -->
+            <div class="form_group">
+                <span th:field="*{GioiTinh}">
+                    <label for="">Giới tính: </label>
+                    <input type="hidden" name="GioiTinh" th:value="*{GioiTinh}" >
+                    <span > Nam
+                        <input  type="radio" name="checkboxSex" value="nam" th:checked="*{GioiTinh} ? 'checked'" />
+                    </span>
+                <span > Nữ
+                        <input type="radio" name="checkboxSex" value="nu"  th:checked="!*{GioiTinh} ? 'checked'" />
+                    </span>
+                </span>
+            </div>
+            <!--Địa chỉ( Sửa label thành span)  -->
+            <div class="form_group">
+                <label for="">Địa chỉ</label>
+                <span th:field="*{DiaChi}">
+                    <input class="form-control" name="DiaChi" type="text" th:value="*{DiaChi}">
+                </span>
+            </div>
+            <!-- Số điện thoại -->
+            <div class="form_group">
+                <label for="">Số điện thoại</label>
+                <span th:field="*{SDT}">
+                    <input class="form-control" name="SDT" type="text" th:value="*{SDT}" >
+                </span>
+            </div>
+            <!-- Gmail -->
+            <div class="form_group">
+                <label for="">Gmail</label>
+                <span th:field="*{Gmail}">
+                    <input class="form-control" name="Gmail" type="text" th:value="*{Gmail}"  >
+                </span>
+            </div>
+
+            <div th:if="${user.getRole().equals('2') || user.getRole().equals('3')}" >
+                <label >Cấp quyền: </label>
+                <span th:field="*{Role}">
+                    <input type="hidden" name="Role" th:value="*{Role}">
+                    <span> Hội đồng
+                        <input type="radio" name="checkboxRole" value="hoidong" th:checked="${user.getRole().equals('2')}" />
+                    </span>
+                <span > Cán bộ
+                        <input type="radio" name="checkboxRole" value="canbo"  th:checked="${user.getRole().equals('3')}"/>
+                    </span>
+                </span>
+            </div>
+            <!-- Nút sửa thông tin -->
+            <p class="change">
+                <button type="submit" class="btn btn-primary">Sửa thông tin</button>
+                <!-- Trở về(back) chưa xong -->
+                <a th:href="${'/information/'+ {pageold} + '/' + {user.getTaiKhoan()} + '/' + {changer.getTaiKhoan()}}" class="btn btn-dark">Trở về</a>
+            </p>
+            
+        </form>
     </div>
 
-
-    <!-- <a th:href="${ '/information/' + {user.getTaiKhoan()} + '/' + {changer.getTaiKhoan()}} ">back</a> -->
     <script>
         function validateForm() {
 
@@ -118,16 +105,17 @@
             var filterArray = arrayConverted.filter((element) => {
                 return element.type !== "hidden";
             });
-            var tempSex = 0, tempRole = 0;
+            var tempSex = 0,
+                tempRole = 0;
             for (var i = 0; i < filterArray.length; i++) {
                 if (filterArray[i].type === "radio") {
-                    if ( filterArray[i].name === "checkboxSex" && filterArray[i].checked === false ) {
+                    if (filterArray[i].name === "checkboxSex" && filterArray[i].checked === false) {
                         tempSex++;
-                    } else if ( filterArray[i].name === "checkboxRole" && filterArray[i].checked === false ) {
+                    } else if (filterArray[i].name === "checkboxRole" && filterArray[i].checked === false) {
                         tempRole++;
                     }
                 } else {
-                    if ( filterArray[i].value === "") {
+                    if (filterArray[i].value === "") {
                         alert("Xin hãy nhập đầy đủ thông tin");
                         return false;
                     } else if (filterArray[i].value.length < 8) {
@@ -136,10 +124,10 @@
                     }
                 }
 
-                if ( tempSex == 2 ) {
+                if (tempSex == 2) {
                     alert("Xin hãy chọn giới tính");
                     return false;
-                } else if ( tempRole == 2 ) {
+                } else if (tempRole == 2) {
                     alert("Xin hãy chọn quyền người dùng");
                     return false;
                 }
@@ -181,9 +169,9 @@
         }
     </script>
 
-    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
-    <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
 </body>
 
 </html>

@@ -116,7 +116,7 @@ html {
 
 #nav>li>a {
     color: #070707;
-    font-size: medium;
+    font-size: 14px;
     text-transform: uppercase;
     margin: auto;
 }
@@ -125,7 +125,7 @@ html {
     text-align: auto;
     text-decoration: none;
     line-height: auto;
-    padding: 1px 24px;
+    padding: 7px;
     display: block;
 }
 
