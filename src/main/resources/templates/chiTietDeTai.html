@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <title>Chi tiết đề tài</title>
     <!-- Import boostrap and Jquery -->
-    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styleCTDT.css">
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styleCTDT.css">
     <!-- Tạo icon trên Title -->
-    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/.././static/img/favicon.ico" type="image/x-icon">
     <!-- Branch -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
@@ -38,9 +38,11 @@
                 <p th:if="!${nguoithuchien.getTen()}" th:text="'Người thực hiện đề tài : Chưa có người thực hiện'"></p>
             </div>
             <label for=""> Lĩnh vực :</label>
-            <select>
-                <option th:each="linhvuc : ${linhVucCuaDeTai}" th:text="${linhvuc.getTenLinhVuc()}" ></option>
-            </select>
+<!--            <select>-->
+<!--                <option th:each="linhvuc : ${linhVucCuaDeTai}" th:text="${linhvuc.getTenLinhVuc()}" ></option>-->
+<!--            </select>-->
+            <span th:each="linhvuc : ${linhVucCuaDeTai}" th:if="${linhvucStat.index < linhVucCuaDeTai.size()-1}" th:text="${linhvuc.getTenLinhVuc()} + ','"></span>
+            <span th:each="linhvuc : ${linhVucCuaDeTai}" th:if="${linhvucStat.index == linhVucCuaDeTai.size()-1}" th:text="${linhvuc.getTenLinhVuc()} + '.'"></span>
         </div >
         <div th:if="${detai.getTrangThai().equals('dangxet') && viewer.getRole().equals('2')} ">
             <!-- Form sửa thông tin -->
@@ -103,16 +105,8 @@
     </div>
 
     <script th:inline="javascript">
-        var detai = [
-            [$ {
-                detai
-            }]
-        ];
-        var pageold = [
-            [$ {
-                pageold
-            }]
-        ];
+        var detai = [[${detai}]];
+        var pageold = [[${pageold}]];
 
         function isClicked(name) {
             document.forms["formPheDuyet"]["status"].value = name;
@@ -150,9 +144,9 @@
             }
         })
     </script>
-    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
-    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>
-    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js "></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js "></script>
 </body>
 
 </html>

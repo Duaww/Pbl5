@@ -108,11 +108,7 @@
     </div>
     <script th:inline="javascript">
         function validateForm() {
-            var danhSachTaiKhoan = [
-                [$ {
-                    danhSachTaiKhoan
-                }]
-            ];
+            var danhSachTaiKhoan = [[${danhSachTaiKhoan}]];
             var form = document.forms["addAccount"];
             var input = document.getElementsByTagName("input");
             var arrayConverted = Object.values(input);
@@ -174,9 +170,9 @@
             return true;
         }
     </script>
-    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
-    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>
-    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js "></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js "></script>
 </body>
 
 </html>

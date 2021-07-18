@@ -86,6 +86,9 @@ public class UserServiceImpl implements UserService {
         user.setSDT(newUser.getSDT());
         user.setGioiTinh(newUser.getGioiTinh());
         user.setGmail(newUser.getGmail());
+        if (newUser.getRole() == null) {
+            newUser.setRole("4");
+        }
         user.setRole(newUser.getRole());
         userRepository.save(user);
         return user;

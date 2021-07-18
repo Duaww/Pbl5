@@ -73,16 +73,6 @@
                     </ul>
                     <ul th:if="${nguoithuchien.getRole().equals('4')}" id="nav" class="navbar-nav ml-auto">
                         <li class="nav-item"><a href="#">Trang chủ</a></li>
-                        <li><a href="#">Tài khoản</a>
-                            <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
-                                <li style="height: 40%; width: 100%;">
-                                    <a th:href="@{'/doimatkhau/' + *{nguoithuchien.getTaiKhoan()}}">Đổi mật khẩu</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'/login'}">Đăng xuất</a>
-                                </li>
-                            </ul>
-                        </li>
                         <li><a class="nav-link " th:href="@{'/danhSachBaiBao/' + ${nguoithuchien.getTaiKhoan()}}">Danh sách bài báo</a></li>
                         <li><a href="#">Đề tài</a>
                             <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
@@ -95,9 +85,22 @@
                                 <li>
                                     <a th:href="@{'/deTaiDaLamDuoc/' + ${nguoithuchien.getTaiKhoan()}}" style="width:100%">Danh sách đề tài đã làm được</a>
                                 </li>
+                                <li><a class="nav-link" th:href="@{'/dangKyLamNghienCuu/' + ${nguoithuchien.getTaiKhoan()}}">Đăng kí làm nghiên cứu</a></li>
                             </ul>
                         </li>
-                        <li><a class="nav-link" th:href="@{'/dangKyLamNghienCuu/' + ${nguoithuchien.getTaiKhoan()}}">Đăng kí làm nghiên cứu</a></li>
+                        <li><a href="#">Tài khoản</a>
+                            <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
+                                <li style="height: 40%; width: 100%;">
+                                    <a th:href="@{'/doimatkhau/' + *{nguoithuchien.getTaiKhoan()}}">Đổi mật khẩu</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/changePersonInfo/' + ${nguoithuchien.getTaiKhoan()}}">Đổi thông tin cá nhân</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/login'}">Đăng xuất</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </nav>

@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <title>Xem đề tài</title>
     <!-- Import boostrap and Jquery -->
-    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/xemDeTai.css">
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/xemDeTai.css">
     <!-- Tạo icon trên Title -->
     <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
     <!-- Branch -->
@@ -18,9 +18,9 @@
 
 <body>
             <div class="xemDeTai" >
-                <h3 >Đề tài</h3>
+                <h3 th:text="${detai.getTenDeTai()}"></h3>
                 <div >
-                    <p th:text="'Tên : ' + ${detai.getTenDeTai()}"></p>
+
                     <label for="" >Mô tả</label>
                     <textarea th:text=" ${detai.getMoTa()}" class="form-control" ></textarea>
                     <div>
@@ -32,19 +32,22 @@
                         <p th:if="!${nguoithuchien.getTen()}" th:text="'Người thực hiện đề tài : Chưa có người thực hiện'"></p>
                     </div>
                     <label style=" font-size: larger; color:black;">Lĩnh vực :</label>
-                    <select>
-                        <option th:each="linhvuc : ${linhVucCuaDeTai}" th:text="${linhvuc.getTenLinhVuc()}"></option>
-                    </select>
+                    <span th:each="linhvuc : ${linhVucCuaDeTai}" th:if="${linhvucStat.index < linhVucCuaDeTai.size()-1}" th:text="${linhvuc.getTenLinhVuc()} + ','"></span>
+                    <span th:each="linhvuc : ${linhVucCuaDeTai}" th:if="${linhvucStat.index == linhVucCuaDeTai.size()-1}" th:text="${linhvuc.getTenLinhVuc()} + '.'"></span>
+
+                    <!--                    <select>-->
+<!--                        <option th:each="linhvuc : ${linhVucCuaDeTai}" th:text="${linhvuc.getTenLinhVuc()}"></option>-->
+<!--                    </select>-->
                     <p class="button"></p>
-                <a th:href="@{'/' + ${pageold} + '/'+ ${detai.getIDDeTai()}}" class="btn btn-primary" >Trở về</a>
+                <a th:href="@{'/xemDanhSachDeTaiDaHoanThanh'}" class="btn btn-primary" >Trở về</a>
             </p>
                 </div>
             </div>
             
 
-    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
-    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
 </body>
 
 </html>

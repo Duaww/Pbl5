@@ -72,16 +72,6 @@
                     </ul>
                     <ul th:if="${user.getRole().equals('4')}" id="nav" class="navbar-nav ml-auto">
                         <li class="nav-item"><a href="#">Trang chủ</a></li>
-                        <li><a href="#">Tài khoản</a>
-                            <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
-                                <li style="height: 40%; width: 100%;">
-                                    <a th:href="@{'/doimatkhau/' + ${user.getTaiKhoan()}}">Đổi mật khẩu</a>
-                                </li>
-                                <li>
-                                    <a th:href="@{'/login'}">Đăng xuất</a>
-                                </li>
-                            </ul>
-                        </li>
                         <li><a class="nav-link " th:href="@{'/danhSachBaiBao/' + ${user.getTaiKhoan()}}">Danh sách bài báo</a></li>
                         <li><a href="#">Đề tài</a>
                             <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
@@ -94,9 +84,22 @@
                                 <li>
                                     <a th:href="@{'/deTaiDaLamDuoc/' + ${user.getTaiKhoan()}}" style="width:100%">Danh sách đề tài đã làm được</a>
                                 </li>
+                                <li><a class="nav-link" th:href="@{'/dangKyLamNghienCuu/' + ${user.getTaiKhoan()}}">Đăng kí làm nghiên cứu</a></li>
                             </ul>
                         </li>
-                        <li><a class="nav-link" th:href="@{'/dangKyLamNghienCuu/' + ${user.getTaiKhoan()}}">Đăng kí làm nghiên cứu</a></li>
+                        <li><a href="#">Tài khoản</a>
+                            <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
+                                <li style="height: 40%; width: 100%;">
+                                    <a th:href="@{'/doimatkhau/' + *{user.getTaiKhoan()}}">Đổi mật khẩu</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}">Đổi thông tin cá nhân</a>
+                                </li>
+                                <li>
+                                    <a th:href="@{'/login'}">Đăng xuất</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -134,20 +137,25 @@
                     </div>
                 </div>
             </div>
-            <hr>
-            <div class="container-fluid padding">
-                <div class="row text-center padding">
-                    <div class="col-12">
-                        <h5>Liên lạc với nhóm</h5>
-                    </div>
-                    <div class="col-md-4 social padding">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                    </div>
-                    <div class="col-md-4 social padding">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                    <div class="col-md-4 social padding">
-                        <a href="#"><i class="fab fa-youtube"></i></a>
+            <div style="margin-top: 17%;">
+                <hr>
+                <div class="container-fluid padding">
+                    <div class="row text-center padding">
+                        <div class="col-12">
+                            <h5>Liên lạc với nhóm</h5>
+                        </div>
+                        <div class="col-md-4 social padding">
+                            <a href="https://www.facebook.com/Duawww"><i class="fab fa-facebook"></i></a>
+                            <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p>
+                        </div>
+                        <div class="col-md-4 social padding">
+                            <a href="https://www.instagram.com/duaww/"><i class="fab fa-instagram"></i></a>
+                            <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p>
+                        </div>
+                        <div class="col-md-4 social padding">
+                            <a href="https://www.youtube.com/watch?v=LMnJG3Oxrrw"><i class="fab fa-youtube"></i></a>
+                            <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p>
+                        </div>
                     </div>
                 </div>
             </div>

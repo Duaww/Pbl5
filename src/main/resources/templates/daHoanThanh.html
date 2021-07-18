@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <title>Đề tài đã hoàn thành</title>
     <!-- Import boostrap and Jquery -->
-    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style2.css">
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/responsive.css">
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style2.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/responsive.css">
     <!-- Tạo icon trên Title -->
-    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/.././static/img/favicon.ico" type="image/x-icon">
     <!-- Branch -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 </head>
@@ -20,7 +20,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <a href="#" , class="navbar-branch">
-            <img src="../static/img/dhbk.png" height="60" alt="#">
+            <img src="/../static/img/dhbk.png" height="60" alt="#">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right:12%; margin-left: 0%;">
@@ -30,29 +30,29 @@
                     <li><a href="#">Tài khoản</a>
                         <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
                             <li style="height: 40%; width: 100%;">
-                                <a th:href="@{'/doimatkhau/' + ${accViewer.getTaiKhoan()}}">Đổi mật khẩu</a>
+                                <a th:href="@{'/doimatkhau/' + ${viewer.getTaiKhoan()}}">Đổi mật khẩu</a>
                             </li>
                             <li>
-                                <a th:href="@{'/changePersonInfo/' + ${accViewer.getTaiKhoan()}}">Thay đổi thông tin cá nhân</a>
+                                <a th:href="@{'/changePersonInfo/' + ${viewer.getTaiKhoan()}}">Thay đổi thông tin cá nhân</a>
                             </li>
                             <li>
                                 <a th:href="@{'/login'}">Đăng xuất</a>
                             </li>
                         </ul>
                     </li>
-                    <li><a class="nav-link " th:href="@{ '/hoidongchamthi/' + ${accViewer.getTaiKhoan()}} ">Hội đồng chấm thi</a></li>
+                    <li><a class="nav-link " th:href="@{ '/hoidongchamthi/' + ${viewer.getTaiKhoan()}}">Hội đồng chấm thi</a></li>
                     <li><a href="#">Đề tài</a>
                         <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
                             <li>
-                                <a th:href="@{ '/listDeTai/' + ${accViewer.getTaiKhoan()}} " style="width:100%">Danh sách đề tài</a>
+                                <a th:href="@{ '/listDeTai/' + ${viewer.getTaiKhoan()}}" style="width:100%">Danh sách đề tài</a>
                             </li>
                             <li>
-                                <a th:href="@{ '/dangThucHien/' + ${accViewer.getTaiKhoan()}} " style="width:100%">Danh sách đề tài đang thực hiện</a>
+                                <a th:href="@{ '/dangThucHien/' + ${viewer.getTaiKhoan()}}" style="width:100%">Danh sách đề tài đang thực hiện</a>
                             </li>
                             <li>
-                                <a th:href="@{ '/daHoanThanh/' + ${accViewer.getTaiKhoan()}} " style="width:100%">Danh sách đề tài đã hoàn thành</a>
+                                <a th:href="@{ '/daHoanThanh/' + ${viewer.getTaiKhoan()}}" style="width:100%">Danh sách đề tài đã hoàn thành</a>
                             </li>
-                            <li><a class="nav-link " th:href="@{ '/danhsachdacham/' + ${accViewer.getTaiKhoan()}} ">Danh sách đề tài đã chấm</a></li>
+                            <li><a class="nav-link " th:href="@{ '/danhsachdacham/' + ${viewer.getTaiKhoan()}} ">Danh sách đề tài đã chấm</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -119,9 +119,9 @@
     </div>
 
    
-    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
-    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
 </body>
 
 </html>

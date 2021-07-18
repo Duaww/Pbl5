@@ -10,6 +10,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Pair;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -550,9 +551,8 @@ public class DeTaiController {
         return "deTaiDaLamDuoc";
     }
 
-    @GetMapping("/xemBaiBao/{idDeTai}")
-    public String getXemBaiBao(Model model, @PathVariable("idDeTai") String idDeTai) {
-        String pageold = "xemBaiBao";
+    @GetMapping("/xemBaiBao/{pageold}/{idDeTai}")
+    public String getXemBaiBao(Model model, @PathVariable("idDeTai") String idDeTai, @PathVariable("pageold") String pageold) {
         BaiBao baiBao = new BaiBao();
         DeTai deTai = deTaiService.findById(idDeTai);
         List<BaiBao> baiBaoList = baiBaoService.findAll();
@@ -568,8 +568,8 @@ public class DeTaiController {
         return "xemBaiBao";
     }
 
-    @GetMapping("/xemDeTai/{pageold}/{idDeTai}")
-    public  String getXemDeTai(Model model, @PathVariable("idDeTai") String idDeTai, @PathVariable("pageold") String pageold) {
+    @GetMapping("/xemDeTai/{idDeTai}")
+    public  String getXemDeTai(Model model, @PathVariable("idDeTai") String idDeTai) {
         DeTai detai = deTaiService.findById(idDeTai);
         List<ChuyenMon> chuyenMonList = chuyenmonService.findAll();
         List<LinhVuc> linhvucList = linhvucService.findAll();
@@ -601,7 +601,6 @@ public class DeTaiController {
             nguoiHuongDan = userService.findById(detai.getIDNguoihuongdan());
         }
         model.addAttribute("nguoithuchien", nguoithuchien);
-        model.addAttribute("pageold", pageold);
         model.addAttribute("nguoiHuongDan", nguoiHuongDan);
         model.addAttribute("detai", detai);
         model.addAttribute("linhVucCuaDeTai", linhvucCuaDeTai);
@@ -789,5 +788,42 @@ public class DeTaiController {
             }
         }
         return getListDeTai(model, accountView);
+    }
+
+    @GetMapping("xemDanhSachDeTaiDaHoanThanh")
+    public String getXemDanhSach(Model model) {
+        List<DeTaiHoanThanh> hoanThanhList = deTaiHoanThanhService.findAll();
+        List<NguoiThucHien> nguoiThucHienList = nguoiThucHienService.findAll();
+        List< Pair< Pair<DeTai, User>, DeTaiHoanThanh > > list = new ArrayList<Pair< Pair<DeTai, User>, DeTaiHoanThanh > >();
+        String pageold = "xemDanhSachDeTaiDaHoanThanh";
+        for (int i = 0; i < hoanThanhList.size(); i++) {
+            Pair<DeTai, User> nguoithuchien = null;
+            for (int j = 0; j < nguoiThucHienList.size(); j++) {
+                DeTai deTai = deTaiService.findById(hoanThanhList.get(i).getIDDeTai());
+                if (nguoiThucHienList.get(j).getIDDeTai().equals(deTai.getIDDeTai())) {
+                    User user = userService.findById(nguoiThucHienList.get(j).getIDNguoiThucHien());
+                    nguoithuchien = Pair.of(deTai, user);
+                }
+            }
+            if (nguoithuchien != null) {
+                list.add(Pair.of(nguoithuchien, hoanThanhList.get(i)));
+            }
+        }
+        model.addAttribute("pageold", pageold);
+        model.addAttribute("list", list);
+        return "xemDanhSachDeTaiDaHoanThanh";
+    }
+
+    @GetMapping("xemDanhSachBaiBao")
+    public String getXemDanhSachBaiBao(Model model) {
+        List<BaiBao> baiBaoList = baiBaoService.findAll();
+        List< Pair<DeTai, BaiBao> > list = new ArrayList< Pair<DeTai, BaiBao> >() ;
+        String pageold = "xemDanhSachBaiBao";
+        for (int i = 0; i < baiBaoList.size(); i++) {
+            list.add(Pair.of(deTaiService.findById(baiBaoList.get(i).getIDDeTai()), baiBaoList.get(i)));
+        }
+        model.addAttribute("pageold", pageold);
+        model.addAttribute("list",  list);
+        return "xemDanhSachBaiBao";
     }
 }

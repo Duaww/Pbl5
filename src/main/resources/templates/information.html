@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thông tin người dùng</title>
     <!-- Import boostrap and Jquery -->
-    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style2.css">
-    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style2.css">
+    <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styles1.css">
     <!-- Tạo icon trên Title -->
-    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/.././static/img/favicon.ico" type="image/x-icon">
     <!-- Branch -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
@@ -23,7 +23,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <a href="#" , class="navbar-branch">
-            <img src="../static/img/dhbk.png" height="60" alt="#">
+            <img src="/../static/img/dhbk.png" height="60" alt="#">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right:0%; margin-left: 0%;">
@@ -33,24 +33,27 @@
                     <li><a href="#">Tài khoản</a>
                         <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
                             <li style="height: 40%; width: 100%;">
-                                <a th:href="@{'/doimatkhau/' + ${accViewer.getTaiKhoan()}}">Đổi mật khẩu</a>
+                                <a th:href="@{'/doimatkhau/' + ${whoFollow.getTaiKhoan()}}">Đổi mật khẩu</a>
                             </li>
-                            <li>
-                                <a th:href="@{'/changePersonInfo/' + ${accViewer.getTaiKhoan()}}">Thay đổi thông tin cá nhân</a>
+                            <li style="height: 40%; width: 100%;">
+                                <a th:href="@{'/addTaiKhoan/' + ${whoFollow.getTaiKhoan()}}">Thêm tài khoản</a>
                             </li>
+<!--                            <li>-->
+<!--                                <a th:href="@{'/changePersonInfo/' + ${user.getTaiKhoan()}}">Thay đổi thông tin cá nhân</a>-->
+<!--                            </li>-->
                             <li>
                                 <a th:href="@{'/login'}">Đăng xuất</a>
                             </li>
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{'/listhoidong/' + *{user.getTaiKhoan()}}">Danh sách hội đồng</a>
+                        <a th:href="@{'/listhoidong/' + *{whoFollow.getTaiKhoan()}}">Danh sách hội đồng</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{'/listcanbo/' + *{user.getTaiKhoan()}}" class="nav-link">Danh sách cán bộ</a>
+                        <a th:href="@{'/listcanbo/' + *{whoFollow.getTaiKhoan()}}" class="nav-link">Danh sách cán bộ</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{'/listncsinh/' + *{user.getTaiKhoan()}}" class="nav-link">Danh sách nghiên cứu sinh</a>
+                        <a th:href="@{'/listncsinh/' + *{whoFollow.getTaiKhoan()}}" class="nav-link">Danh sách nghiên cứu sinh</a>
                     </li>
                 </ul>
             </div>
@@ -128,7 +131,7 @@
                 </div>
                 <div class="col-md-4 social padding">
                     <a href="https://www.youtube.com/watch?v=LMnJG3Oxrrw"><i class="fab fa-youtube"></i></a>
-                    <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p </div>
+                    <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p></div>
                 </div>
             </div>
         </div>
@@ -136,11 +139,7 @@
     </div>
 
     <script th:inline="javascript">
-        var user = [
-            [$ {
-                user
-            }]
-        ];
+        var user = [[${user}]];
 
         function lock() {
             let status = user.trangThai;
@@ -164,9 +163,9 @@
         }
     </script>
 
-    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
-    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
 </body>
 
 </html>
