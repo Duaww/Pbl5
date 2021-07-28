@@ -9,6 +9,7 @@ body {
     justify-content: center;
 }
 h3{
+    font-size: x-large;
     padding-bottom: 1rem;
     text-align: center;
 }
@@ -49,4 +50,5 @@ h3{
 
 p.button{
     text-align: right;
+    padding-bottom: 5px;
 }

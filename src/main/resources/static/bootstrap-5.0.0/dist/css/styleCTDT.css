@@ -19,17 +19,21 @@ body {
     border-radius: 10px;
 }
 h3{
-    font-size: x-large;
-    padding-bottom: 1rem;
+    font-size: xx-large;
     text-align: center;
+    padding-bottom: 1rem;
 }
-intput.input_text{
+input.input_text{
     color: black;
     outline: none;
     padding: 5px;
     border-radius: 10px;
     border: 1px solid #eee ;
     background-color: #eee;
+}
+input.input_text:focus{
+    background-color: white;
+    border-color: #eee;
 }
 textarea{
     margin-top: -7px;
@@ -56,6 +60,7 @@ select{
 }
 .button{
     text-align: right;
+    padding-bottom: 5px;
 }
 div.form_group{
     padding-bottom: 0.5rem;

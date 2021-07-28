@@ -84,8 +84,8 @@
                 <span th:field="${diem}">
                     <input type="hidden" name="diem" th:value="${diem}">
                 </span>
-                <textarea name="nhapdiem" class="form_input" th:if="${diem}" th:text="${diem}" ></textarea>
-                <textarea name="nhapdiem" class="form_input" th:if="!${diem}" th:text="''" ></textarea>
+                <input class="input_text " type="text" name="nhapdiem" th:if="${diem}" th:text="${diem}" >
+                <input class="input_text " type="text" name="nhapdiem" th:if="!${diem}" th:text="''" >
                 <p class="button"><input type="submit" value="Update điểm" class="btn btn-primary"></p>
             </form>
         </div>
