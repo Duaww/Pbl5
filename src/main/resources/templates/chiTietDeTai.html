@@ -84,8 +84,8 @@
                 <span th:field="${diem}">
                     <input type="hidden" name="diem" th:value="${diem}">
                 </span>
-                <input class="input_text " type="text" name="nhapdiem" th:if="${diem}" th:text="${diem}" >
-                <input class="input_text " type="text" name="nhapdiem" th:if="!${diem}" th:text="''" >
+                <input class="input_text" type="text" name="nhapdiem" th:if="${diem}" th:value="${diem}" >
+                <input class="input_text" type="text" name="nhapdiem" th:if="!${diem}" th:value="''" >
                 <p class="button"><input type="submit" value="Update điểm" class="btn btn-primary"></p>
             </form>
         </div>
@@ -115,12 +115,17 @@
         function validateForm() {
             if (pageold == "listDeTaiCham") {
                 var soDiem = document.getElementsByName("nhapdiem")[0].value;
-                document.forms["updateDiem"]["diem"].value = soDiem;
+                soDiem = soDiem.split(' ').join('');
+
                 if (soDiem === "") {
                     alert("Bạn chưa nhập điểm cho đề tài");
                     return false;
-                } else {
-
+                } else if (parseInt(soDiem) > 10 || parseInt(soDiem) < 0 ){
+                    alert("Nhập số điểm không phù hợp");
+                    return false;
+                }
+                else {
+                    document.forms["updateDiem"]["diem"].value = soDiem;
                     alert("Cập nhật điểm thành công");
                     return true;
                 }

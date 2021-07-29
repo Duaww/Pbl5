@@ -677,13 +677,14 @@ public class DeTaiController {
         User user = userService.findByName(accountView);
         DeTai deTai = deTaiService.findById(idDeTai);
         List<HoiDongCham> deTaiCham = hoiDongChamService.findByIdDeTai(idDeTai);
-        float diem = 0;
+        float diemTB = 0;
 
         for (int i = 0; i < deTaiCham.size(); i++) {
-            diem = diem + Float.parseFloat(deTaiCham.get(i).getDiem());
+            String diemDeTai = deTaiCham.get(i).getDiem().replace("\\s", "");
+            diemTB = diemTB + Float.parseFloat(diemDeTai);
         }
-        diem = diem / deTaiCham.size();
-        deTaiHoanThanhService.insertDeTai(idDeTai ,diem);
+        diemTB = diemTB / deTaiCham.size();
+        deTaiHoanThanhService.insertDeTai(idDeTai ,diemTB);
         return diemDeTai(idDeTai, accountView, model);
     }
 
