@@ -29,7 +29,7 @@
                 <span th:if="!${nguoiHuongDan.getTen()}" th:text="'Người hướng dẫn : Chưa có người hướng dẫn '"></span>
             </div>
             <p>
-                <span th:if="${detai.getTrangThai().equals('OK')}" th:text="'Trạng thái : OK'"></span>
+                <span th:if="${detai.getTrangThai().equals('OK')}" th:text="'Trạng thái : Đã duyệt'"></span>
                 <span th:if="${detai.getTrangThai().equals('dangxet')}" th:text="'Trạng thái : Đang xét'"></span>
                 <span th:if="${detai.getTrangThai().equals('chuaxet')}" th:text="'Trạng thái : Chưa xét'"></span>
             </p>

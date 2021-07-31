@@ -64,7 +64,7 @@
                 <label style="color: black;"><strong>Chọn trạng thái muốn lọc</strong></label>
                 <select name="field" id="fields" style="height: 35px;">
                     <option value="all">Tất cả</option>
-                    <option value="OK">OK</option>
+                    <option value="OK">Đã duyệt</option>
                     <option value="dangxet">Đang xét</option>
                     <option value="chuaxet">Chưa xét</option>
                 </select>
@@ -96,7 +96,7 @@
                                     <span th:if="!${element.second.getTen()}" th:text="'Chưa có người hướng dẫn'"></span>
                                 </td>
                                 <td>
-                                    <span th:if="${element.first.getTrangThai().equals('OK')}" th:text="'OK'"></span>
+                                    <span th:if="${element.first.getTrangThai().equals('OK')}" th:text="'Đã duyệt'"></span>
                                     <span th:if="${element.first.getTrangThai().equals('dangxet')}" th:text="'Đang xét'"></span>
                                     <span th:if="${element.first.getTrangThai().equals('chuaxet')}" th:text="'Chưa xét'"></span>
                                 </td>
