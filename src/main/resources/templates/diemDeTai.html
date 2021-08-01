@@ -76,7 +76,7 @@
                         <tr>
                             <tr th:each="element : ${danhSachNguoiCham}">
                                 <td th:text="${element.first.getTen()}"></td>
-                                <td th:text="${element.second}"></td>
+                                <td name="soDiem" th:text="${element.second}"></td>
                             </tr>
                         </tr>
                     </tbody>
@@ -114,10 +114,21 @@
     <script th:inline="javascript">
         function validateForm() {
             var hoanthanh = [[${hoanthanh}]];
+            var soDiem = document.getElementsByName("soDiem");
+            var diemNull = false;
+            for (var i = 0; i < soDiem.length; i++) {
+                if (soDiem[i].textContent.localeCompare("Chưa chấm điểm")) {
+                    diemNull = true;
+                }
+            }
             if (hoanthanh) {
                 alert("Đề tài đã được nghiệm thu");
                 return false;
-            } else {
+            } else if (diemNull == true) {
+                alert("Cán bộ chưa hoàn thành việc chấm điểm");
+                return false;
+            }
+            else {
                 var conFirm = confirm("Bạn có chắc muốn nghiệm thu đề tài ?");
                 if (conFirm) {
                     alert("Nghiệm thu thành công");

@@ -88,7 +88,7 @@
                             <tr th:each="list : ${nguoidexuat}">
                                 <td th:text="${list.first.getTenDeTai()}"></td>
                                 <td>
-                                    <span th:if="${list.first.getTrangThai().equals('OK')}" th:text="'OK'"></span>
+                                    <span th:if="${list.first.getTrangThai().equals('OK')}" th:text="'Đã duyệt'"></span>
                                     <span th:if="${list.first.getTrangThai().equals('dangxet')}" th:text="'Đang xét'"></span>
                                     <span th:if="${list.first.getTrangThai().equals('chuaxet')}" th:text="'Chưa xét'"></span>
                                 </td>

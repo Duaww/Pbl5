@@ -122,7 +122,7 @@
                                     <tr th:each="detai : ${deTaiCoThe}">
                                         <td th:text="${detai.getTenDeTai()}"></td>
                                         <td>
-                                            <span th:if="${detai.getTrangThai().equals('OK')}" th:text="'OK'"></span>
+                                            <span th:if="${detai.getTrangThai().equals('OK')}" th:text="'Đã duyệt'"></span>
                                             <span th:if="${detai.getTrangThai().equals('dangxet')}" th:text="'Đang xét'"></span>
                                             <span th:if="${detai.getTrangThai().equals('chuaxet')}" th:text="'Chưa xét'"></span>
                                         </td>
