@@ -242,7 +242,7 @@ public class UserController {
         model.addAttribute("giatri", giatri);
         model.addAttribute("changer", changer);
         model.addAttribute("listncsinh", listNcsinh);
-        return "listncSinh";
+        return "listncsinh";
     }
 
     @PostMapping("/listncsinh/{account}")
