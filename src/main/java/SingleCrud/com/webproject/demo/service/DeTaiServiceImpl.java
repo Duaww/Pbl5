@@ -1,7 +1,9 @@
 package SingleCrud.com.webproject.demo.service;
 
 import SingleCrud.com.webproject.demo.model.DeTai;
+import SingleCrud.com.webproject.demo.model.DeTaiDangThucHien;
 import SingleCrud.com.webproject.demo.model.User;
+import SingleCrud.com.webproject.demo.repository.DeTaiDangThucHienRepository;
 import SingleCrud.com.webproject.demo.repository.DeTaiRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +15,12 @@ import java.util.List;
 public class DeTaiServiceImpl implements DeTaiService {
 
     private final DeTaiRepository deTaiRepository;
+    private final DeTaiDangThucHienRepository deTaiDangThucHienRepository;
 
     @Autowired
-    public DeTaiServiceImpl(DeTaiRepository deTaiRepository) {
+    public DeTaiServiceImpl(DeTaiRepository deTaiRepository, DeTaiDangThucHienRepository deTaiDangThucHienRepository) {
         this.deTaiRepository = deTaiRepository;
+        this.deTaiDangThucHienRepository = deTaiDangThucHienRepository;
     }
 
 

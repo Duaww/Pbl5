@@ -39,10 +39,10 @@ public class DeTaiDangThucHienServiceImpl implements DeTaiDangThucHienService {
         for (int i = 0 ; i < deTaiDangThucHiens.size(); i++) {
             if (deTaiDangThucHiens.get(i).getIDDeTai().equals(idDeTai)) {
                 deTaiDangThucHien = deTaiDangThucHiens.get(i);
-                break;
+                return deTaiDangThucHien;
             }
         }
-        return deTaiDangThucHien;
+        return  null;
     }
 
     @Override

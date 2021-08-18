@@ -62,7 +62,7 @@
             <textarea th:if="!${plane}" th:text="''" >
             </textarea>
         </div>
-        <div th:if="${viewer.getRole().equals('4') && pageold.equals('deTaiDangThucHien')}" class="form_group">
+        <div th:if="${(viewer.getRole().equals('4') && pageold.equals('deTaiDangThucHien')) || (viewer.getRole().equals('3') && pageold.equals('deTaiDangThucHien'))}" class="form_group">
             <label for="" >Tiến độ: </label>
             <form name="updateTienDo" th:action="@{'/chiTietDeTai/' + ${pageold} + '/'+ ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" onsubmit="return validateForm()" method="post">
                 <span th:field="${newTienDo}">

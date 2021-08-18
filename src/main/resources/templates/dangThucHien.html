@@ -76,7 +76,11 @@
                     <tr>
                         <tr th:each="element : ${listDangThucHien}">
                             <td th:text="${element.second.getTenDeTai()}"></td>
-                            <td th:text="${element.second.getTrangThai()}"></td>
+                            <td>
+                                <span th:if="${element.second.getTrangThai().equals('OK')}" th:text="'Đã duyệt'"></span>
+                                <span th:if="${element.second.getTrangThai().equals('dangxet')}" th:text="'Đang xét'"></span>
+                                <span th:if="${element.second.getTrangThai().equals('chuaxet')}" th:text="'Chưa xét'"></span>
+                            </td>
                             <td th:text="${element.first.getTienDo()}"></td>
                             <td><a th:href="@{'/chiTietDeTai/' + ${pageold} + '/' +  ${element.second.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px;  width: 50%; text-align: center; margin-left: 0%;">Chi tiết</a></td>
                             <td><a th:href="@{'/phanCongCham/' + ${element.second.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px;  width: 70%; text-align: center; margin-left: 0%;">Phân công chấm</a></td>

@@ -171,6 +171,10 @@ public class DeTaiController {
             deTaiService.changeStatus(idDeTai, status);
         } else if (!newTiendo.equals("")) {
             DeTaiDangThucHien deTaiDangThucHien =  deTaiDangThucHienService.findByIdDeTai(idDeTai);
+            if (deTaiDangThucHien ==  null) {
+                deTaiDangThucHien = new DeTaiDangThucHien();
+            }
+//            System.out.println(deTaiDangThucHien);
             deTaiDangThucHienService.updateTienDo(deTaiDangThucHien, idDeTai , newTiendo);
         } else if (!diem.equals("")) {
             User user = userService.findByName(accViewer);
@@ -219,7 +223,10 @@ public class DeTaiController {
         List<DeTai> deTaiList = new ArrayList<DeTai>();
         List<Pair<DeTaiDangThucHien ,DeTai>> dangThucHienList = new ArrayList<Pair<DeTaiDangThucHien ,DeTai>>();
         for (int i = 0 ;i < list.size(); i++) {
-            dangThucHienList.add(Pair.of(list.get(i), deTaiService.findById(list.get(i).getIDDeTai())));
+            DeTai deTai = deTaiService.findById(list.get(i).getIDDeTai());
+            if (deTai.getTrangThai().equals("OK")) {
+                dangThucHienList.add(Pair.of(list.get(i), deTai));
+            }
         }
         String pageOld = "dangThucHien";
         model.addAttribute("pageold", pageOld);
