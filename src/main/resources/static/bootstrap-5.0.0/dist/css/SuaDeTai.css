@@ -9,7 +9,11 @@ body{
 div.suadetai{
     padding: 2rem 3.5rem;
     width: 100%;
+<<<<<<< HEAD
     max-width: 60rem;
+=======
+    max-width: 50rem;
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
     background-color: white;
     border-radius: 10px;
 }

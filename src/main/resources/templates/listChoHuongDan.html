@@ -23,9 +23,14 @@
             <img src="../static/img/dhbk.png" height="60" alt="#">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+<<<<<<< HEAD
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right:0%; margin-left: 0%;">
             <div class="navbar-collapse" >
                 <ul id="nav" class="navbar-nav ml-auto" style="margin-right: 5%;">
+=======
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul id="nav" class="navbar-nav ml-auto" style="margin-right: 5%;">
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
                 <li class="nav-item"><a href="#">Trang chủ</a></li>
                 <li><a href="#">Đề tài</a>
                     <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
@@ -69,7 +74,10 @@
                 </li>
             </ul>
         </div>
+<<<<<<< HEAD
         </div>
+=======
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
     </nav>
     <div class="container-fluid form-text">
         <h3 style="margin-top: 20px; color: black; margin-left: 12.5%;">Danh sách chờ hướng dẫn </h3>
@@ -90,7 +98,11 @@
                             <tr th:each="list : ${nguoidexuat}">
                                 <td th:text="${list.first.getTenDeTai()}"></td>
                                 <td>
+<<<<<<< HEAD
                                     <span th:if="${list.first.getTrangThai().equals('OK')}" th:text="'Đã duyệt'"></span>
+=======
+                                    <span th:if="${list.first.getTrangThai().equals('OK')}" th:text="'OK'"></span>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
                                     <span th:if="${list.first.getTrangThai().equals('dangxet')}" th:text="'Đang xét'"></span>
                                     <span th:if="${list.first.getTrangThai().equals('chuaxet')}" th:text="'Chưa xét'"></span>
                                 </td>
@@ -131,7 +143,11 @@
                 </div>
                 <div class="col-md-4 social padding">
                     <a href="https://www.youtube.com/watch?v=LMnJG3Oxrrw"><i class="fab fa-youtube"></i></a>
+<<<<<<< HEAD
                     <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p> </div>
+=======
+                    <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p </div>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
                 </div>
             </div>
         </div>

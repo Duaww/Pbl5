@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Chi tiết đề tài</title>
     <!-- Import boostrap and Jquery -->
+<<<<<<< HEAD
     <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
@@ -12,6 +13,15 @@
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/styleCTDT.css">
     <!-- Tạo icon trên Title -->
     <link rel="icon" href="/.././static/img/favicon.ico" type="image/x-icon">
+=======
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styleCTDT.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
     <!-- Branch -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 
@@ -29,7 +39,11 @@
                 <span th:if="!${nguoiHuongDan.getTen()}" th:text="'Người hướng dẫn : Chưa có người hướng dẫn '"></span>
             </div>
             <p>
+<<<<<<< HEAD
                 <span th:if="${detai.getTrangThai().equals('OK')}" th:text="'Trạng thái : Đã duyệt'"></span>
+=======
+                <span th:if="${detai.getTrangThai().equals('OK')}" th:text="'Trạng thái : OK'"></span>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
                 <span th:if="${detai.getTrangThai().equals('dangxet')}" th:text="'Trạng thái : Đang xét'"></span>
                 <span th:if="${detai.getTrangThai().equals('chuaxet')}" th:text="'Trạng thái : Chưa xét'"></span>
             </p>
@@ -38,11 +52,17 @@
                 <p th:if="!${nguoithuchien.getTen()}" th:text="'Người thực hiện đề tài : Chưa có người thực hiện'"></p>
             </div>
             <label for=""> Lĩnh vực :</label>
+<<<<<<< HEAD
 <!--            <select>-->
 <!--                <option th:each="linhvuc : ${linhVucCuaDeTai}" th:text="${linhvuc.getTenLinhVuc()}" ></option>-->
 <!--            </select>-->
             <span th:each="linhvuc : ${linhVucCuaDeTai}" th:if="${linhvucStat.index < linhVucCuaDeTai.size()-1}" th:text="${linhvuc.getTenLinhVuc()} + ','"></span>
             <span th:each="linhvuc : ${linhVucCuaDeTai}" th:if="${linhvucStat.index == linhVucCuaDeTai.size()-1}" th:text="${linhvuc.getTenLinhVuc()} + '.'"></span>
+=======
+            <select>
+                <option th:each="linhvuc : ${linhVucCuaDeTai}" th:text="${linhvuc.getTenLinhVuc()}" ></option>
+            </select>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
         </div >
         <div th:if="${detai.getTrangThai().equals('dangxet') && viewer.getRole().equals('2')} ">
             <!-- Form sửa thông tin -->
@@ -62,7 +82,11 @@
             <textarea th:if="!${plane}" th:text="''" >
             </textarea>
         </div>
+<<<<<<< HEAD
         <div th:if="${(viewer.getRole().equals('4') && pageold.equals('deTaiDangThucHien')) || (viewer.getRole().equals('3') && pageold.equals('deTaiDangThucHien'))}" class="form_group">
+=======
+        <div th:if="${viewer.getRole().equals('4') && pageold.equals('deTaiDangThucHien')}" class="form_group">
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
             <label for="" >Tiến độ: </label>
             <form name="updateTienDo" th:action="@{'/chiTietDeTai/' + ${pageold} + '/'+ ${detai.getIDDeTai()} + '/' + ${viewer.getTaiKhoan()}}" onsubmit="return validateForm()" method="post">
                 <span th:field="${newTienDo}">
@@ -84,8 +108,13 @@
                 <span th:field="${diem}">
                     <input type="hidden" name="diem" th:value="${diem}">
                 </span>
+<<<<<<< HEAD
                 <input class="input_text" type="text" name="nhapdiem" th:if="${diem}" th:value="${diem}" >
                 <input class="input_text" type="text" name="nhapdiem" th:if="!${diem}" th:value="''" >
+=======
+                <textarea name="nhapdiem" class="form_input" th:if="${diem}" th:text="${diem}" ></textarea>
+                <textarea name="nhapdiem" class="form_input" th:if="!${diem}" th:text="''" ></textarea>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
                 <p class="button"><input type="submit" value="Update điểm" class="btn btn-primary"></p>
             </form>
         </div>
@@ -105,8 +134,21 @@
     </div>
 
     <script th:inline="javascript">
+<<<<<<< HEAD
         var detai = [[${detai}]];
         var pageold = [[${pageold}]];
+=======
+        var detai = [
+            [$ {
+                detai
+            }]
+        ];
+        var pageold = [
+            [$ {
+                pageold
+            }]
+        ];
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
 
         function isClicked(name) {
             document.forms["formPheDuyet"]["status"].value = name;
@@ -115,6 +157,7 @@
         function validateForm() {
             if (pageold == "listDeTaiCham") {
                 var soDiem = document.getElementsByName("nhapdiem")[0].value;
+<<<<<<< HEAD
                 soDiem = soDiem.split(' ').join('');
 
                 if (soDiem === "") {
@@ -126,6 +169,14 @@
                 }
                 else {
                     document.forms["updateDiem"]["diem"].value = soDiem;
+=======
+                document.forms["updateDiem"]["diem"].value = soDiem;
+                if (soDiem === "") {
+                    alert("Bạn chưa nhập điểm cho đề tài");
+                    return false;
+                } else {
+
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
                     alert("Cập nhật điểm thành công");
                     return true;
                 }
@@ -149,9 +200,15 @@
             }
         })
     </script>
+<<<<<<< HEAD
     <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
     <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>
     <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js "></script>
+=======
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js "></script>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
 </body>
 
 </html>

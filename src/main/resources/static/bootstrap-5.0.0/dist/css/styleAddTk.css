@@ -9,7 +9,10 @@ body {
     justify-content: center;
 }
 h3{
+<<<<<<< HEAD
     font-size: x-large;
+=======
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
     padding-bottom: 1rem;
     text-align: center;
 }
@@ -50,5 +53,8 @@ h3{
 
 p.button{
     text-align: right;
+<<<<<<< HEAD
     padding-bottom: 5px;
+=======
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
 }

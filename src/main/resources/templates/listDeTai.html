@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Đề tài</title>
     <!-- Import boostrap and Jquery -->
+<<<<<<< HEAD
     <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
@@ -13,6 +14,16 @@
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/responsive.css">
     <!-- Tạo icon trên Title -->
     <link rel="icon" href="/.././static/img/favicon.ico" type="image/x-icon">
+=======
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style2.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/responsive.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
     <!-- Branch -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 </head>
@@ -20,12 +31,20 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <a href="#" class="navbar-branch">
+<<<<<<< HEAD
             <img src="/../static/img/dhbk.png" height="60" alt="#">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right:0%; margin-left: 0%;">
             <div class="navbar-collapse" >
                 <ul id="nav" class="navbar-nav ml-auto" style="margin-right: 12%;">
+=======
+            <img src="../static/img/dhbk.png" height="60" alt="#">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right: 11%;">
+            <ul id="nav" class="navbar-nav ml-auto">
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
                 <li class="nav-item"><a th:href="@{'/hoidong/' + ${viewer.getTaiKhoan()}}">Trang chủ</a></li>
                 <li><a href="#">Tài khoản</a>
                     <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
@@ -57,7 +76,10 @@
                 </li>
             </ul>
         </div>
+<<<<<<< HEAD
         </div>
+=======
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
     </nav>
     <div class="container-fluid form-text">
         <h3 style="margin-top: 20px;color: black; margin-left: 12.5%;">Danh sách đề tài </h3>
@@ -66,7 +88,11 @@
                 <label style="color: black;"><strong>Chọn trạng thái muốn lọc</strong></label>
                 <select name="field" id="fields" style="height: 35px;">
                     <option value="all">Tất cả</option>
+<<<<<<< HEAD
                     <option value="OK">Đã duyệt</option>
+=======
+                    <option value="OK">OK</option>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
                     <option value="dangxet">Đang xét</option>
                     <option value="chuaxet">Chưa xét</option>
                 </select>
@@ -98,7 +124,11 @@
                                     <span th:if="!${element.second.getTen()}" th:text="'Chưa có người hướng dẫn'"></span>
                                 </td>
                                 <td>
+<<<<<<< HEAD
                                     <span th:if="${element.first.getTrangThai().equals('OK')}" th:text="'Đã duyệt'"></span>
+=======
+                                    <span th:if="${element.first.getTrangThai().equals('OK')}" th:text="'OK'"></span>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
                                     <span th:if="${element.first.getTrangThai().equals('dangxet')}" th:text="'Đang xét'"></span>
                                     <span th:if="${element.first.getTrangThai().equals('chuaxet')}" th:text="'Chưa xét'"></span>
                                 </td>
@@ -130,7 +160,11 @@
                 </div>
                 <div class="col-md-4 social padding">
                     <a href="https://www.youtube.com/watch?v=LMnJG3Oxrrw"><i class="fab fa-youtube"></i></a>
+<<<<<<< HEAD
                     <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p></div>
+=======
+                    <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p </div>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
                 </div>
             </div>
         </div>
@@ -145,9 +179,15 @@
             return true;
         }
     </script>
+<<<<<<< HEAD
     <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
     <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+=======
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js"></script>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
 </body>
 
 </html>

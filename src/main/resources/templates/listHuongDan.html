@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Danh sách hướng dẫn</title>
     <!-- Import boostrap and Jquery -->
+<<<<<<< HEAD
     <script src="/../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/style.css">
@@ -13,6 +14,16 @@
     <link rel="stylesheet" href="/../static/bootstrap-5.0.0/dist/css/responsive.css">
     <!-- Tạo icon trên Title -->
     <link rel="icon" href="/.././static/img/favicon.ico" type="image/x-icon">
+=======
+    <script src="../static/bootstrap-5.0.0/dist/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/style2.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/styles1.css">
+    <link rel="stylesheet" href="../static/bootstrap-5.0.0/dist/css/responsive.css">
+    <!-- Tạo icon trên Title -->
+    <link rel="icon" href=".././static/img/favicon.ico" type="image/x-icon">
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
     <!-- Branch -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
 </head>
@@ -20,12 +31,20 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
         <a href="#" class="navbar-branch">
+<<<<<<< HEAD
             <img src="/../static/img/dhbk.png" height="60" alt="#">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent" style="margin-right:0%; margin-left: 0%;">
             <div class="navbar-collapse" >
                 <ul id="nav" class="navbar-nav ml-auto" style="margin-right: 7%;">
+=======
+            <img src="../static/img/dhbk.png" height="60" alt="#">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul id="nav" class="navbar-nav ml-auto" style="margin-right: 7%;">
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
                 <li class="nav-item"><a href="#">Trang chủ</a></li>
                 <li><a href="#">Đề tài</a>
                     <ul class="sub-nav" style="padding-left: 0; padding-right: 0;">
@@ -69,7 +88,10 @@
                 </li>
             </ul>
         </div>
+<<<<<<< HEAD
         </div>
+=======
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
     </nav>
     <div class="container-fluid form-text">
         <h3 style="margin-top:20px; color: black; margin-left: 12.5%;">Danh sách hướng dẫn</h3>
@@ -87,22 +109,39 @@
                     <tr th:each="list : ${listHuongDan} ">
                         <td th:text="${list.first.getTenDeTai()} "></td>
                         <td>
+<<<<<<< HEAD
                             <span th:if="${list.first.getTrangThai().equals('OK')}" th:text="'Đã duyệt'"></span>
+=======
+                            <span th:if="${list.first.getTrangThai().equals('OK')}" th:text="'OK'"></span>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
                             <span th:if="${list.first.getTrangThai().equals('dangxet')}" th:text="'Đang xét'"></span>
                             <span th:if="${list.first.getTrangThai().equals('chuaxet')}" th:text="'Chưa xét'"></span>
                         </td>
                         <td>
+<<<<<<< HEAD
                             <span th:if="${list.second.getTen()}">
                             <a th:href="@{ '/thongtinNCS/' + ${pageold} + '/' + ${list.second.getID()} + '/' + ${nguoihuongdan.getID()}}" th:text="${list.second.getTen()}"></a>
                         </span>
                             <span th:if="!${list.second.getTen()}" th:text=" 'Chưa có ai thực hiện' "></span>
                         </td>
                         <td><a th:href="@{ '/chiTietDeTai/'+ ${pageold} + '/' + ${list.first.getIDDeTai()} + '/' + ${nguoihuongdan.getTaiKhoan()}}" class="btn btn-outline-info" style="border-radius: 10px;  width: 40%; text-align: center;">Chi tiết</a></td>
+=======
+                            <span th:if="${list.second.getTen()} ">
+                            <a th:href="@{ '/thongtinNCS/' + ${pageold} + '/' + ${list.second.getID()} + '/' + ${nguoihuongdan.getID()}} " th:text="${list.second.getTen()} "></a>
+                        </span>
+                            <span th:if="!${list.second.getTen()} " th:text=" 'Chưa có ai thực hiện' "></span>
+                        </td>
+                        <td><a th:href="@{ '/chiTietDeTai/'+ ${pageold} + '/' + ${list.first.getIDDeTai()} + '/' + ${nguoihuongdan.getTaiKhoan()}} " class="btn btn-outline-info" style="border-radius: 10px;  width: 40%; text-align: center;">Chi tiết</a></td>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
                     </tr>
                 </tr>
             </tbody>
         </table>
+<<<<<<< HEAD
         <a th:href="@{'/canbo/' + *{nguoihuongdan.getTaiKhoan()}}" class="btn btn-primary " style="border-radius: 10px; margin-top: 20px; width: 10%; margin-left: 12.5%; ">Trở về</a>
+=======
+        <a th:href="@{'/canbo/' + *{nguoihuongdan.getTaiKhoan()}} " class="btn btn-primary " style="border-radius: 10px; margin-top: 20px; width: 10%; margin-left: 12.5%; ">Trở về</a>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
     </div>
     <div style="margin-top: 17%;">
         <hr>
@@ -121,15 +160,25 @@
                 </div>
                 <div class="col-md-4 social padding">
                     <a href="https://www.youtube.com/watch?v=LMnJG3Oxrrw"><i class="fab fa-youtube"></i></a>
+<<<<<<< HEAD
                     <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p> </div>
+=======
+                    <p style="font-size: medium; color: black;">Nguyễn Thanh Tính</p </div>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
                 </div>
             </div>
         </div>
 
     </div>
+<<<<<<< HEAD
     <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
     <script src="/../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>
     <script src="/../static/bootstrap-5.0.0/dist/js/scripts1.js "></script>
+=======
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.bundle.min.js "></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/bootstrap.min.js "></script>
+    <script src="../static/bootstrap-5.0.0/dist/js/scripts1.js "></script>
+>>>>>>> ec43ea922ba95f613fce290fd8fd476a8cf9ba6d
 </body>
 
 </html>
